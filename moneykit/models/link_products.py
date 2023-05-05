@@ -31,7 +31,6 @@ class LinkProducts:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         accounts: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.accounts, Unset):
             accounts = self.accounts.to_dict()

@@ -30,7 +30,6 @@ class TransactionsLinkProduct:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         settings = self.settings.to_dict()
 
         refreshed_at: Union[Unset, None, str] = UNSET

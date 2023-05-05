@@ -27,7 +27,6 @@ class TransactionDiff:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         created = []
         for created_item_data in self.created:
             created_item = created_item_data.to_dict()

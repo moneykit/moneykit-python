@@ -28,7 +28,6 @@ class GetUserLinksResponse:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         links = self.links.to_dict()
 
         field_dict: Dict[str, Any] = {}

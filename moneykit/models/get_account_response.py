@@ -27,7 +27,6 @@ class GetAccountResponse:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         account = self.account.to_dict()
 
         link = self.link.to_dict()

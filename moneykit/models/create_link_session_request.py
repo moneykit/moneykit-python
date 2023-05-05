@@ -44,7 +44,6 @@ class CreateLinkSessionRequest:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         customer_user = self.customer_user.to_dict()
 
         settings: Union[Unset, None, Dict[str, Any]] = UNSET

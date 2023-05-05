@@ -34,7 +34,6 @@ class TransactionSyncResponse:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         transactions = self.transactions.to_dict()
 
         cursor = self.cursor.to_dict()

@@ -42,7 +42,6 @@ class AccountIdentity:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         account_id = self.account_id
         account_type = self.account_type.value
 

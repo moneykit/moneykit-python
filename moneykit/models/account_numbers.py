@@ -29,7 +29,6 @@ class AccountNumbers:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         ach = []
         for ach_item_data in self.ach:
             ach_item = ach_item_data.to_dict()

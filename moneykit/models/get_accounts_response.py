@@ -27,7 +27,6 @@ class GetAccountsResponse:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         accounts = []
         for accounts_item_data in self.accounts:
             accounts_item = accounts_item_data.to_dict()

@@ -38,7 +38,6 @@ class IntrospectClientResponse:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         client_id = self.client_id
         client_name = self.client_name
         scope = self.scope

@@ -25,7 +25,6 @@ class JWKSet:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         keys = []
         for keys_item_data in self.keys:
             keys_item = keys_item_data.to_dict()

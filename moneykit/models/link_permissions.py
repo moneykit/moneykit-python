@@ -20,7 +20,6 @@ class LinkPermissions:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         requested = []
         for requested_item_data in self.requested:
             requested_item = requested_item_data.to_dict()

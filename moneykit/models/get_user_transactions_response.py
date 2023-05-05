@@ -29,7 +29,6 @@ class GetUserTransactionsResponse:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         total = self.total
         page = self.page
         size = self.size

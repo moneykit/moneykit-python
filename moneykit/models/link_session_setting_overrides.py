@@ -34,7 +34,6 @@ class LinkSessionSettingOverrides:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         providers: Union[Unset, None, List[str]] = UNSET
         if not isinstance(self.providers, Unset):
             if self.providers is None:

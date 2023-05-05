@@ -28,7 +28,6 @@ class Owner:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         names = self.names
 
         addresses = []

@@ -28,7 +28,6 @@ class ProductsSettings:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         account_numbers: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.account_numbers, Unset):
             account_numbers = self.account_numbers.to_dict()

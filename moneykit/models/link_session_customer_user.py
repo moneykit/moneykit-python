@@ -28,7 +28,6 @@ class LinkSessionCustomerUser:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         id = self.id
         email: Union[Unset, None, Dict[str, Any]] = UNSET
         if not isinstance(self.email, Unset):

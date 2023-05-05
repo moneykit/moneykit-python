@@ -19,7 +19,6 @@ class GetUserAccountsResponseLinks:
     additional_properties: Dict[str, "AccountGroup"] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         field_dict: Dict[str, Any] = {}
         for prop_name, prop in self.additional_properties.items():
             field_dict[prop_name] = prop.to_dict()
@@ -34,7 +33,6 @@ class GetUserAccountsResponseLinks:
 
         d = src_dict.copy()
         get_user_accounts_response_links = cls()
-
 
         additional_properties = {}
         for prop_name, prop_dict in d.items():

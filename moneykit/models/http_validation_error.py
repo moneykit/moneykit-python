@@ -32,7 +32,6 @@ class HTTPValidationError:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         validation_errors = []
         for validation_errors_item_data in self.validation_errors:
             validation_errors_item = validation_errors_item_data.to_dict()

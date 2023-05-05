@@ -51,7 +51,6 @@ class LinkResponse:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         link_id = self.link_id
         institution_id = self.institution_id
         institution_name = self.institution_name

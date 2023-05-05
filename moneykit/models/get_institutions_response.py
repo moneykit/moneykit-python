@@ -23,7 +23,6 @@ class GetInstitutionsResponse:
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         institutions = []
         for institutions_item_data in self.institutions:
             institutions_item = institutions_item_data.to_dict()
