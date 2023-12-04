@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestPhoneNumberType(unittest.TestCase):
     """PhoneNumberType unit test stubs"""
 

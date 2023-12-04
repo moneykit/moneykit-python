@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestPublicLinkError(unittest.TestCase):
     """PublicLinkError unit test stubs"""
 

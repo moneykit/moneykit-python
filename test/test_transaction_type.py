@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestTransactionType(unittest.TestCase):
     """TransactionType unit test stubs"""
 

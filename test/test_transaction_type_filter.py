@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestTransactionTypeFilter(unittest.TestCase):
     """TransactionTypeFilter unit test stubs"""
 

@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestProvider(unittest.TestCase):
     """Provider unit test stubs"""
 

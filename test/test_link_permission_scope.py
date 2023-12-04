@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestLinkPermissionScope(unittest.TestCase):
     """LinkPermissionScope unit test stubs"""
 

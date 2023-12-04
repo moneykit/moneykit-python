@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestCountry(unittest.TestCase):
     """Country unit test stubs"""
 

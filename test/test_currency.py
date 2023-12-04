@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestCurrency(unittest.TestCase):
     """Currency unit test stubs"""
 

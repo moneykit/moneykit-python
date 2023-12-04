@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestWebhookLinkTestEvent(unittest.TestCase):
     """WebhookLinkTestEvent unit test stubs"""
 
