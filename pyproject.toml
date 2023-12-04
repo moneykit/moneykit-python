@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "moneykit"
-version = "0.0.1"
+version = "0.1.0.alpha.1"
 description = "MoneyKit API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
@@ -22,15 +22,6 @@ pytest = ">=7.2.1"
 tox = ">=3.9.0"
 ruff = "0.1.6"
 mypy = "^1.7.0"
-
-[tool.poetry-dynamic-versioning]
-enable = true
-vcs = "git"
-tag-branch = "main"
-strict = true
-
-[tool.poetry-dynamic-versioning.substitution]
-files = ["moneykit/__init__.py"]
 
 [build-system]
 requires = ["setuptools"]
