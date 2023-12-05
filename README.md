@@ -35,6 +35,96 @@ import moneykit
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
 ```python
+import moneykit
+import moneykit.models
+from moneykit.rest import ApiException
+
+
+config = moneykit.Configuration(host="https://api.moneykit.com")
+api_client = moneykit.ApiClient(config)
+try:
+    access_token_api = moneykit.AccessTokenApi(api_client)
+    response = access_token_api.generate_access_token(
+        client_id=os.environ["MONEYKIT_CLIENT_ID"],
+        client_secret=os.environ["MONEYKIT_CLIENT_SECRET"],
+        grant_type="client_credentials",
+    )
+
+    api_client.configuration.access_token = response.access_token
+except ApiException as e:
+    print("Exception when calling AccessTokenApi->generate_access_token: %s\n" % e)
+```
+
+
+## Examples
+
+See our [Examples repository](https://github.com/moneykit/examples) for more complete example projects.
+
+### Create a Link Session
+
+```python
+import moneykit
+import moneykit.models
+
+link_session_api = moneykit.LinkSessionApi(moneykit_client())
+
+response = link_session_api.create_link_session(
+    moneykit.models.CreateLinkSessionRequest(
+        customer_user=moneykit.models.LinkSessionCustomerUser(id=user.uuid),
+        redirect_uri="http://localhost:3000",
+    ),
+)
+
+link_session_token = response.link_session_token
+```
+
+### Exchange token for a Link id
+
+```python
+import moneykit
+import moneykit.models
+
+
+exchangeable_token = 'TOKEN'
+
+link_session_api = moneykit.LinkSessionApi(moneykit_client())
+response = link_session_api.exchange_token(
+    moneykit.models.ExchangeTokenRequest(exchangeable_token=body.exchangeable_token),
+)
+
+link_id = response.link_id
+institution_id = response.link.institution_id
+```
+
+### Disconnect link
+
+```python
+import moneykit
+import moneykit.models
+
+
+link_id = 'LINK_ID'
+
+links_api = moneykit.LinksApi(moneykit_client())
+links_api.disconnect(link_id)
+```
+
+### Fetch accounts
+
+```python
+import moneykit
+import moneykit.models
+
+
+link_id = 'LINK_ID'
+
+accounts_api = moneykit.AccountsApi(moneykit_client())
+response = accounts_api.get_accounts(link_id)
+
+accounts = response.accounts
+```
+
+```python
 
 import time
 import moneykit
