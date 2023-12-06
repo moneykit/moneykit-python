@@ -51,8 +51,8 @@ class LinkSessionCustomerUser(BaseModel):
     @field_validator("id")
     def id_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9-_]+$/")
+        if not re.match(r"^[a-zA-Z0-9_-]+$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9_-]+$/")
         return value
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
