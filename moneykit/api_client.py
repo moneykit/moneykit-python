@@ -30,11 +30,6 @@ from moneykit import rest
 from moneykit.exceptions import (
     ApiValueError,
     ApiException,
-    BadRequestException,
-    UnauthorizedException,
-    ForbiddenException,
-    NotFoundException,
-    ServiceException,
 )
 
 
@@ -76,7 +71,7 @@ class ApiClient:
         self.configuration = configuration
 
         self.rest_client = rest.RESTClientObject(configuration)
-        self.default_headers = {}
+        self.default_headers = {"MoneyKit-Version": "2023-02-18"}
         if header_name is not None:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
@@ -265,7 +260,7 @@ class ApiClient:
         return response_data
 
     def response_deserialize(
-        self, response_data=None, response_types_map=None
+        self, response_data: rest.RESTResponse = None, response_types_map=None
     ) -> ApiResponse:
         """Deserializes response into an object.
         :param response_data: RESTResponse object to be deserialized.
@@ -284,39 +279,29 @@ class ApiClient:
                 str(response_data.status)[0] + "XX", None
             )
 
-        if not 200 <= response_data.status <= 299:
-            if response_data.status == 400:
-                raise BadRequestException(http_resp=response_data)
-
-            if response_data.status == 401:
-                raise UnauthorizedException(http_resp=response_data)
-
-            if response_data.status == 403:
-                raise ForbiddenException(http_resp=response_data)
-
-            if response_data.status == 404:
-                raise NotFoundException(http_resp=response_data)
-
-            if 500 <= response_data.status <= 599:
-                raise ServiceException(http_resp=response_data)
-            raise ApiException(http_resp=response_data)
-
         # deserialize response data
-
-        if response_type == "bytearray":
-            return_data = response_data.data
-        elif response_type is None:
-            return_data = None
-        elif response_type == "file":
-            return_data = self.__deserialize_file(response_data)
-        else:
-            match = None
-            content_type = response_data.getheader("content-type")
-            if content_type is not None:
-                match = re.search(r"charset=([a-zA-Z\-\d]+)[\s;]?", content_type)
-            encoding = match.group(1) if match else "utf-8"
-            response_text = response_data.data.decode(encoding)
-            return_data = self.deserialize(response_text, response_type)
+        response_text = None
+        return_data = None
+        try:
+            if response_type == "bytearray":
+                return_data = response_data.data
+            elif response_type == "file":
+                return_data = self.__deserialize_file(response_data)
+            elif response_type is not None:
+                match = None
+                content_type = response_data.getheader("content-type")
+                if content_type is not None:
+                    match = re.search(r"charset=([a-zA-Z\-\d]+)[\s;]?", content_type)
+                encoding = match.group(1) if match else "utf-8"
+                response_text = response_data.data.decode(encoding)
+                return_data = self.deserialize(response_text, response_type)
+        finally:
+            if not 200 <= response_data.status <= 299:
+                raise ApiException.from_response(
+                    http_resp=response_data,
+                    body=response_text,
+                    data=return_data,
+                )
 
         return ApiResponse(
             status_code=response_data.status,

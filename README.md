@@ -39,7 +39,7 @@ import moneykit
 import moneykit.models
 from moneykit.rest import ApiException
 
-
+# Defaults to MoneyKit-Version: 2023-02-18
 config = moneykit.Configuration(host="https://api.moneykit.com")
 api_client = moneykit.ApiClient(config)
 try:
