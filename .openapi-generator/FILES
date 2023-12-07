@@ -134,8 +134,3 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
-test/test_body.py
-test/test_link_product_refresh_webhook.py
-test/test_link_product_state.py
-test/test_response_handle_link_webhook_event_request_body_webhook_post.py
-test/test_transaction_updates_available_webhook.py

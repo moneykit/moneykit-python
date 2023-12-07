@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestLinkProductState(unittest.TestCase):
     """LinkProductState unit test stubs"""
 

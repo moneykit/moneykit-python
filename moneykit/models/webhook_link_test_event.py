@@ -32,9 +32,9 @@ class WebhookLinkTestEvent(str, Enum):
     """
     allowed enum values
     """
-    LINK_DOT_STATE_CHANGED = "link.state_changed"
-    LINK_DOT_PRODUCT_REFRESH = "link.product_refresh"
-    TRANSACTIONS_DOT_UPDATES_AVAILABLE = "transactions.updates_available"
+    LINK_STATE_CHANGED = "link.state_changed"
+    LINK_PRODUCT_REFRESH = "link.product_refresh"
+    TRANSACTIONS_UPDATES_AVAILABLE = "transactions.updates_available"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
