@@ -13,13 +13,15 @@
 
 
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List, Literal, Optional
+
 from pydantic import BaseModel, StrictInt, StrictStr, field_validator
+
 from moneykit.models.link_product_state import LinkProductState
 from moneykit.models.product import Product
 
@@ -34,9 +36,9 @@ class LinkProductRefreshWebhook(BaseModel):
     LinkProductRefreshWebhook
     """  # noqa: E501
 
-    webhook_event: Optional[StrictStr] = "link.product_refresh"
-    webhook_major_version: Optional[StrictInt] = 1
-    webhook_minor_version: Optional[StrictInt] = 0
+    webhook_event: Literal["link.product_refresh"] = "link.product_refresh"
+    webhook_major_version: int = 1
+    webhook_minor_version: int = 0
     webhook_idempotency_key: StrictStr
     webhook_timestamp: datetime
     link_id: StrictStr
