@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "moneykit"
-version = "0.1.2"
+version = "0.1.3"
 description = "MoneyKit API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
