@@ -34,6 +34,7 @@ moneykit/models/api_error_auth_unauthorized_response.py
 moneykit/models/api_error_rate_limit_exceeded_response.py
 moneykit/models/bacs_number.py
 moneykit/models/basic_account_details.py
+moneykit/models/body.py
 moneykit/models/country.py
 moneykit/models/create_link_session_request.py
 moneykit/models/create_link_session_response.py
@@ -72,6 +73,8 @@ moneykit/models/link_error_not_found_response.py
 moneykit/models/link_error_unauthorized_access_response.py
 moneykit/models/link_permission_scope.py
 moneykit/models/link_permissions.py
+moneykit/models/link_product_refresh_webhook.py
+moneykit/models/link_product_state.py
 moneykit/models/link_products.py
 moneykit/models/link_response.py
 moneykit/models/link_session_customer_user.py
@@ -112,11 +115,13 @@ moneykit/models/response401_refresh_products_links_id_products_post.py
 moneykit/models/response401_reset_login_links_id_reset_post.py
 moneykit/models/response401_trigger_test_link_webhook_event_webhooks_test_link_id_post.py
 moneykit/models/response401_update_link_links_id_patch.py
+moneykit/models/response_handle_link_webhook_event_request_body_webhook_post.py
 moneykit/models/transaction.py
 moneykit/models/transaction_diff.py
 moneykit/models/transaction_sync_response.py
 moneykit/models/transaction_type.py
 moneykit/models/transaction_type_filter.py
+moneykit/models/transaction_updates_available_webhook.py
 moneykit/models/transactions_link_product.py
 moneykit/models/transactions_product_settings.py
 moneykit/models/update_link_request.py
@@ -129,3 +134,8 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
+test/test_body.py
+test/test_link_product_refresh_webhook.py
+test/test_link_product_state.py
+test/test_response_handle_link_webhook_event_request_body_webhook_post.py
+test/test_transaction_updates_available_webhook.py

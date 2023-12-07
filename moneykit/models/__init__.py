@@ -38,6 +38,7 @@ from moneykit.models.ach_number import AchNumber
 from moneykit.models.address import Address
 from moneykit.models.bacs_number import BacsNumber
 from moneykit.models.basic_account_details import BasicAccountDetails
+from moneykit.models.body import Body
 from moneykit.models.country import Country
 from moneykit.models.create_link_session_request import CreateLinkSessionRequest
 from moneykit.models.create_link_session_response import CreateLinkSessionResponse
@@ -82,6 +83,8 @@ from moneykit.models.link_error_unauthorized_access_response import (
 )
 from moneykit.models.link_permission_scope import LinkPermissionScope
 from moneykit.models.link_permissions import LinkPermissions
+from moneykit.models.link_product_refresh_webhook import LinkProductRefreshWebhook
+from moneykit.models.link_product_state import LinkProductState
 from moneykit.models.link_products import LinkProducts
 from moneykit.models.link_response import LinkResponse
 from moneykit.models.link_session_customer_user import LinkSessionCustomerUser
@@ -170,11 +173,17 @@ from moneykit.models.response401_trigger_test_link_webhook_event_webhooks_test_l
 from moneykit.models.response401_update_link_links_id_patch import (
     Response401UpdateLinkLinksIdPatch,
 )
+from moneykit.models.response_handle_link_webhook_event_request_body_webhook_post import (
+    ResponseHandleLinkWebhookEventRequestBodyWebhookPost,
+)
 from moneykit.models.transaction import Transaction
 from moneykit.models.transaction_diff import TransactionDiff
 from moneykit.models.transaction_sync_response import TransactionSyncResponse
 from moneykit.models.transaction_type import TransactionType
 from moneykit.models.transaction_type_filter import TransactionTypeFilter
+from moneykit.models.transaction_updates_available_webhook import (
+    TransactionUpdatesAvailableWebhook,
+)
 from moneykit.models.transactions_link_product import TransactionsLinkProduct
 from moneykit.models.transactions_product_settings import TransactionsProductSettings
 from moneykit.models.update_link_request import UpdateLinkRequest
