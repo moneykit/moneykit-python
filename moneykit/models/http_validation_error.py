@@ -54,7 +54,7 @@ class HTTPValidationError(BaseModel):
         if value is None:
             return value
 
-        if value not in ("api_error.request.validation_failed"):
+        if value not in ("api_error.request.validation_failed",):
             raise ValueError(
                 "must be one of enum values ('api_error.request.validation_failed')"
             )

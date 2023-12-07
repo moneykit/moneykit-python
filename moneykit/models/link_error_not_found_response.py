@@ -48,7 +48,7 @@ class LinkErrorNotFoundResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link_error.not_found"):
+        if value not in ("link_error.not_found",):
             raise ValueError("must be one of enum values ('link_error.not_found')")
         return value
 

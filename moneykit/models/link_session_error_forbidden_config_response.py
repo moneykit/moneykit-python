@@ -49,7 +49,7 @@ class LinkSessionErrorForbiddenConfigResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link_session_error.forbidden_config"):
+        if value not in ("link_session_error.forbidden_config",):
             raise ValueError(
                 "must be one of enum values ('link_session_error.forbidden_config')"
             )

@@ -48,7 +48,7 @@ class LinkErrorUnauthorizedAccessResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link_error.unauthorized_access"):
+        if value not in ("link_error.unauthorized_access",):
             raise ValueError(
                 "must be one of enum values ('link_error.unauthorized_access')"
             )

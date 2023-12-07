@@ -48,7 +48,7 @@ class LinkErrorDeletedResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link_error.deleted"):
+        if value not in ("link_error.deleted",):
             raise ValueError("must be one of enum values ('link_error.deleted')")
         return value
 

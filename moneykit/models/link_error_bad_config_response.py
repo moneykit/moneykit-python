@@ -48,7 +48,7 @@ class LinkErrorBadConfigResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link_error.bad_config"):
+        if value not in ("link_error.bad_config",):
             raise ValueError("must be one of enum values ('link_error.bad_config')")
         return value
 

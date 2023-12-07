@@ -51,7 +51,7 @@ class APIErrorRateLimitExceededResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("api_error.rate_limit_exceeded"):
+        if value not in ("api_error.rate_limit_exceeded",):
             raise ValueError(
                 "must be one of enum values ('api_error.rate_limit_exceeded')"
             )

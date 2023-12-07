@@ -50,7 +50,7 @@ class LinkErrorBadStateResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link_error.bad_state"):
+        if value not in ("link_error.bad_state",):
             raise ValueError("must be one of enum values ('link_error.bad_state')")
         return value
 

@@ -51,7 +51,7 @@ class APIErrorAuthExpiredAccessTokenResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("api_error.auth.expired_access_token"):
+        if value not in ("api_error.auth.expired_access_token",):
             raise ValueError(
                 "must be one of enum values ('api_error.auth.expired_access_token')"
             )

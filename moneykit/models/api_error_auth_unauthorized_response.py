@@ -49,7 +49,7 @@ class APIErrorAuthUnauthorizedResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("api_error.auth.unauthorized"):
+        if value not in ("api_error.auth.unauthorized",):
             raise ValueError(
                 "must be one of enum values ('api_error.auth.unauthorized')"
             )

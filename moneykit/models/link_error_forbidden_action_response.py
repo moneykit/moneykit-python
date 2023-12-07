@@ -49,7 +49,7 @@ class LinkErrorForbiddenActionResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link_error.forbidden_action"):
+        if value not in ("link_error.forbidden_action",):
             raise ValueError(
                 "must be one of enum values ('link_error.forbidden_action')"
             )

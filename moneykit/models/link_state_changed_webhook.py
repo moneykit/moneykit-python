@@ -66,7 +66,7 @@ class LinkStateChangedWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link.state_changed"):
+        if value not in ("link.state_changed",):
             raise ValueError("must be one of enum values ('link.state_changed')")
         return value
 
@@ -76,7 +76,7 @@ class LinkStateChangedWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in (1):
+        if value not in (1,):
             raise ValueError("must be one of enum values (1)")
         return value
 
@@ -86,7 +86,7 @@ class LinkStateChangedWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in (0):
+        if value not in (0,):
             raise ValueError("must be one of enum values (0)")
         return value
 

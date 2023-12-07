@@ -59,7 +59,7 @@ class TransactionUpdatesAvailableWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in ("transactions.updates_available"):
+        if value not in ("transactions.updates_available",):
             raise ValueError(
                 "must be one of enum values ('transactions.updates_available')"
             )
@@ -71,7 +71,7 @@ class TransactionUpdatesAvailableWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in (1):
+        if value not in (1,):
             raise ValueError("must be one of enum values (1)")
         return value
 
@@ -81,7 +81,7 @@ class TransactionUpdatesAvailableWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in (0):
+        if value not in (0,):
             raise ValueError("must be one of enum values (0)")
         return value
 

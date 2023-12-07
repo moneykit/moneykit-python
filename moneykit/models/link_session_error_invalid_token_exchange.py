@@ -49,7 +49,7 @@ class LinkSessionErrorInvalidTokenExchange(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link_session_error.invalid_token_exchange"):
+        if value not in ("link_session_error.invalid_token_exchange",):
             raise ValueError(
                 "must be one of enum values ('link_session_error.invalid_token_exchange')"
             )

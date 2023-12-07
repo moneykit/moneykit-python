@@ -68,7 +68,7 @@ class LinkProductRefreshWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in ("link.product_refresh"):
+        if value not in ("link.product_refresh",):
             raise ValueError("must be one of enum values ('link.product_refresh')")
         return value
 
@@ -78,7 +78,7 @@ class LinkProductRefreshWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in (1):
+        if value not in (1,):
             raise ValueError("must be one of enum values (1)")
         return value
 
@@ -88,7 +88,7 @@ class LinkProductRefreshWebhook(BaseModel):
         if value is None:
             return value
 
-        if value not in (0):
+        if value not in (0,):
             raise ValueError("must be one of enum values (0)")
         return value
 

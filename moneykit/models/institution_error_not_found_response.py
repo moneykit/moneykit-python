@@ -48,7 +48,7 @@ class InstitutionErrorNotFoundResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ("institution_error.not_found"):
+        if value not in ("institution_error.not_found",):
             raise ValueError(
                 "must be one of enum values ('institution_error.not_found')"
             )
