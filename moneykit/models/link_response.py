@@ -44,6 +44,9 @@ class LinkResponse(BaseModel):
     institution_name: StrictStr = Field(
         description="The institution name this link is connected to."
     )
+    institution_avatar: StrictStr = Field(
+        description="An avatar image for the link's institution."
+    )
     state: LinkState
     error_code: Optional[PublicLinkError] = None
     last_synced_at: Optional[datetime] = Field(
@@ -61,6 +64,7 @@ class LinkResponse(BaseModel):
         "link_id",
         "institution_id",
         "institution_name",
+        "institution_avatar",
         "state",
         "error_code",
         "last_synced_at",
@@ -128,6 +132,7 @@ class LinkResponse(BaseModel):
                 "link_id": obj.get("link_id"),
                 "institution_id": obj.get("institution_id"),
                 "institution_name": obj.get("institution_name"),
+                "institution_avatar": obj.get("institution_avatar"),
                 "state": obj.get("state"),
                 "error_code": obj.get("error_code"),
                 "last_synced_at": obj.get("last_synced_at"),
