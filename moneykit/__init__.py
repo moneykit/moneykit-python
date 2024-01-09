@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 
 # import apis into sdk package
 from moneykit.api.access_token_api import AccessTokenApi

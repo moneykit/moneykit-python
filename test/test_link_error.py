@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestLinkError(unittest.TestCase):
     """LinkError unit test stubs"""
 

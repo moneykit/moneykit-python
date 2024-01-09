@@ -44,7 +44,8 @@ class InvestmentTransactionResponse(BaseModel):
         description="The effective (posted) date of the transaction, in ISO-8601 format.",
         alias="date",
     )
-    datetime: Optional[datetime] = Field(
+    datetime_: Optional[datetime] = Field(
+        alias="datetime",
         default=None,
         description="If the institution has provided the actual time of the transaction, this field             contains the full date and time of the transaction, in ISO-8601 format.  If the time is             not available, this field will be null.             <p>Note that the time is generally reported in the timezone of the institution or the account holder.",
     )

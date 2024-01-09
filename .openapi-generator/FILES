@@ -144,16 +144,3 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
-test/test_get_holdings_response.py
-test/test_get_investment_transactions_response.py
-test/test_holding_response.py
-test/test_investment_transaction_response.py
-test/test_investments_api.py
-test/test_investments_link_product.py
-test/test_link_error.py
-test/test_link_product_failure_reasons.py
-test/test_response401_get_holdings_links_id_investments_holdings_get.py
-test/test_response401_get_investment_transactions_links_id_investments_transactions_get.py
-test/test_response401_get_transactions.py
-test/test_response401_get_user_transactions.py
-test/test_security_response.py

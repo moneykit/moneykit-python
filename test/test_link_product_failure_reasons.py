@@ -15,7 +15,6 @@
 import unittest
 
 
-
 class TestLinkProductFailureReasons(unittest.TestCase):
     """LinkProductFailureReasons unit test stubs"""
 
