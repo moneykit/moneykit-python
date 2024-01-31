@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictBool, StrictStr
 from pydantic import Field
 from moneykit.models.link_product_failure_reasons import LinkProductFailureReasons
 from moneykit.models.transactions_product_settings import TransactionsProductSettings
@@ -48,6 +48,7 @@ class TransactionsLinkProduct(BaseModel):
         default=None,
         description="The error message, if the last attempt to refresh the product failed.",
     )
+    has_history: StrictBool
     settings: TransactionsProductSettings
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
@@ -55,6 +56,7 @@ class TransactionsLinkProduct(BaseModel):
         "last_attempted_at",
         "error_code",
         "error_message",
+        "has_history",
         "settings",
     ]
 
@@ -117,6 +119,7 @@ class TransactionsLinkProduct(BaseModel):
                 "last_attempted_at": obj.get("last_attempted_at"),
                 "error_code": obj.get("error_code"),
                 "error_message": obj.get("error_message"),
+                "has_history": obj.get("has_history"),
                 "settings": TransactionsProductSettings.from_dict(obj.get("settings"))
                 if obj.get("settings") is not None
                 else None,

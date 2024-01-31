@@ -25,6 +25,7 @@ from pydantic import Field
 from typing_extensions import Annotated
 from pydantic import StrictStr
 
+from moneykit.models.link_common import LinkCommon
 from moneykit.models.refresh_products_request import RefreshProductsRequest
 
 from moneykit.api_client import ApiClient
@@ -60,7 +61,7 @@ class ProductsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> LinkCommon:
         """/links/{id}/products
 
         Requests an update of the provided products for the link.     This is an asynchronous operation. The response will be a 202 Accepted if the request was successful.     Refreshes are subject to rate limiting.     <br><br>     <b>Rate Limiting</b><br>     <ul>         <li>1 refresh per link per hour for account data</li>         <li>1 refresh per link per hour for transaction data</li>         <li>1 refresh per link per day for account numbers</li>         <li>1 refresh per link per day for identity data</li>     </ul>
@@ -100,7 +101,15 @@ class ProductsApi:
             _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            "202": "LinkCommon",
+            "401": "Response401RefreshProductsLinksIdProductsPost",
+            "429": "APIErrorRateLimitExceededResponse",
+            "404": "LinkErrorNotFoundResponse",
+            "403": "LinkErrorForbiddenActionResponse",
+            "410": "LinkErrorDeletedResponse",
+            "422": "LinkErrorBadStateResponse",
+        }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
         )
@@ -126,7 +135,7 @@ class ProductsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[LinkCommon]:
         """/links/{id}/products
 
         Requests an update of the provided products for the link.     This is an asynchronous operation. The response will be a 202 Accepted if the request was successful.     Refreshes are subject to rate limiting.     <br><br>     <b>Rate Limiting</b><br>     <ul>         <li>1 refresh per link per hour for account data</li>         <li>1 refresh per link per hour for transaction data</li>         <li>1 refresh per link per day for account numbers</li>         <li>1 refresh per link per day for identity data</li>     </ul>
@@ -166,7 +175,15 @@ class ProductsApi:
             _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            "202": "LinkCommon",
+            "401": "Response401RefreshProductsLinksIdProductsPost",
+            "429": "APIErrorRateLimitExceededResponse",
+            "404": "LinkErrorNotFoundResponse",
+            "403": "LinkErrorForbiddenActionResponse",
+            "410": "LinkErrorDeletedResponse",
+            "422": "LinkErrorBadStateResponse",
+        }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
         )
@@ -232,7 +249,15 @@ class ProductsApi:
             _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            "202": "LinkCommon",
+            "401": "Response401RefreshProductsLinksIdProductsPost",
+            "429": "APIErrorRateLimitExceededResponse",
+            "404": "LinkErrorNotFoundResponse",
+            "403": "LinkErrorForbiddenActionResponse",
+            "410": "LinkErrorDeletedResponse",
+            "422": "LinkErrorBadStateResponse",
+        }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
         )
