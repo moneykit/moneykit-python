@@ -598,7 +598,7 @@ class AccountsApi:
     ) -> GetAccountsResponse:
         """/links/{id}/accounts
 
-        Returns a list of open, permissioned accounts associated with a <a href=#tag/Links>link</a>.
+        Returns a list of open, permissioned accounts associated with a <a href=#tag/Links>link</a>
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -675,7 +675,7 @@ class AccountsApi:
     ) -> ApiResponse[GetAccountsResponse]:
         """/links/{id}/accounts
 
-        Returns a list of open, permissioned accounts associated with a <a href=#tag/Links>link</a>.
+        Returns a list of open, permissioned accounts associated with a <a href=#tag/Links>link</a>
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -752,7 +752,7 @@ class AccountsApi:
     ) -> RESTResponseType:
         """/links/{id}/accounts
 
-        Returns a list of open, permissioned accounts associated with a <a href=#tag/Links>link</a>.
+        Returns a list of open, permissioned accounts associated with a <a href=#tag/Links>link</a>
 
         :param id: The unique ID for this link. (required)
         :type id: str
