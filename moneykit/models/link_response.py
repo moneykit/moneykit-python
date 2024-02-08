@@ -24,6 +24,7 @@ from pydantic import Field
 from moneykit.models.link_error import LinkError
 from moneykit.models.link_products import LinkProducts
 from moneykit.models.link_state import LinkState
+from moneykit.models.product import Product
 from moneykit.models.provider import Provider
 
 try:
@@ -55,6 +56,7 @@ class LinkResponse(BaseModel):
     )
     tags: Optional[List[StrictStr]] = None
     products: LinkProducts
+    available_products: List[Product]
     provider: Provider
     webhook: Optional[StrictStr] = Field(
         default=None, description="The webhook url assigned to this link."
@@ -70,6 +72,7 @@ class LinkResponse(BaseModel):
         "last_synced_at",
         "tags",
         "products",
+        "available_products",
         "provider",
         "webhook",
     ]
@@ -140,6 +143,7 @@ class LinkResponse(BaseModel):
                 "products": LinkProducts.from_dict(obj.get("products"))
                 if obj.get("products") is not None
                 else None,
+                "available_products": obj.get("available_products"),
                 "provider": obj.get("provider"),
                 "webhook": obj.get("webhook"),
             }

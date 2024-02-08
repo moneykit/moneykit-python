@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictFloat, StrictInt
 from pydantic import Field
@@ -47,8 +47,18 @@ class AccountBalances(BaseModel):
         default=None,
         description="The credit limit on the account.  Typically this exists only for credit-type accounts.             <p>In some cases, this may represent the overdraft limit for depository accounts.",
     )
+    balance_date: Optional[datetime] = Field(
+        default=None,
+        description="The date that the balance was captured at.  This may not include a time. When this field is null, the balance was captured at an unknown time.",
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["currency", "available", "current", "limit"]
+    __properties: ClassVar[List[str]] = [
+        "currency",
+        "available",
+        "current",
+        "limit",
+        "balance_date",
+    ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -106,6 +116,7 @@ class AccountBalances(BaseModel):
                 "available": obj.get("available"),
                 "current": obj.get("current"),
                 "limit": obj.get("limit"),
+                "balance_date": obj.get("balance_date"),
             }
         )
         # store additional fields in additional_properties

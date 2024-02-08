@@ -24,6 +24,7 @@ from pydantic import Field
 from moneykit.models.link_error import LinkError
 from moneykit.models.link_products import LinkProducts
 from moneykit.models.link_state import LinkState
+from moneykit.models.product import Product
 
 try:
     from typing import Self
@@ -54,6 +55,7 @@ class LinkCommon(BaseModel):
     )
     tags: Optional[List[StrictStr]] = None
     products: LinkProducts
+    available_products: List[Product]
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "link_id",
@@ -65,6 +67,7 @@ class LinkCommon(BaseModel):
         "last_synced_at",
         "tags",
         "products",
+        "available_products",
     ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
@@ -133,6 +136,7 @@ class LinkCommon(BaseModel):
                 "products": LinkProducts.from_dict(obj.get("products"))
                 if obj.get("products") is not None
                 else None,
+                "available_products": obj.get("available_products"),
             }
         )
         # store additional fields in additional_properties
