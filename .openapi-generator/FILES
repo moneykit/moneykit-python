@@ -141,9 +141,3 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
-test/test_api_public_transactions_get_transactions_response.py
-test/test_api_public_transactions_legacy_get_transactions_response.py
-test/test_api_public_users_transactions_get_user_transactions_response.py
-test/test_api_public_users_transactions_legacy_get_user_transactions_response.py
-test/test_link_product.py
-test/test_product_settings.py
