@@ -59,18 +59,6 @@ from moneykit.models.account_numbers import AccountNumbers
 from moneykit.models.account_with_account_numbers import AccountWithAccountNumbers
 from moneykit.models.ach_number import AchNumber
 from moneykit.models.address import Address
-from moneykit.models.api_public_transactions_get_transactions_response import (
-    ApiPublicTransactionsGetTransactionsResponse,
-)
-from moneykit.models.api_public_transactions_legacy_get_transactions_response import (
-    ApiPublicTransactionsLegacyGetTransactionsResponse,
-)
-from moneykit.models.api_public_users_transactions_get_user_transactions_response import (
-    ApiPublicUsersTransactionsGetUserTransactionsResponse,
-)
-from moneykit.models.api_public_users_transactions_legacy_get_user_transactions_response import (
-    ApiPublicUsersTransactionsLegacyGetUserTransactionsResponse,
-)
 from moneykit.models.bacs_number import BacsNumber
 from moneykit.models.basic_account_details import BasicAccountDetails
 from moneykit.models.body import Body
@@ -93,6 +81,7 @@ from moneykit.models.get_institutions_response import GetInstitutionsResponse
 from moneykit.models.get_investment_transactions_response import (
     GetInvestmentTransactionsResponse,
 )
+from moneykit.models.get_transactions_response import GetTransactionsResponse
 from moneykit.models.get_user_accounts_response import GetUserAccountsResponse
 from moneykit.models.get_user_links_response import GetUserLinksResponse
 from moneykit.models.get_user_transactions_response import GetUserTransactionsResponse
@@ -187,11 +176,9 @@ from moneykit.models.response401_get_investment_transactions_links_id_investment
 from moneykit.models.response401_get_link_links_id_get import (
     Response401GetLinkLinksIdGet,
 )
+from moneykit.models.response401_get_transactions import Response401GetTransactions
 from moneykit.models.response401_get_transactions_diff_links_id_transactions_sync_get import (
     Response401GetTransactionsDiffLinksIdTransactionsSyncGet,
-)
-from moneykit.models.response401_get_transactions_links_id_transactions_get import (
-    Response401GetTransactionsLinksIdTransactionsGet,
 )
 from moneykit.models.response401_get_user_accounts_users_id_accounts_get import (
     Response401GetUserAccountsUsersIdAccountsGet,
@@ -199,8 +186,8 @@ from moneykit.models.response401_get_user_accounts_users_id_accounts_get import 
 from moneykit.models.response401_get_user_links_users_id_links_get import (
     Response401GetUserLinksUsersIdLinksGet,
 )
-from moneykit.models.response401_get_user_transactions_users_id_transactions_get import (
-    Response401GetUserTransactionsUsersIdTransactionsGet,
+from moneykit.models.response401_get_user_transactions import (
+    Response401GetUserTransactions,
 )
 from moneykit.models.response401_get_well_known_jwks_well_known_jwks_json_get import (
     Response401GetWellKnownJwksWellKnownJwksJsonGet,

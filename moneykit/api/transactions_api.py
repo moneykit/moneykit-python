@@ -29,12 +29,8 @@ from pydantic import StrictStr
 
 from typing import List, Optional
 
-from moneykit.models.api_public_transactions_get_transactions_response import (
-    ApiPublicTransactionsGetTransactionsResponse,
-)
-from moneykit.models.api_public_users_transactions_get_user_transactions_response import (
-    ApiPublicUsersTransactionsGetUserTransactionsResponse,
-)
+from moneykit.models.get_transactions_response import GetTransactionsResponse
+from moneykit.models.get_user_transactions_response import GetUserTransactionsResponse
 from moneykit.models.transaction_sync_response import TransactionSyncResponse
 from moneykit.models.transaction_type_filter import TransactionTypeFilter
 
@@ -59,19 +55,17 @@ class TransactionsApi:
     def get_transactions(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A `next` cursor to fetch the next page of transactions."
-            ),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return."),
-        ] = None,
         account_ids: Annotated[
             Optional[List[StrictStr]],
             Field(description="An optional list of account IDs to filter the results."),
+        ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
             Optional[date],
@@ -85,7 +79,6 @@ class TransactionsApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
-        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -97,25 +90,23 @@ class TransactionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiPublicTransactionsGetTransactionsResponse:
+    ) -> GetTransactionsResponse:
         """/links/{id}/transactions
 
-        Returns transactions for the accounts associated with a <a href=#tag/Links>link</a>.  Results are paginated,     and returned in reverse chronological order.     <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns     transactions that have already been fetched, either because `prefetch` was requested when the link was created,     or because of scheduled or on-demand updates.     <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the     update frequency can vary, depending on the downstream data provider, the institution, and whether one or both     provide webhook-based updates.  **To force a check for updated transactions, you can use the     <a href=#operation/refresh_products>/products</a> endpoint.**     <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
+        Returns transactions for the accounts associated with a <a href=#tag/Links>link</a>.  Results are     paginated, and returned in reverse chronological order.     <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns     transactions that have already been fetched, either because `prefetch` was requested when the link was created,     or because of scheduled or on-demand updates.     <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the     update frequency can vary, depending on the downstream data provider, the institution, and whether one or both     provide webhook-based updates.  **To force a check for updated transactions, you can use the     <a href=#operation/refresh_products>/products</a> endpoint.**     <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param cursor: A `next` cursor to fetch the next page of transactions.
-        :type cursor: str
-        :param size: The number of items to return.
-        :type size: int
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
+        :param page: The page number to return.
+        :type page: int
+        :param size: The number of items to return per page.
+        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
-        :param moneykit_version:
-        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -140,12 +131,11 @@ class TransactionsApi:
 
         _param = self._get_transactions_serialize(
             id=id,
-            cursor=cursor,
-            size=size,
             account_ids=account_ids,
+            page=page,
+            size=size,
             start_date=start_date,
             end_date=end_date,
-            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -153,8 +143,8 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApiPublicTransactionsGetTransactionsResponse",
-            "401": "Response401GetTransactionsLinksIdTransactionsGet",
+            "200": "GetTransactionsResponse",
+            "401": "Response401GetTransactions",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -174,19 +164,17 @@ class TransactionsApi:
     def get_transactions_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A `next` cursor to fetch the next page of transactions."
-            ),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return."),
-        ] = None,
         account_ids: Annotated[
             Optional[List[StrictStr]],
             Field(description="An optional list of account IDs to filter the results."),
+        ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
             Optional[date],
@@ -200,7 +188,6 @@ class TransactionsApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
-        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -212,25 +199,23 @@ class TransactionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiPublicTransactionsGetTransactionsResponse]:
+    ) -> ApiResponse[GetTransactionsResponse]:
         """/links/{id}/transactions
 
-        Returns transactions for the accounts associated with a <a href=#tag/Links>link</a>.  Results are paginated,     and returned in reverse chronological order.     <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns     transactions that have already been fetched, either because `prefetch` was requested when the link was created,     or because of scheduled or on-demand updates.     <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the     update frequency can vary, depending on the downstream data provider, the institution, and whether one or both     provide webhook-based updates.  **To force a check for updated transactions, you can use the     <a href=#operation/refresh_products>/products</a> endpoint.**     <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
+        Returns transactions for the accounts associated with a <a href=#tag/Links>link</a>.  Results are     paginated, and returned in reverse chronological order.     <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns     transactions that have already been fetched, either because `prefetch` was requested when the link was created,     or because of scheduled or on-demand updates.     <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the     update frequency can vary, depending on the downstream data provider, the institution, and whether one or both     provide webhook-based updates.  **To force a check for updated transactions, you can use the     <a href=#operation/refresh_products>/products</a> endpoint.**     <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param cursor: A `next` cursor to fetch the next page of transactions.
-        :type cursor: str
-        :param size: The number of items to return.
-        :type size: int
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
+        :param page: The page number to return.
+        :type page: int
+        :param size: The number of items to return per page.
+        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
-        :param moneykit_version:
-        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -255,12 +240,11 @@ class TransactionsApi:
 
         _param = self._get_transactions_serialize(
             id=id,
-            cursor=cursor,
-            size=size,
             account_ids=account_ids,
+            page=page,
+            size=size,
             start_date=start_date,
             end_date=end_date,
-            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -268,8 +252,8 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApiPublicTransactionsGetTransactionsResponse",
-            "401": "Response401GetTransactionsLinksIdTransactionsGet",
+            "200": "GetTransactionsResponse",
+            "401": "Response401GetTransactions",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -289,19 +273,17 @@ class TransactionsApi:
     def get_transactions_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A `next` cursor to fetch the next page of transactions."
-            ),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return."),
-        ] = None,
         account_ids: Annotated[
             Optional[List[StrictStr]],
             Field(description="An optional list of account IDs to filter the results."),
+        ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
             Optional[date],
@@ -315,7 +297,6 @@ class TransactionsApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
-        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -330,22 +311,20 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """/links/{id}/transactions
 
-        Returns transactions for the accounts associated with a <a href=#tag/Links>link</a>.  Results are paginated,     and returned in reverse chronological order.     <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns     transactions that have already been fetched, either because `prefetch` was requested when the link was created,     or because of scheduled or on-demand updates.     <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the     update frequency can vary, depending on the downstream data provider, the institution, and whether one or both     provide webhook-based updates.  **To force a check for updated transactions, you can use the     <a href=#operation/refresh_products>/products</a> endpoint.**     <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
+        Returns transactions for the accounts associated with a <a href=#tag/Links>link</a>.  Results are     paginated, and returned in reverse chronological order.     <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns     transactions that have already been fetched, either because `prefetch` was requested when the link was created,     or because of scheduled or on-demand updates.     <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the     update frequency can vary, depending on the downstream data provider, the institution, and whether one or both     provide webhook-based updates.  **To force a check for updated transactions, you can use the     <a href=#operation/refresh_products>/products</a> endpoint.**     <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param cursor: A `next` cursor to fetch the next page of transactions.
-        :type cursor: str
-        :param size: The number of items to return.
-        :type size: int
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
+        :param page: The page number to return.
+        :type page: int
+        :param size: The number of items to return per page.
+        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
-        :param moneykit_version:
-        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -370,12 +349,11 @@ class TransactionsApi:
 
         _param = self._get_transactions_serialize(
             id=id,
-            cursor=cursor,
-            size=size,
             account_ids=account_ids,
+            page=page,
+            size=size,
             start_date=start_date,
             end_date=end_date,
-            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -383,8 +361,8 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApiPublicTransactionsGetTransactionsResponse",
-            "401": "Response401GetTransactionsLinksIdTransactionsGet",
+            "200": "GetTransactionsResponse",
+            "401": "Response401GetTransactions",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -399,12 +377,11 @@ class TransactionsApi:
     def _get_transactions_serialize(
         self,
         id,
-        cursor,
-        size,
         account_ids,
+        page,
+        size,
         start_date,
         end_date,
-        moneykit_version,
         _request_auth,
         _content_type,
         _headers,
@@ -427,14 +404,14 @@ class TransactionsApi:
         if id is not None:
             _path_params["id"] = id
         # process the query parameters
-        if cursor is not None:
-            _query_params.append(("cursor", cursor))
+        if account_ids is not None:
+            _query_params.append(("account_ids", account_ids))
+
+        if page is not None:
+            _query_params.append(("page", page))
 
         if size is not None:
             _query_params.append(("size", size))
-
-        if account_ids is not None:
-            _query_params.append(("account_ids", account_ids))
 
         if start_date is not None:
             if isinstance(start_date, date):
@@ -459,8 +436,6 @@ class TransactionsApi:
                 _query_params.append(("end_date", end_date))
 
         # process the header parameters
-        if moneykit_version is not None:
-            _header_params["moneykit-version"] = moneykit_version
         # process the form parameters
         # process the body parameter
 
@@ -808,16 +783,6 @@ class TransactionsApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A `next` cursor to fetch the next page of transactions."
-            ),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return."),
-        ] = None,
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
         category: Optional[List[StrictStr]] = None,
         account_id: Annotated[
@@ -832,6 +797,14 @@ class TransactionsApi:
                 description="If present, filters results to transactions at institutions matching the given IDs."
             ),
         ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
+        ] = None,
         start_date: Annotated[
             Optional[date],
             Field(
@@ -844,7 +817,6 @@ class TransactionsApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
-        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -856,17 +828,13 @@ class TransactionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiPublicUsersTransactionsGetUserTransactionsResponse:
+    ) -> GetUserTransactionsResponse:
         """/users/{id}/transactions
 
-        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
+        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
-        :param cursor: A `next` cursor to fetch the next page of transactions.
-        :type cursor: str
-        :param size: The number of items to return.
-        :type size: int
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
         :param category:
@@ -875,12 +843,14 @@ class TransactionsApi:
         :type account_id: List[str]
         :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
         :type institution_id: List[str]
+        :param page: The page number to return.
+        :type page: int
+        :param size: The number of items to return per page.
+        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
-        :param moneykit_version:
-        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -905,15 +875,14 @@ class TransactionsApi:
 
         _param = self._get_user_transactions_serialize(
             id=id,
-            cursor=cursor,
-            size=size,
             transaction_type=transaction_type,
             category=category,
             account_id=account_id,
             institution_id=institution_id,
+            page=page,
+            size=size,
             start_date=start_date,
             end_date=end_date,
-            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -921,8 +890,8 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApiPublicUsersTransactionsGetUserTransactionsResponse",
-            "401": "Response401GetUserTransactionsUsersIdTransactionsGet",
+            "200": "GetUserTransactionsResponse",
+            "401": "Response401GetUserTransactions",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -942,16 +911,6 @@ class TransactionsApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A `next` cursor to fetch the next page of transactions."
-            ),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return."),
-        ] = None,
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
         category: Optional[List[StrictStr]] = None,
         account_id: Annotated[
@@ -966,6 +925,14 @@ class TransactionsApi:
                 description="If present, filters results to transactions at institutions matching the given IDs."
             ),
         ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
+        ] = None,
         start_date: Annotated[
             Optional[date],
             Field(
@@ -978,7 +945,6 @@ class TransactionsApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
-        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -990,17 +956,13 @@ class TransactionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiPublicUsersTransactionsGetUserTransactionsResponse]:
+    ) -> ApiResponse[GetUserTransactionsResponse]:
         """/users/{id}/transactions
 
-        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
+        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
-        :param cursor: A `next` cursor to fetch the next page of transactions.
-        :type cursor: str
-        :param size: The number of items to return.
-        :type size: int
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
         :param category:
@@ -1009,12 +971,14 @@ class TransactionsApi:
         :type account_id: List[str]
         :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
         :type institution_id: List[str]
+        :param page: The page number to return.
+        :type page: int
+        :param size: The number of items to return per page.
+        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
-        :param moneykit_version:
-        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1039,15 +1003,14 @@ class TransactionsApi:
 
         _param = self._get_user_transactions_serialize(
             id=id,
-            cursor=cursor,
-            size=size,
             transaction_type=transaction_type,
             category=category,
             account_id=account_id,
             institution_id=institution_id,
+            page=page,
+            size=size,
             start_date=start_date,
             end_date=end_date,
-            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1055,8 +1018,8 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApiPublicUsersTransactionsGetUserTransactionsResponse",
-            "401": "Response401GetUserTransactionsUsersIdTransactionsGet",
+            "200": "GetUserTransactionsResponse",
+            "401": "Response401GetUserTransactions",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1076,16 +1039,6 @@ class TransactionsApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A `next` cursor to fetch the next page of transactions."
-            ),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return."),
-        ] = None,
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
         category: Optional[List[StrictStr]] = None,
         account_id: Annotated[
@@ -1100,6 +1053,14 @@ class TransactionsApi:
                 description="If present, filters results to transactions at institutions matching the given IDs."
             ),
         ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
+        ] = None,
         start_date: Annotated[
             Optional[date],
             Field(
@@ -1112,7 +1073,6 @@ class TransactionsApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
-        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1127,14 +1087,10 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """/users/{id}/transactions
 
-        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
+        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
-        :param cursor: A `next` cursor to fetch the next page of transactions.
-        :type cursor: str
-        :param size: The number of items to return.
-        :type size: int
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
         :param category:
@@ -1143,12 +1099,14 @@ class TransactionsApi:
         :type account_id: List[str]
         :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
         :type institution_id: List[str]
+        :param page: The page number to return.
+        :type page: int
+        :param size: The number of items to return per page.
+        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
-        :param moneykit_version:
-        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1173,15 +1131,14 @@ class TransactionsApi:
 
         _param = self._get_user_transactions_serialize(
             id=id,
-            cursor=cursor,
-            size=size,
             transaction_type=transaction_type,
             category=category,
             account_id=account_id,
             institution_id=institution_id,
+            page=page,
+            size=size,
             start_date=start_date,
             end_date=end_date,
-            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1189,8 +1146,8 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApiPublicUsersTransactionsGetUserTransactionsResponse",
-            "401": "Response401GetUserTransactionsUsersIdTransactionsGet",
+            "200": "GetUserTransactionsResponse",
+            "401": "Response401GetUserTransactions",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1200,15 +1157,14 @@ class TransactionsApi:
     def _get_user_transactions_serialize(
         self,
         id,
-        cursor,
-        size,
         transaction_type,
         category,
         account_id,
         institution_id,
+        page,
+        size,
         start_date,
         end_date,
-        moneykit_version,
         _request_auth,
         _content_type,
         _headers,
@@ -1234,12 +1190,6 @@ class TransactionsApi:
         if id is not None:
             _path_params["id"] = id
         # process the query parameters
-        if cursor is not None:
-            _query_params.append(("cursor", cursor))
-
-        if size is not None:
-            _query_params.append(("size", size))
-
         if transaction_type is not None:
             _query_params.append(("transaction_type", transaction_type))
 
@@ -1251,6 +1201,12 @@ class TransactionsApi:
 
         if institution_id is not None:
             _query_params.append(("institution_id", institution_id))
+
+        if page is not None:
+            _query_params.append(("page", page))
+
+        if size is not None:
+            _query_params.append(("size", size))
 
         if start_date is not None:
             if isinstance(start_date, date):
@@ -1275,8 +1231,6 @@ class TransactionsApi:
                 _query_params.append(("end_date", end_date))
 
         # process the header parameters
-        if moneykit_version is not None:
-            _header_params["moneykit-version"] = moneykit_version
         # process the form parameters
         # process the body parameter
 
