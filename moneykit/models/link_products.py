@@ -20,10 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from moneykit.models.account_numbers_link_product import AccountNumbersLinkProduct
-from moneykit.models.accounts_link_product import AccountsLinkProduct
-from moneykit.models.identity_link_product import IdentityLinkProduct
-from moneykit.models.investments_link_product import InvestmentsLinkProduct
+from moneykit.models.link_product import LinkProduct
 from moneykit.models.transactions_link_product import TransactionsLinkProduct
 
 try:
@@ -37,11 +34,11 @@ class LinkProducts(BaseModel):
     LinkProducts
     """  # noqa: E501
 
-    accounts: Optional[AccountsLinkProduct] = None
-    account_numbers: Optional[AccountNumbersLinkProduct] = None
-    identity: Optional[IdentityLinkProduct] = None
+    accounts: Optional[LinkProduct] = None
+    account_numbers: Optional[LinkProduct] = None
+    identity: Optional[LinkProduct] = None
     transactions: Optional[TransactionsLinkProduct] = None
-    investments: Optional[InvestmentsLinkProduct] = None
+    investments: Optional[LinkProduct] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "accounts",
@@ -118,15 +115,13 @@ class LinkProducts(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "accounts": AccountsLinkProduct.from_dict(obj.get("accounts"))
+                "accounts": LinkProduct.from_dict(obj.get("accounts"))
                 if obj.get("accounts") is not None
                 else None,
-                "account_numbers": AccountNumbersLinkProduct.from_dict(
-                    obj.get("account_numbers")
-                )
+                "account_numbers": LinkProduct.from_dict(obj.get("account_numbers"))
                 if obj.get("account_numbers") is not None
                 else None,
-                "identity": IdentityLinkProduct.from_dict(obj.get("identity"))
+                "identity": LinkProduct.from_dict(obj.get("identity"))
                 if obj.get("identity") is not None
                 else None,
                 "transactions": TransactionsLinkProduct.from_dict(
@@ -134,7 +129,7 @@ class LinkProducts(BaseModel):
                 )
                 if obj.get("transactions") is not None
                 else None,
-                "investments": InvestmentsLinkProduct.from_dict(obj.get("investments"))
+                "investments": LinkProduct.from_dict(obj.get("investments"))
                 if obj.get("investments") is not None
                 else None,
             }

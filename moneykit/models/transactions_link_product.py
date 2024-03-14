@@ -48,16 +48,21 @@ class TransactionsLinkProduct(BaseModel):
         default=None,
         description="The error message, if the last attempt to refresh the product failed.",
     )
+    unavailable: Optional[StrictStr] = Field(
+        default=None,
+        description="If this product can't currently be updated, the reason why it is unavailable.         <p>Unavailable products can't be refreshed, but past data, if any, is still accessible.",
+    )
+    settings: Optional[TransactionsProductSettings] = None
     has_history: StrictBool
-    settings: TransactionsProductSettings
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "refreshed_at",
         "last_attempted_at",
         "error_code",
         "error_message",
-        "has_history",
+        "unavailable",
         "settings",
+        "has_history",
     ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
@@ -119,10 +124,11 @@ class TransactionsLinkProduct(BaseModel):
                 "last_attempted_at": obj.get("last_attempted_at"),
                 "error_code": obj.get("error_code"),
                 "error_message": obj.get("error_message"),
-                "has_history": obj.get("has_history"),
+                "unavailable": obj.get("unavailable"),
                 "settings": TransactionsProductSettings.from_dict(obj.get("settings"))
                 if obj.get("settings") is not None
                 else None,
+                "has_history": obj.get("has_history"),
             }
         )
         # store additional fields in additional_properties

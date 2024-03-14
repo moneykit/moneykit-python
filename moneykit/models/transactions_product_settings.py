@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool
+from pydantic import BaseModel, StrictBool, StrictStr
 from pydantic import Field
 
 try:
@@ -41,12 +41,21 @@ class TransactionsProductSettings(BaseModel):
         default=False,
         description="If true, the data will be available as soon as possible after linking, even if `required` is false. If false, the data will be available after the first manual data refresh.",
     )
+    reason: Optional[StrictStr] = Field(
+        default=None,
+        description='A **brief** description of the reason your app wants this data.         This description will follow the words "...data is used to", and will be displayed         to the user when permission is requested.  You should provide this field if your         app does not request this product by default, or if you want to show a particular         reason for requesting the product during this link session.',
+    )
     extend_history: Optional[StrictBool] = Field(
         default=False,
         description="If true, MoneyKit will attempt to fetch as much transaction history as possible. Not all institutions supply the same extent of transaction history. Generally, however, at least the past 30 days of transactions are available.",
     )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["required", "prefetch", "extend_history"]
+    __properties: ClassVar[List[str]] = [
+        "required",
+        "prefetch",
+        "reason",
+        "extend_history",
+    ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -106,6 +115,7 @@ class TransactionsProductSettings(BaseModel):
                 "prefetch": obj.get("prefetch")
                 if obj.get("prefetch") is not None
                 else False,
+                "reason": obj.get("reason"),
                 "extend_history": obj.get("extend_history")
                 if obj.get("extend_history") is not None
                 else False,

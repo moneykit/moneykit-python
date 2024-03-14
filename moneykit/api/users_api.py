@@ -29,9 +29,11 @@ from pydantic import StrictStr
 
 from typing import List, Optional
 
+from moneykit.models.api_public_users_transactions_get_user_transactions_response import (
+    ApiPublicUsersTransactionsGetUserTransactionsResponse,
+)
 from moneykit.models.get_user_accounts_response import GetUserAccountsResponse
 from moneykit.models.get_user_links_response import GetUserLinksResponse
-from moneykit.models.get_user_transactions_response import GetUserTransactionsResponse
 from moneykit.models.transaction_type_filter import TransactionTypeFilter
 
 from moneykit.api_client import ApiClient
@@ -637,6 +639,16 @@ class UsersApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="A `next` cursor to fetch the next page of transactions."
+            ),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Field(description="The number of items to return."),
+        ] = None,
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
         category: Optional[List[StrictStr]] = None,
         account_id: Annotated[
@@ -651,14 +663,6 @@ class UsersApi:
                 description="If present, filters results to transactions at institutions matching the given IDs."
             ),
         ] = None,
-        page: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=1)]],
-            Field(description="The page number to return."),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
-            Field(description="The number of items to return per page."),
-        ] = None,
         start_date: Annotated[
             Optional[date],
             Field(
@@ -671,6 +675,7 @@ class UsersApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
+        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -682,13 +687,17 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetUserTransactionsResponse:
+    ) -> ApiPublicUsersTransactionsGetUserTransactionsResponse:
         """/users/{id}/transactions
 
-        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
+        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
+        :param cursor: A `next` cursor to fetch the next page of transactions.
+        :type cursor: str
+        :param size: The number of items to return.
+        :type size: int
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
         :param category:
@@ -697,14 +706,12 @@ class UsersApi:
         :type account_id: List[str]
         :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
         :type institution_id: List[str]
-        :param page: The page number to return.
-        :type page: int
-        :param size: The number of items to return per page.
-        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
+        :param moneykit_version:
+        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -729,14 +736,15 @@ class UsersApi:
 
         _param = self._get_user_transactions_serialize(
             id=id,
+            cursor=cursor,
+            size=size,
             transaction_type=transaction_type,
             category=category,
             account_id=account_id,
             institution_id=institution_id,
-            page=page,
-            size=size,
             start_date=start_date,
             end_date=end_date,
+            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -744,8 +752,8 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetUserTransactionsResponse",
-            "401": "Response401GetUserTransactions",
+            "200": "ApiPublicUsersTransactionsGetUserTransactionsResponse",
+            "401": "Response401GetUserTransactionsUsersIdTransactionsGet",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -765,6 +773,16 @@ class UsersApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="A `next` cursor to fetch the next page of transactions."
+            ),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Field(description="The number of items to return."),
+        ] = None,
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
         category: Optional[List[StrictStr]] = None,
         account_id: Annotated[
@@ -779,14 +797,6 @@ class UsersApi:
                 description="If present, filters results to transactions at institutions matching the given IDs."
             ),
         ] = None,
-        page: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=1)]],
-            Field(description="The page number to return."),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
-            Field(description="The number of items to return per page."),
-        ] = None,
         start_date: Annotated[
             Optional[date],
             Field(
@@ -799,6 +809,7 @@ class UsersApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
+        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -810,13 +821,17 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetUserTransactionsResponse]:
+    ) -> ApiResponse[ApiPublicUsersTransactionsGetUserTransactionsResponse]:
         """/users/{id}/transactions
 
-        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
+        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
+        :param cursor: A `next` cursor to fetch the next page of transactions.
+        :type cursor: str
+        :param size: The number of items to return.
+        :type size: int
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
         :param category:
@@ -825,14 +840,12 @@ class UsersApi:
         :type account_id: List[str]
         :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
         :type institution_id: List[str]
-        :param page: The page number to return.
-        :type page: int
-        :param size: The number of items to return per page.
-        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
+        :param moneykit_version:
+        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -857,14 +870,15 @@ class UsersApi:
 
         _param = self._get_user_transactions_serialize(
             id=id,
+            cursor=cursor,
+            size=size,
             transaction_type=transaction_type,
             category=category,
             account_id=account_id,
             institution_id=institution_id,
-            page=page,
-            size=size,
             start_date=start_date,
             end_date=end_date,
+            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -872,8 +886,8 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetUserTransactionsResponse",
-            "401": "Response401GetUserTransactions",
+            "200": "ApiPublicUsersTransactionsGetUserTransactionsResponse",
+            "401": "Response401GetUserTransactionsUsersIdTransactionsGet",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -893,6 +907,16 @@ class UsersApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="A `next` cursor to fetch the next page of transactions."
+            ),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Field(description="The number of items to return."),
+        ] = None,
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
         category: Optional[List[StrictStr]] = None,
         account_id: Annotated[
@@ -907,14 +931,6 @@ class UsersApi:
                 description="If present, filters results to transactions at institutions matching the given IDs."
             ),
         ] = None,
-        page: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=1)]],
-            Field(description="The page number to return."),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
-            Field(description="The number of items to return per page."),
-        ] = None,
         start_date: Annotated[
             Optional[date],
             Field(
@@ -927,6 +943,7 @@ class UsersApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
             ),
         ] = None,
+        moneykit_version: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -941,10 +958,14 @@ class UsersApi:
     ) -> RESTResponseType:
         """/users/{id}/transactions
 
-        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
+        Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.     <p>Version information: Prior to version 2023-12-14 this endpoint used `page` offset for pagination instead of      `cursor` based pagination.
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
+        :param cursor: A `next` cursor to fetch the next page of transactions.
+        :type cursor: str
+        :param size: The number of items to return.
+        :type size: int
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
         :param category:
@@ -953,14 +974,12 @@ class UsersApi:
         :type account_id: List[str]
         :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
         :type institution_id: List[str]
-        :param page: The page number to return.
-        :type page: int
-        :param size: The number of items to return per page.
-        :type size: int
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
         :type end_date: date
+        :param moneykit_version:
+        :type moneykit_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -985,14 +1004,15 @@ class UsersApi:
 
         _param = self._get_user_transactions_serialize(
             id=id,
+            cursor=cursor,
+            size=size,
             transaction_type=transaction_type,
             category=category,
             account_id=account_id,
             institution_id=institution_id,
-            page=page,
-            size=size,
             start_date=start_date,
             end_date=end_date,
+            moneykit_version=moneykit_version,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1000,8 +1020,8 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetUserTransactionsResponse",
-            "401": "Response401GetUserTransactions",
+            "200": "ApiPublicUsersTransactionsGetUserTransactionsResponse",
+            "401": "Response401GetUserTransactionsUsersIdTransactionsGet",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1011,14 +1031,15 @@ class UsersApi:
     def _get_user_transactions_serialize(
         self,
         id,
+        cursor,
+        size,
         transaction_type,
         category,
         account_id,
         institution_id,
-        page,
-        size,
         start_date,
         end_date,
+        moneykit_version,
         _request_auth,
         _content_type,
         _headers,
@@ -1044,6 +1065,12 @@ class UsersApi:
         if id is not None:
             _path_params["id"] = id
         # process the query parameters
+        if cursor is not None:
+            _query_params.append(("cursor", cursor))
+
+        if size is not None:
+            _query_params.append(("size", size))
+
         if transaction_type is not None:
             _query_params.append(("transaction_type", transaction_type))
 
@@ -1055,12 +1082,6 @@ class UsersApi:
 
         if institution_id is not None:
             _query_params.append(("institution_id", institution_id))
-
-        if page is not None:
-            _query_params.append(("page", page))
-
-        if size is not None:
-            _query_params.append(("size", size))
 
         if start_date is not None:
             if isinstance(start_date, date):
@@ -1085,6 +1106,8 @@ class UsersApi:
                 _query_params.append(("end_date", end_date))
 
         # process the header parameters
+        if moneykit_version is not None:
+            _header_params["moneykit-version"] = moneykit_version
         # process the form parameters
         # process the body parameter
 

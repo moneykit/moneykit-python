@@ -18,10 +18,12 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from moneykit.models.product_settings import ProductSettings
-from moneykit.models.transactions_product_settings import TransactionsProductSettings
+from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, StrictInt
+from pydantic import Field
+from moneykit.models.account import Account
+from moneykit.models.link_common import LinkCommon
+from moneykit.models.transaction import Transaction
 
 try:
     from typing import Self
@@ -29,21 +31,27 @@ except ImportError:
     from typing_extensions import Self
 
 
-class ProductsSettings(BaseModel):
+class ApiPublicTransactionsLegacyGetTransactionsResponse(BaseModel):
     """
-    ProductsSettings
+    ApiPublicTransactionsLegacyGetTransactionsResponse
     """  # noqa: E501
 
-    account_numbers: Optional[ProductSettings] = None
-    identity: Optional[ProductSettings] = None
-    transactions: Optional[TransactionsProductSettings] = None
-    investments: Optional[ProductSettings] = None
+    total: StrictInt = Field(description="The total number of results for this query.")
+    page: StrictInt = Field(
+        description="The page number corresponding to this batch of results."
+    )
+    size: StrictInt = Field(description="The number of results in this batch.")
+    transactions: List[Transaction]
+    accounts: List[Account]
+    link: LinkCommon
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
-        "account_numbers",
-        "identity",
+        "total",
+        "page",
+        "size",
         "transactions",
-        "investments",
+        "accounts",
+        "link",
     ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
@@ -59,7 +67,7 @@ class ProductsSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of ProductsSettings from a JSON string"""
+        """Create an instance of ApiPublicTransactionsLegacyGetTransactionsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,18 +88,23 @@ class ProductsSettings(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of account_numbers
-        if self.account_numbers:
-            _dict["account_numbers"] = self.account_numbers.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of identity
-        if self.identity:
-            _dict["identity"] = self.identity.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of transactions
+        # override the default output from pydantic by calling `to_dict()` of each item in transactions (list)
+        _items = []
         if self.transactions:
-            _dict["transactions"] = self.transactions.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of investments
-        if self.investments:
-            _dict["investments"] = self.investments.to_dict()
+            for _item in self.transactions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["transactions"] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in accounts (list)
+        _items = []
+        if self.accounts:
+            for _item in self.accounts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["accounts"] = _items
+        # override the default output from pydantic by calling `to_dict()` of link
+        if self.link:
+            _dict["link"] = self.link.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -101,7 +114,7 @@ class ProductsSettings(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of ProductsSettings from a dict"""
+        """Create an instance of ApiPublicTransactionsLegacyGetTransactionsResponse from a dict"""
         if obj is None:
             return None
 
@@ -110,19 +123,19 @@ class ProductsSettings(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "account_numbers": ProductSettings.from_dict(obj.get("account_numbers"))
-                if obj.get("account_numbers") is not None
-                else None,
-                "identity": ProductSettings.from_dict(obj.get("identity"))
-                if obj.get("identity") is not None
-                else None,
-                "transactions": TransactionsProductSettings.from_dict(
-                    obj.get("transactions")
-                )
+                "total": obj.get("total"),
+                "page": obj.get("page"),
+                "size": obj.get("size"),
+                "transactions": [
+                    Transaction.from_dict(_item) for _item in obj.get("transactions")
+                ]
                 if obj.get("transactions") is not None
                 else None,
-                "investments": ProductSettings.from_dict(obj.get("investments"))
-                if obj.get("investments") is not None
+                "accounts": [Account.from_dict(_item) for _item in obj.get("accounts")]
+                if obj.get("accounts") is not None
+                else None,
+                "link": LinkCommon.from_dict(obj.get("link"))
+                if obj.get("link") is not None
                 else None,
             }
         )

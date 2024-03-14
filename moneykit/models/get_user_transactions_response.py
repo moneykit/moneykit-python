@@ -19,9 +19,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt
-from pydantic import Field
-from moneykit.models.transaction import Transaction
+from pydantic import BaseModel
 
 try:
     from typing import Self
@@ -34,21 +32,9 @@ class GetUserTransactionsResponse(BaseModel):
     GetUserTransactionsResponse
     """  # noqa: E501
 
-    total: StrictInt = Field(description="The total number of results for this query.")
-    page: StrictInt = Field(
-        description="The page number corresponding to this batch of results."
-    )
-    size: StrictInt = Field(description="The number of results in this batch.")
-    transactions: List[Transaction]
-    accounts: Optional[Any]
+    accounts: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "total",
-        "page",
-        "size",
-        "transactions",
-        "accounts",
-    ]
+    __properties: ClassVar[List[str]] = ["accounts"]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -84,13 +70,6 @@ class GetUserTransactionsResponse(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in transactions (list)
-        _items = []
-        if self.transactions:
-            for _item in self.transactions:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["transactions"] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -112,18 +91,7 @@ class GetUserTransactionsResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "total": obj.get("total"),
-                "page": obj.get("page"),
-                "size": obj.get("size"),
-                "transactions": [
-                    Transaction.from_dict(_item) for _item in obj.get("transactions")
-                ]
-                if obj.get("transactions") is not None
-                else None,
-            }
-        )
+        _obj = cls.model_validate({})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

@@ -17,11 +17,12 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, StrictStr
+from pydantic import Field
+from moneykit.models.link_product_failure_reasons import LinkProductFailureReasons
 from moneykit.models.product_settings import ProductSettings
-from moneykit.models.transactions_product_settings import TransactionsProductSettings
 
 try:
     from typing import Self
@@ -29,21 +30,37 @@ except ImportError:
     from typing_extensions import Self
 
 
-class ProductsSettings(BaseModel):
+class LinkProduct(BaseModel):
     """
-    ProductsSettings
+    LinkProduct
     """  # noqa: E501
 
-    account_numbers: Optional[ProductSettings] = None
-    identity: Optional[ProductSettings] = None
-    transactions: Optional[TransactionsProductSettings] = None
-    investments: Optional[ProductSettings] = None
+    refreshed_at: Optional[datetime] = Field(
+        default=None,
+        description="An ISO-8601 timestamp indicating the last time that the product was updated.",
+    )
+    last_attempted_at: Optional[datetime] = Field(
+        default=None,
+        description="An ISO-8601 timestamp indicating the last time that the product was attempted.",
+    )
+    error_code: Optional[LinkProductFailureReasons] = None
+    error_message: Optional[StrictStr] = Field(
+        default=None,
+        description="The error message, if the last attempt to refresh the product failed.",
+    )
+    unavailable: Optional[StrictStr] = Field(
+        default=None,
+        description="If this product can't currently be updated, the reason why it is unavailable.         <p>Unavailable products can't be refreshed, but past data, if any, is still accessible.",
+    )
+    settings: Optional[ProductSettings] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
-        "account_numbers",
-        "identity",
-        "transactions",
-        "investments",
+        "refreshed_at",
+        "last_attempted_at",
+        "error_code",
+        "error_message",
+        "unavailable",
+        "settings",
     ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
@@ -59,7 +76,7 @@ class ProductsSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of ProductsSettings from a JSON string"""
+        """Create an instance of LinkProduct from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,18 +97,9 @@ class ProductsSettings(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of account_numbers
-        if self.account_numbers:
-            _dict["account_numbers"] = self.account_numbers.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of identity
-        if self.identity:
-            _dict["identity"] = self.identity.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of transactions
-        if self.transactions:
-            _dict["transactions"] = self.transactions.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of investments
-        if self.investments:
-            _dict["investments"] = self.investments.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of settings
+        if self.settings:
+            _dict["settings"] = self.settings.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -101,7 +109,7 @@ class ProductsSettings(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of ProductsSettings from a dict"""
+        """Create an instance of LinkProduct from a dict"""
         if obj is None:
             return None
 
@@ -110,19 +118,13 @@ class ProductsSettings(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "account_numbers": ProductSettings.from_dict(obj.get("account_numbers"))
-                if obj.get("account_numbers") is not None
-                else None,
-                "identity": ProductSettings.from_dict(obj.get("identity"))
-                if obj.get("identity") is not None
-                else None,
-                "transactions": TransactionsProductSettings.from_dict(
-                    obj.get("transactions")
-                )
-                if obj.get("transactions") is not None
-                else None,
-                "investments": ProductSettings.from_dict(obj.get("investments"))
-                if obj.get("investments") is not None
+                "refreshed_at": obj.get("refreshed_at"),
+                "last_attempted_at": obj.get("last_attempted_at"),
+                "error_code": obj.get("error_code"),
+                "error_message": obj.get("error_message"),
+                "unavailable": obj.get("unavailable"),
+                "settings": ProductSettings.from_dict(obj.get("settings"))
+                if obj.get("settings") is not None
                 else None,
             }
         )
