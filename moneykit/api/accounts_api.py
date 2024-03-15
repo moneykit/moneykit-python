@@ -868,13 +868,13 @@ class AccountsApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
-        account_id: Annotated[
+        account_ids: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
                 description="If present, filters results to accounts matching the given IDs."
             ),
         ] = None,
-        institution_id: Annotated[
+        institution_ids: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
                 description="If present, filters results to accounts at institutions matching the given IDs."
@@ -898,10 +898,10 @@ class AccountsApi:
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
-        :param account_id: If present, filters results to accounts matching the given IDs.
-        :type account_id: List[str]
-        :param institution_id: If present, filters results to accounts at institutions matching the given IDs.
-        :type institution_id: List[str]
+        :param account_ids: If present, filters results to accounts matching the given IDs.
+        :type account_ids: List[str]
+        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -926,8 +926,8 @@ class AccountsApi:
 
         _param = self._get_user_accounts_serialize(
             id=id,
-            account_id=account_id,
-            institution_id=institution_id,
+            account_ids=account_ids,
+            institution_ids=institution_ids,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -956,13 +956,13 @@ class AccountsApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
-        account_id: Annotated[
+        account_ids: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
                 description="If present, filters results to accounts matching the given IDs."
             ),
         ] = None,
-        institution_id: Annotated[
+        institution_ids: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
                 description="If present, filters results to accounts at institutions matching the given IDs."
@@ -986,10 +986,10 @@ class AccountsApi:
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
-        :param account_id: If present, filters results to accounts matching the given IDs.
-        :type account_id: List[str]
-        :param institution_id: If present, filters results to accounts at institutions matching the given IDs.
-        :type institution_id: List[str]
+        :param account_ids: If present, filters results to accounts matching the given IDs.
+        :type account_ids: List[str]
+        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1014,8 +1014,8 @@ class AccountsApi:
 
         _param = self._get_user_accounts_serialize(
             id=id,
-            account_id=account_id,
-            institution_id=institution_id,
+            account_ids=account_ids,
+            institution_ids=institution_ids,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1044,13 +1044,13 @@ class AccountsApi:
                 description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
             ),
         ],
-        account_id: Annotated[
+        account_ids: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
                 description="If present, filters results to accounts matching the given IDs."
             ),
         ] = None,
-        institution_id: Annotated[
+        institution_ids: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
                 description="If present, filters results to accounts at institutions matching the given IDs."
@@ -1074,10 +1074,10 @@ class AccountsApi:
 
         :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
         :type id: str
-        :param account_id: If present, filters results to accounts matching the given IDs.
-        :type account_id: List[str]
-        :param institution_id: If present, filters results to accounts at institutions matching the given IDs.
-        :type institution_id: List[str]
+        :param account_ids: If present, filters results to accounts matching the given IDs.
+        :type account_ids: List[str]
+        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1102,8 +1102,8 @@ class AccountsApi:
 
         _param = self._get_user_accounts_serialize(
             id=id,
-            account_id=account_id,
-            institution_id=institution_id,
+            account_ids=account_ids,
+            institution_ids=institution_ids,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1122,8 +1122,8 @@ class AccountsApi:
     def _get_user_accounts_serialize(
         self,
         id,
-        account_id,
-        institution_id,
+        account_ids,
+        institution_ids,
         _request_auth,
         _content_type,
         _headers,
@@ -1132,8 +1132,8 @@ class AccountsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            "account_id": "multi",
-            "institution_id": "multi",
+            "account_ids": "multi",
+            "institution_ids": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -1147,11 +1147,11 @@ class AccountsApi:
         if id is not None:
             _path_params["id"] = id
         # process the query parameters
-        if account_id is not None:
-            _query_params.append(("account_id", account_id))
+        if account_ids is not None:
+            _query_params.append(("account_ids", account_ids))
 
-        if institution_id is not None:
-            _query_params.append(("institution_id", institution_id))
+        if institution_ids is not None:
+            _query_params.append(("institution_ids", institution_ids))
 
         # process the header parameters
         # process the form parameters

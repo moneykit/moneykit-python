@@ -33,7 +33,9 @@ class InvestmentTransactionResponse(BaseModel):
     InvestmentTransactionResponse
     """  # noqa: E501
 
-    id: StrictStr = Field(description="The unique ID for this investment transaction.")
+    investment_transaction_id: StrictStr = Field(
+        description="The unique ID for this investment transaction."
+    )
     account_id: StrictStr = Field(
         description="The ID of the account in which this investment transaction occurred."
     )
@@ -77,7 +79,7 @@ class InvestmentTransactionResponse(BaseModel):
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
-        "id",
+        "investment_transaction_id",
         "account_id",
         "amount",
         "date",
@@ -143,7 +145,7 @@ class InvestmentTransactionResponse(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "id": obj.get("id"),
+                "investment_transaction_id": obj.get("investment_transaction_id"),
                 "account_id": obj.get("account_id"),
                 "amount": obj.get("amount"),
                 "date": obj.get("date"),

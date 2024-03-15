@@ -33,7 +33,9 @@ class SecurityResponse(BaseModel):
     SecurityResponse
     """  # noqa: E501
 
-    id: StrictStr = Field(description="A unique MoneyKit ID for this security.")
+    security_id: StrictStr = Field(
+        description="A unique MoneyKit ID for this security."
+    )
     name: StrictStr = Field(description="A user-facing name for this security.")
     type: StrictStr = Field(
         description="The type of this security.  Will be one of: <p>`cash`: Cash, currency, and money market funds <p>`crypto`: Digital or virtual currencies <p>`derivative`: Options, warrants, and other derivative instruments <p>`equity`: Equities (stocks) <p>`etf`: Exchange-traded investment funds <p>`bond`: Bonds and certificates of deposit (CDs) <p>`loan`: Loans and loan receivables <p>`fund`: Open- and closed-end vehicles pooling funds of multiple investors <p>`unknown`: Indicates the type is unknown or does not fit into any other category"
@@ -61,7 +63,7 @@ class SecurityResponse(BaseModel):
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
-        "id",
+        "security_id",
         "name",
         "type",
         "currency",
@@ -124,7 +126,7 @@ class SecurityResponse(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "id": obj.get("id"),
+                "security_id": obj.get("security_id"),
                 "name": obj.get("name"),
                 "type": obj.get("type"),
                 "currency": obj.get("currency"),
