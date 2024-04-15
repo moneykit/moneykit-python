@@ -17,10 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr
+from pydantic import BaseModel, StrictStr
 from pydantic import Field
+from moneykit.models.app_response import AppResponse
 
 try:
     from typing import Self
@@ -28,33 +29,27 @@ except ImportError:
     from typing_extensions import Self
 
 
-class ProductSettings(BaseModel):
+class AppClientResponse(BaseModel):
     """
-    ProductSettings
+    application client
     """  # noqa: E501
 
-    required: Optional[StrictBool] = Field(
-        default=False,
-        description="If true, only institutions supporting this product will be available.",
+    client_id: StrictStr = Field(description="The client's client ID.")
+    client_name: StrictStr = Field(
+        description="Friendly client name for identification."
     )
-    require_permission: Optional[StrictBool] = Field(
-        default=False,
-        description="This flag matters only if `required` is false.  For non-required products,         the product permission is normally presented to the user as optional (granted by default, but the user may         opt out).  If this flag is true, however, the product permission will be presented in the UI as non-optional:         the user's only choice is to grant the permission or to cancel the link.         <p>         Note that this field is ignored if `required` is true.  Permission is always mandatory for required products.",
-    )
-    prefetch: Optional[StrictBool] = Field(
-        default=False,
-        description="If true, the data will be available as soon as possible after linking, even if `required` is false. If false, the data will be available after the first manual data refresh.",
-    )
-    reason: Optional[StrictStr] = Field(
-        default=None,
-        description='A **brief** description of the reason your app wants this data.         This description will follow the words "...data is used to", and will be displayed         to the user when permission is requested.  You should provide this field if your         app does not request this product by default, or if you want to show a particular         reason for requesting the product during this link session.',
+    scope: StrictStr = Field(description="Actions allowed by this client.")
+    app: AppResponse
+    disabled_at: Optional[datetime] = Field(
+        default=None, description="Set to timestamp if the client has been disabled."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
-        "required",
-        "require_permission",
-        "prefetch",
-        "reason",
+        "client_id",
+        "client_name",
+        "scope",
+        "app",
+        "disabled_at",
     ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
@@ -70,7 +65,7 @@ class ProductSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of ProductSettings from a JSON string"""
+        """Create an instance of AppClientResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -91,6 +86,9 @@ class ProductSettings(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of app
+        if self.app:
+            _dict["app"] = self.app.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -100,7 +98,7 @@ class ProductSettings(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of ProductSettings from a dict"""
+        """Create an instance of AppClientResponse from a dict"""
         if obj is None:
             return None
 
@@ -109,16 +107,13 @@ class ProductSettings(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "required": obj.get("required")
-                if obj.get("required") is not None
-                else False,
-                "require_permission": obj.get("require_permission")
-                if obj.get("require_permission") is not None
-                else False,
-                "prefetch": obj.get("prefetch")
-                if obj.get("prefetch") is not None
-                else False,
-                "reason": obj.get("reason"),
+                "client_id": obj.get("client_id"),
+                "client_name": obj.get("client_name"),
+                "scope": obj.get("scope"),
+                "app": AppResponse.from_dict(obj.get("app"))
+                if obj.get("app") is not None
+                else None,
+                "disabled_at": obj.get("disabled_at"),
             }
         )
         # store additional fields in additional_properties

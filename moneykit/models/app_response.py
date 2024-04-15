@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, StrictStr
 from pydantic import Field
 
 try:
@@ -28,34 +28,17 @@ except ImportError:
     from typing_extensions import Self
 
 
-class ProductSettings(BaseModel):
+class AppResponse(BaseModel):
     """
-    ProductSettings
+    App for a specific environment
     """  # noqa: E501
 
-    required: Optional[StrictBool] = Field(
-        default=False,
-        description="If true, only institutions supporting this product will be available.",
-    )
-    require_permission: Optional[StrictBool] = Field(
-        default=False,
-        description="This flag matters only if `required` is false.  For non-required products,         the product permission is normally presented to the user as optional (granted by default, but the user may         opt out).  If this flag is true, however, the product permission will be presented in the UI as non-optional:         the user's only choice is to grant the permission or to cancel the link.         <p>         Note that this field is ignored if `required` is true.  Permission is always mandatory for required products.",
-    )
-    prefetch: Optional[StrictBool] = Field(
-        default=False,
-        description="If true, the data will be available as soon as possible after linking, even if `required` is false. If false, the data will be available after the first manual data refresh.",
-    )
-    reason: Optional[StrictStr] = Field(
-        default=None,
-        description='A **brief** description of the reason your app wants this data.         This description will follow the words "...data is used to", and will be displayed         to the user when permission is requested.  You should provide this field if your         app does not request this product by default, or if you want to show a particular         reason for requesting the product during this link session.',
-    )
+    app_id: StrictStr = Field(description="Your app's ID.")
+    name: StrictStr = Field(description="Your app's name.")
+    id: StrictStr = Field(description="Your app's ID.")
+    app_name: StrictStr = Field(description="Your app's name.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "required",
-        "require_permission",
-        "prefetch",
-        "reason",
-    ]
+    __properties: ClassVar[List[str]] = ["app_id", "name", "id", "app_name"]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -70,7 +53,7 @@ class ProductSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of ProductSettings from a JSON string"""
+        """Create an instance of AppResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -100,7 +83,7 @@ class ProductSettings(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of ProductSettings from a dict"""
+        """Create an instance of AppResponse from a dict"""
         if obj is None:
             return None
 
@@ -109,16 +92,10 @@ class ProductSettings(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "required": obj.get("required")
-                if obj.get("required") is not None
-                else False,
-                "require_permission": obj.get("require_permission")
-                if obj.get("require_permission") is not None
-                else False,
-                "prefetch": obj.get("prefetch")
-                if obj.get("prefetch") is not None
-                else False,
-                "reason": obj.get("reason"),
+                "app_id": obj.get("app_id"),
+                "name": obj.get("name"),
+                "id": obj.get("id"),
+                "app_name": obj.get("app_name"),
             }
         )
         # store additional fields in additional_properties

@@ -27,8 +27,8 @@ from pydantic import StrictStr
 
 from typing import Optional
 
+from moneykit.models.app_client_response import AppClientResponse
 from moneykit.models.generate_access_token_response import GenerateAccessTokenResponse
-from moneykit.models.introspect_client_response import IntrospectClientResponse
 from moneykit.models.jwk_set import JWKSet
 
 from moneykit.api_client import ApiClient
@@ -629,7 +629,7 @@ class AccessTokenApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IntrospectClientResponse:
+    ) -> AppClientResponse:
         """/auth/introspect
 
         Get details about the client and application associated with your `access_token`.
@@ -664,7 +664,7 @@ class AccessTokenApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "IntrospectClientResponse",
+            "200": "AppClientResponse",
             "401": "Response401InstrospectClientAuthIntrospectGet",
         }
         response_data = self.api_client.call_api(
@@ -690,7 +690,7 @@ class AccessTokenApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IntrospectClientResponse]:
+    ) -> ApiResponse[AppClientResponse]:
         """/auth/introspect
 
         Get details about the client and application associated with your `access_token`.
@@ -725,7 +725,7 @@ class AccessTokenApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "IntrospectClientResponse",
+            "200": "AppClientResponse",
             "401": "Response401InstrospectClientAuthIntrospectGet",
         }
         response_data = self.api_client.call_api(
@@ -786,7 +786,7 @@ class AccessTokenApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "IntrospectClientResponse",
+            "200": "AppClientResponse",
             "401": "Response401InstrospectClientAuthIntrospectGet",
         }
         response_data = self.api_client.call_api(

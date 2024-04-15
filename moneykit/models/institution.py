@@ -41,8 +41,7 @@ class Institution(BaseModel):
     name: StrictStr = Field(description="The name of the institution.")
     country: Country
     domain: Optional[StrictStr] = Field(
-        default=None,
-        description="The domain of the institution's customer-facing website.",
+        default=None, description="The domain of the institution's user-facing website."
     )
     color: StrictStr = Field(
         description="The primary color of this institution, represented as hexcode."

@@ -41,8 +41,16 @@ class MoneyKitConnectFeatures(BaseModel):
         default=False,
         description="If enabled, the user can register for, or login into, Money ID.",
     )
+    duplicate_institution_warning: Optional[StrictBool] = Field(
+        default=False,
+        description="If enabled, the user will see a warning when trying to connect the same institution more than once.",
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["issue_reporter", "enable_money_id"]
+    __properties: ClassVar[List[str]] = [
+        "issue_reporter",
+        "enable_money_id",
+        "duplicate_institution_warning",
+    ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -101,6 +109,11 @@ class MoneyKitConnectFeatures(BaseModel):
                 else False,
                 "enable_money_id": obj.get("enable_money_id")
                 if obj.get("enable_money_id") is not None
+                else False,
+                "duplicate_institution_warning": obj.get(
+                    "duplicate_institution_warning"
+                )
+                if obj.get("duplicate_institution_warning") is not None
                 else False,
             }
         )

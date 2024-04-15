@@ -64,7 +64,7 @@ class TransactionsApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -173,7 +173,7 @@ class TransactionsApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -282,7 +282,7 @@ class TransactionsApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -469,7 +469,7 @@ class TransactionsApi:
         cursor: Annotated[
             Optional[StrictStr],
             Field(
-                description="A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of customer cursors."
+                description="A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of app cursors."
             ),
         ] = None,
         size: Annotated[
@@ -494,7 +494,7 @@ class TransactionsApi:
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param cursor: A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of customer cursors.
+        :param cursor: A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of app cursors.
         :type cursor: str
         :param size: The number of items to return.
         :type size: int
@@ -555,7 +555,7 @@ class TransactionsApi:
         cursor: Annotated[
             Optional[StrictStr],
             Field(
-                description="A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of customer cursors."
+                description="A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of app cursors."
             ),
         ] = None,
         size: Annotated[
@@ -580,7 +580,7 @@ class TransactionsApi:
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param cursor: A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of customer cursors.
+        :param cursor: A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of app cursors.
         :type cursor: str
         :param size: The number of items to return.
         :type size: int
@@ -641,7 +641,7 @@ class TransactionsApi:
         cursor: Annotated[
             Optional[StrictStr],
             Field(
-                description="A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of customer cursors."
+                description="A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of app cursors."
             ),
         ] = None,
         size: Annotated[
@@ -666,7 +666,7 @@ class TransactionsApi:
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param cursor: A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of customer cursors.
+        :param cursor: A cursor value representing the last update requested. If included, the response will only return         changes after this update. If omitted, a complete history of updates will be returned. This value must be stored         by the client as we do not keep track of app cursors.
         :type cursor: str
         :param size: The number of items to return.
         :type size: int
@@ -802,7 +802,7 @@ class TransactionsApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -930,7 +930,7 @@ class TransactionsApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -1058,7 +1058,7 @@ class TransactionsApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[

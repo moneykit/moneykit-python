@@ -40,7 +40,7 @@ class InvestmentTransactionResponse(BaseModel):
         description="The ID of the account in which this investment transaction occurred."
     )
     amount: StrictStr = Field(
-        description="The total value of this transaction, denominated in account currency.  Positive values indicate         debits (deposits); negative values are credits (withdrawals).  For example, for a `buy` transaction, the amount         will be equal to `-(quantity * price + fees)`."
+        description="The total value of this transaction, denominated in account currency.  Positive values indicate         debits (withdrawals); negative values are credits (deposits).  When a transaction has both quantity and price,         the amount should be equal to `quantity * price + fees`."
     )
     var_date: date = Field(
         description="The effective (posted) date of the transaction, in ISO-8601 format.",
@@ -59,7 +59,7 @@ class InvestmentTransactionResponse(BaseModel):
     )
     fees: Optional[StrictStr] = Field(
         default=None,
-        description="The combined value of any fees applied to the transaction.  Fees are subtracted from the         total transaction amount, and are reported as positive values; refunds are reported as negative values.",
+        description="The combined value of any fees applied to the transaction.  Fees are reported as positive         values; refunds are reported as negative values.",
     )
     forex_rate: Optional[StrictStr] = Field(
         default=None,

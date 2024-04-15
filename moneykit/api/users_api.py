@@ -656,7 +656,7 @@ class UsersApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -784,7 +784,7 @@ class UsersApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -912,7 +912,7 @@ class UsersApi:
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[

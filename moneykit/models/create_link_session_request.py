@@ -50,7 +50,7 @@ class CreateLinkSessionRequest(BaseModel):
     redirect_uri: Annotated[
         str, Field(min_length=1, strict=True, max_length=65536)
     ] = Field(
-        description="For Oauth linking, a URI indicating the destination, in your application, where the user should         be sent after authenticating with the institution.  The `redirect_uri` should not contain any query parameters,         and it must be pre-approved by MoneyKit during the customer setup process."
+        description="For Oauth linking, a URI indicating the destination, in your application, where the user should         be sent after authenticating with the institution.  The `redirect_uri` should not contain any query parameters,         and it must be pre-approved by MoneyKit during the app setup process."
     )
     webhook: Optional[
         Annotated[str, Field(min_length=1, strict=True, max_length=65536)]

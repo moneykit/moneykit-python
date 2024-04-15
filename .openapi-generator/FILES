@@ -30,6 +30,8 @@ moneykit/models/address.py
 moneykit/models/api_error_auth_expired_access_token_response.py
 moneykit/models/api_error_auth_unauthorized_response.py
 moneykit/models/api_error_rate_limit_exceeded_response.py
+moneykit/models/app_client_response.py
+moneykit/models/app_response.py
 moneykit/models/bacs_number.py
 moneykit/models/basic_account_details.py
 moneykit/models/body.py
@@ -38,7 +40,6 @@ moneykit/models/create_link_session_request.py
 moneykit/models/create_link_session_response.py
 moneykit/models/currency.py
 moneykit/models/cursor_pagination.py
-moneykit/models/customer_app.py
 moneykit/models/eft_number.py
 moneykit/models/email.py
 moneykit/models/exchange_token_request.py
@@ -60,7 +61,6 @@ moneykit/models/identity_response.py
 moneykit/models/institution.py
 moneykit/models/institution_error_not_found_response.py
 moneykit/models/international_number.py
-moneykit/models/introspect_client_response.py
 moneykit/models/investment_transaction_response.py
 moneykit/models/jwk_set.py
 moneykit/models/link_common.py
@@ -138,3 +138,5 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
+test/test_app_client_response.py
+test/test_app_response.py

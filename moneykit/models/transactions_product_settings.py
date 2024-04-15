@@ -37,6 +37,10 @@ class TransactionsProductSettings(BaseModel):
         default=False,
         description="If true, only institutions supporting this product will be available.",
     )
+    require_permission: Optional[StrictBool] = Field(
+        default=False,
+        description="This flag matters only if `required` is false.  For non-required products,         the product permission is normally presented to the user as optional (granted by default, but the user may         opt out).  If this flag is true, however, the product permission will be presented in the UI as non-optional:         the user's only choice is to grant the permission or to cancel the link.         <p>         Note that this field is ignored if `required` is true.  Permission is always mandatory for required products.",
+    )
     prefetch: Optional[StrictBool] = Field(
         default=False,
         description="If true, the data will be available as soon as possible after linking, even if `required` is false. If false, the data will be available after the first manual data refresh.",
@@ -52,6 +56,7 @@ class TransactionsProductSettings(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "required",
+        "require_permission",
         "prefetch",
         "reason",
         "extend_history",
@@ -111,6 +116,9 @@ class TransactionsProductSettings(BaseModel):
             {
                 "required": obj.get("required")
                 if obj.get("required") is not None
+                else False,
+                "require_permission": obj.get("require_permission")
+                if obj.get("require_permission") is not None
                 else False,
                 "prefetch": obj.get("prefetch")
                 if obj.get("prefetch") is not None

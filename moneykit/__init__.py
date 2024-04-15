@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.1.12"
+__version__ = "0.1.13"
 
 # import apis into sdk package
 from moneykit.api.access_token_api import AccessTokenApi
@@ -59,6 +59,8 @@ from moneykit.models.account_numbers import AccountNumbers
 from moneykit.models.account_with_account_numbers import AccountWithAccountNumbers
 from moneykit.models.ach_number import AchNumber
 from moneykit.models.address import Address
+from moneykit.models.app_client_response import AppClientResponse
+from moneykit.models.app_response import AppResponse
 from moneykit.models.bacs_number import BacsNumber
 from moneykit.models.basic_account_details import BasicAccountDetails
 from moneykit.models.body import Body
@@ -67,7 +69,6 @@ from moneykit.models.create_link_session_request import CreateLinkSessionRequest
 from moneykit.models.create_link_session_response import CreateLinkSessionResponse
 from moneykit.models.currency import Currency
 from moneykit.models.cursor_pagination import CursorPagination
-from moneykit.models.customer_app import CustomerApp
 from moneykit.models.eft_number import EftNumber
 from moneykit.models.email import Email
 from moneykit.models.exchange_token_request import ExchangeTokenRequest
@@ -93,7 +94,6 @@ from moneykit.models.institution_error_not_found_response import (
     InstitutionErrorNotFoundResponse,
 )
 from moneykit.models.international_number import InternationalNumber
-from moneykit.models.introspect_client_response import IntrospectClientResponse
 from moneykit.models.investment_transaction_response import (
     InvestmentTransactionResponse,
 )
