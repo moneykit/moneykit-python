@@ -18,9 +18,12 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr
-from pydantic import Field
+from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel
+from moneykit.models.account_with_account_numbers_legacy20230218 import (
+    AccountWithAccountNumbersLegacy20230218,
+)
+from moneykit.models.link_common import LinkCommon
 
 try:
     from typing import Self
@@ -28,34 +31,15 @@ except ImportError:
     from typing_extensions import Self
 
 
-class TransactionsProductSettings(BaseModel):
+class GetAccountNumbersResponseLegacy20230218(BaseModel):
     """
-    TransactionsProductSettings
+    GetAccountNumbersResponseLegacy20230218
     """  # noqa: E501
 
-    required: Optional[StrictBool] = Field(
-        default=False,
-        description="If true, only institutions supporting this product will be available.",
-    )
-    require_permission: Optional[StrictBool] = Field(
-        default=False,
-        description="This flag matters only if `required` is false.  For non-required products,         the product permission is normally presented to the user as optional (granted by default, but the user may         opt out).  If this flag is true, however, the product permission will be presented in the UI as non-optional:         the user's only choice is to grant the permission or to cancel the link.         <p>         Note that this field is ignored if `required` is true.  Permission is always mandatory for required products.",
-    )
-    prefetch: Optional[StrictBool] = Field(
-        default=False,
-        description="If true, the data will be available as soon as possible after linking, even if `required` is false. If false, the data will be available after the first manual data refresh.",
-    )
-    reason: Optional[StrictStr] = Field(
-        default=None,
-        description='A **brief** description of the reason your app wants this data.         This description will follow the words "...data is used to", and will be displayed         to the user when permission is requested.  You should provide this field if your         app does not request this product by default, or if you want to show a particular         reason for requesting the product during this link session.',
-    )
+    accounts: List[AccountWithAccountNumbersLegacy20230218]
+    link: LinkCommon
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "required",
-        "require_permission",
-        "prefetch",
-        "reason",
-    ]
+    __properties: ClassVar[List[str]] = ["accounts", "link"]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -70,7 +54,7 @@ class TransactionsProductSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TransactionsProductSettings from a JSON string"""
+        """Create an instance of GetAccountNumbersResponseLegacy20230218 from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -91,6 +75,16 @@ class TransactionsProductSettings(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in accounts (list)
+        _items = []
+        if self.accounts:
+            for _item in self.accounts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["accounts"] = _items
+        # override the default output from pydantic by calling `to_dict()` of link
+        if self.link:
+            _dict["link"] = self.link.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -100,7 +94,7 @@ class TransactionsProductSettings(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of TransactionsProductSettings from a dict"""
+        """Create an instance of GetAccountNumbersResponseLegacy20230218 from a dict"""
         if obj is None:
             return None
 
@@ -109,16 +103,15 @@ class TransactionsProductSettings(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "required": obj.get("required")
-                if obj.get("required") is not None
-                else False,
-                "require_permission": obj.get("require_permission")
-                if obj.get("require_permission") is not None
-                else False,
-                "prefetch": obj.get("prefetch")
-                if obj.get("prefetch") is not None
-                else False,
-                "reason": obj.get("reason"),
+                "accounts": [
+                    AccountWithAccountNumbersLegacy20230218.from_dict(_item)
+                    for _item in obj.get("accounts")
+                ]
+                if obj.get("accounts") is not None
+                else None,
+                "link": LinkCommon.from_dict(obj.get("link"))
+                if obj.get("link") is not None
+                else None,
             }
         )
         # store additional fields in additional_properties

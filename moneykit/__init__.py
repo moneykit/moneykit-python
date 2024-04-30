@@ -55,8 +55,10 @@ from moneykit.models.account import Account
 from moneykit.models.account_balances import AccountBalances
 from moneykit.models.account_group import AccountGroup
 from moneykit.models.account_identity import AccountIdentity
-from moneykit.models.account_numbers import AccountNumbers
-from moneykit.models.account_with_account_numbers import AccountWithAccountNumbers
+from moneykit.models.account_numbers_legacy20230218 import AccountNumbersLegacy20230218
+from moneykit.models.account_with_account_numbers_legacy20230218 import (
+    AccountWithAccountNumbersLegacy20230218,
+)
 from moneykit.models.ach_number import AchNumber
 from moneykit.models.address import Address
 from moneykit.models.app_client_response import AppClientResponse
@@ -74,7 +76,9 @@ from moneykit.models.email import Email
 from moneykit.models.exchange_token_request import ExchangeTokenRequest
 from moneykit.models.exchange_token_response import ExchangeTokenResponse
 from moneykit.models.generate_access_token_response import GenerateAccessTokenResponse
-from moneykit.models.get_account_numbers_response import GetAccountNumbersResponse
+from moneykit.models.get_account_numbers_response_legacy20230218 import (
+    GetAccountNumbersResponseLegacy20230218,
+)
 from moneykit.models.get_account_response import GetAccountResponse
 from moneykit.models.get_accounts_response import GetAccountsResponse
 from moneykit.models.get_holdings_response import GetHoldingsResponse
@@ -152,8 +156,8 @@ from moneykit.models.response401_exchange_token_link_session_exchange_token_post
 from moneykit.models.response401_get_account_links_id_accounts_account_id_get import (
     Response401GetAccountLinksIdAccountsAccountIdGet,
 )
-from moneykit.models.response401_get_account_numbers_links_id_accounts_numbers_get import (
-    Response401GetAccountNumbersLinksIdAccountsNumbersGet,
+from moneykit.models.response401_get_account_numbers_legacy20230218_links_id_accounts_numbers_get import (
+    Response401GetAccountNumbersLegacy20230218LinksIdAccountsNumbersGet,
 )
 from moneykit.models.response401_get_accounts_links_id_accounts_get import (
     Response401GetAccountsLinksIdAccountsGet,

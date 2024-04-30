@@ -25,7 +25,9 @@ from pydantic import Field
 from typing_extensions import Annotated
 from pydantic import StrictStr
 
-from moneykit.models.get_account_numbers_response import GetAccountNumbersResponse
+from moneykit.models.get_account_numbers_response_legacy20230218 import (
+    GetAccountNumbersResponseLegacy20230218,
+)
 
 from moneykit.api_client import ApiClient
 from moneykit.api_response import ApiResponse
@@ -45,7 +47,7 @@ class AccountNumbersApi:
         self.api_client = api_client
 
     @validate_call
-    def get_account_numbers(
+    def get_account_numbers_legacy20230218(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -59,7 +61,7 @@ class AccountNumbersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetAccountNumbersResponse:
+    ) -> GetAccountNumbersResponseLegacy20230218:
         """/links/{id}/accounts/numbers
 
         Returns a list of open, permissioned accounts associated with a <a href=#tag/Links>link</a>,         including full account and routing numbers for appropriate accounts (such as checking and savings accounts).         <p>**Note** that this endpoint does **not** trigger a fetch of account numbers from the institution; it merely returns         account numbers that have already been fetched, either because `prefetch` was requested when the link was created,         or because of an on-demand update.  **To force a check for new/updated account numbers, you must use the         <a href=#operation/refresh_products>/products</a> endpoint.**         <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.
@@ -88,7 +90,7 @@ class AccountNumbersApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_account_numbers_serialize(
+        _param = self._get_account_numbers_legacy20230218_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -97,8 +99,8 @@ class AccountNumbersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetAccountNumbersResponse",
-            "401": "Response401GetAccountNumbersLinksIdAccountsNumbersGet",
+            "200": "GetAccountNumbersResponseLegacy20230218",
+            "401": "Response401GetAccountNumbersLegacy20230218LinksIdAccountsNumbersGet",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -115,7 +117,7 @@ class AccountNumbersApi:
         ).data
 
     @validate_call
-    def get_account_numbers_with_http_info(
+    def get_account_numbers_legacy20230218_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -129,7 +131,7 @@ class AccountNumbersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetAccountNumbersResponse]:
+    ) -> ApiResponse[GetAccountNumbersResponseLegacy20230218]:
         """/links/{id}/accounts/numbers
 
         Returns a list of open, permissioned accounts associated with a <a href=#tag/Links>link</a>,         including full account and routing numbers for appropriate accounts (such as checking and savings accounts).         <p>**Note** that this endpoint does **not** trigger a fetch of account numbers from the institution; it merely returns         account numbers that have already been fetched, either because `prefetch` was requested when the link was created,         or because of an on-demand update.  **To force a check for new/updated account numbers, you must use the         <a href=#operation/refresh_products>/products</a> endpoint.**         <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.
@@ -158,7 +160,7 @@ class AccountNumbersApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_account_numbers_serialize(
+        _param = self._get_account_numbers_legacy20230218_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -167,8 +169,8 @@ class AccountNumbersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetAccountNumbersResponse",
-            "401": "Response401GetAccountNumbersLinksIdAccountsNumbersGet",
+            "200": "GetAccountNumbersResponseLegacy20230218",
+            "401": "Response401GetAccountNumbersLegacy20230218LinksIdAccountsNumbersGet",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -185,7 +187,7 @@ class AccountNumbersApi:
         )
 
     @validate_call
-    def get_account_numbers_without_preload_content(
+    def get_account_numbers_legacy20230218_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -228,7 +230,7 @@ class AccountNumbersApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_account_numbers_serialize(
+        _param = self._get_account_numbers_legacy20230218_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -237,8 +239,8 @@ class AccountNumbersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetAccountNumbersResponse",
-            "401": "Response401GetAccountNumbersLinksIdAccountsNumbersGet",
+            "200": "GetAccountNumbersResponseLegacy20230218",
+            "401": "Response401GetAccountNumbersLegacy20230218LinksIdAccountsNumbersGet",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -250,7 +252,7 @@ class AccountNumbersApi:
         )
         return response_data.response
 
-    def _get_account_numbers_serialize(
+    def _get_account_numbers_legacy20230218_serialize(
         self,
         id,
         _request_auth,

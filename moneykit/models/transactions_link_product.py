@@ -53,7 +53,9 @@ class TransactionsLinkProduct(BaseModel):
         description="If this product can't currently be updated, the reason why it is unavailable.         <p>Unavailable products can't be refreshed, but past data, if any, is still accessible.",
     )
     settings: Optional[TransactionsProductSettings] = None
-    has_history: StrictBool
+    has_history: StrictBool = Field(
+        description="DEPRECATED: No longer used as we fetch as much history as possible."
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "refreshed_at",

@@ -39,6 +39,7 @@ class LinkProductFailureReasons(str, Enum):
     TIMEOUT = "timeout"
     UNKNOWN = "unknown"
     NO_ACCOUNTS = "no_accounts"
+    INSTITUTION_ERROR = "institution_error"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
