@@ -323,7 +323,7 @@ class AccountsApi:
         )
 
     @validate_call
-    def get_account_numbers_legacy20230218(
+    def get_account_numbers(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -366,7 +366,7 @@ class AccountsApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_account_numbers_legacy20230218_serialize(
+        _param = self._get_account_numbers_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -376,7 +376,7 @@ class AccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             "200": "GetAccountNumbersResponseLegacy20230218",
-            "401": "Response401GetAccountNumbersLegacy20230218LinksIdAccountsNumbersGet",
+            "401": "Response401GetAccountNumbers",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -393,7 +393,7 @@ class AccountsApi:
         ).data
 
     @validate_call
-    def get_account_numbers_legacy20230218_with_http_info(
+    def get_account_numbers_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -436,7 +436,7 @@ class AccountsApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_account_numbers_legacy20230218_serialize(
+        _param = self._get_account_numbers_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -446,7 +446,7 @@ class AccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             "200": "GetAccountNumbersResponseLegacy20230218",
-            "401": "Response401GetAccountNumbersLegacy20230218LinksIdAccountsNumbersGet",
+            "401": "Response401GetAccountNumbers",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -463,7 +463,7 @@ class AccountsApi:
         )
 
     @validate_call
-    def get_account_numbers_legacy20230218_without_preload_content(
+    def get_account_numbers_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -506,7 +506,7 @@ class AccountsApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_account_numbers_legacy20230218_serialize(
+        _param = self._get_account_numbers_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -516,7 +516,7 @@ class AccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             "200": "GetAccountNumbersResponseLegacy20230218",
-            "401": "Response401GetAccountNumbersLegacy20230218LinksIdAccountsNumbersGet",
+            "401": "Response401GetAccountNumbers",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -528,7 +528,7 @@ class AccountsApi:
         )
         return response_data.response
 
-    def _get_account_numbers_legacy20230218_serialize(
+    def _get_account_numbers_serialize(
         self,
         id,
         _request_auth,

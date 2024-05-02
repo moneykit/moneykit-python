@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.1.13"
+__version__ = "0.1.14"
 
 # import apis into sdk package
 from moneykit.api.access_token_api import AccessTokenApi
@@ -156,9 +156,7 @@ from moneykit.models.response401_exchange_token_link_session_exchange_token_post
 from moneykit.models.response401_get_account_links_id_accounts_account_id_get import (
     Response401GetAccountLinksIdAccountsAccountIdGet,
 )
-from moneykit.models.response401_get_account_numbers_legacy20230218_links_id_accounts_numbers_get import (
-    Response401GetAccountNumbersLegacy20230218LinksIdAccountsNumbersGet,
-)
+from moneykit.models.response401_get_account_numbers import Response401GetAccountNumbers
 from moneykit.models.response401_get_accounts_links_id_accounts_get import (
     Response401GetAccountsLinksIdAccountsGet,
 )
