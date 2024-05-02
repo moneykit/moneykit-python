@@ -138,4 +138,3 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
-test/test_response401_get_account_numbers.py
