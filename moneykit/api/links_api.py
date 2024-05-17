@@ -47,7 +47,7 @@ class LinksApi:
         self.api_client = api_client
 
     @validate_call
-    def disconnect(
+    def delete_link(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -90,7 +90,7 @@ class LinksApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._disconnect_serialize(
+        _param = self._delete_link_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -109,7 +109,7 @@ class LinksApi:
         ).data
 
     @validate_call
-    def disconnect_with_http_info(
+    def delete_link_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -152,7 +152,7 @@ class LinksApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._disconnect_serialize(
+        _param = self._delete_link_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -171,7 +171,7 @@ class LinksApi:
         )
 
     @validate_call
-    def disconnect_without_preload_content(
+    def delete_link_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -214,7 +214,7 @@ class LinksApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._disconnect_serialize(
+        _param = self._delete_link_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -228,7 +228,7 @@ class LinksApi:
         )
         return response_data.response
 
-    def _disconnect_serialize(
+    def _delete_link_serialize(
         self,
         id,
         _request_auth,

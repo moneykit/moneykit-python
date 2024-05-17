@@ -96,7 +96,7 @@ moneykit/models/products_settings.py
 moneykit/models/provider.py
 moneykit/models/refresh_products_request.py
 moneykit/models/requested_link_permission.py
-moneykit/models/response401_disconnect_links_id_delete.py
+moneykit/models/response401_delete_link_links_id_delete.py
 moneykit/models/response401_exchange_token_link_session_exchange_token_post.py
 moneykit/models/response401_get_account_links_id_accounts_account_id_get.py
 moneykit/models/response401_get_account_numbers.py
@@ -138,3 +138,4 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
+test/test_response401_delete_link_links_id_delete.py

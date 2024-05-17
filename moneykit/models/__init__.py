@@ -119,8 +119,8 @@ from moneykit.models.products_settings import ProductsSettings
 from moneykit.models.provider import Provider
 from moneykit.models.refresh_products_request import RefreshProductsRequest
 from moneykit.models.requested_link_permission import RequestedLinkPermission
-from moneykit.models.response401_disconnect_links_id_delete import (
-    Response401DisconnectLinksIdDelete,
+from moneykit.models.response401_delete_link_links_id_delete import (
+    Response401DeleteLinkLinksIdDelete,
 )
 from moneykit.models.response401_exchange_token_link_session_exchange_token_post import (
     Response401ExchangeTokenLinkSessionExchangeTokenPost,
