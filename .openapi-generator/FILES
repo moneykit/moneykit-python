@@ -138,4 +138,3 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
-test/test_response401_delete_link_links_id_delete.py
