@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "moneykit"
-version = "0.1.14"
+version = "0.1.15"
 description = "MoneyKit API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
@@ -20,7 +20,7 @@ typing-extensions = ">=4.7.1"
 [tool.poetry.dev-dependencies]
 pytest = ">=7.2.1"
 tox = ">=3.9.0"
-ruff = "0.1.6"
+ruff = "0.5.6"
 mypy = "^1.7.0"
 
 [build-system]
