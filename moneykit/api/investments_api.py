@@ -347,13 +347,13 @@ class InvestmentsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -380,9 +380,9 @@ class InvestmentsApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -456,13 +456,13 @@ class InvestmentsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -489,9 +489,9 @@ class InvestmentsApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -565,13 +565,13 @@ class InvestmentsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -598,9 +598,9 @@ class InvestmentsApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

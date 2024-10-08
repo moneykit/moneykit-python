@@ -23,7 +23,7 @@ from typing_extensions import Annotated
 
 from moneykit.models.get_user_links_response import GetUserLinksResponse
 from moneykit.models.import_link_request import ImportLinkRequest
-from moneykit.models.link_response import LinkResponse
+from moneykit.models.link_common import LinkCommon
 from moneykit.models.update_link_request import UpdateLinkRequest
 
 from moneykit.api_client import ApiClient
@@ -290,7 +290,7 @@ class LinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> LinkResponse:
+    ) -> LinkCommon:
         """/links/{id}
 
         Fetches details about a link.
@@ -328,7 +328,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401GetLinkLinksIdGet",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -360,7 +360,7 @@ class LinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[LinkResponse]:
+    ) -> ApiResponse[LinkCommon]:
         """/links/{id}
 
         Fetches details about a link.
@@ -398,7 +398,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401GetLinkLinksIdGet",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -468,7 +468,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401GetLinkLinksIdGet",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -537,7 +537,7 @@ class LinksApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         _request_timeout: Union[
@@ -556,7 +556,7 @@ class LinksApi:
 
         Fetches all links belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -607,7 +607,7 @@ class LinksApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         _request_timeout: Union[
@@ -626,7 +626,7 @@ class LinksApi:
 
         Fetches all links belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -677,7 +677,7 @@ class LinksApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         _request_timeout: Union[
@@ -696,7 +696,7 @@ class LinksApi:
 
         Fetches all links belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -802,10 +802,10 @@ class LinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> LinkResponse:
+    ) -> LinkCommon:
         """/links/import
 
-        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.
+        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  You should set generous HTTP read timeouts to avoid disconnecting before the import is complete.
 
         :param import_link_request: (required)
         :type import_link_request: ImportLinkRequest
@@ -840,7 +840,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401ImportLinkLinksImportPost",
             "429": "APIErrorRateLimitExceededResponse",
         }
@@ -868,10 +868,10 @@ class LinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[LinkResponse]:
+    ) -> ApiResponse[LinkCommon]:
         """/links/import
 
-        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.
+        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  You should set generous HTTP read timeouts to avoid disconnecting before the import is complete.
 
         :param import_link_request: (required)
         :type import_link_request: ImportLinkRequest
@@ -906,7 +906,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401ImportLinkLinksImportPost",
             "429": "APIErrorRateLimitExceededResponse",
         }
@@ -937,7 +937,7 @@ class LinksApi:
     ) -> RESTResponseType:
         """/links/import
 
-        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.
+        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  You should set generous HTTP read timeouts to avoid disconnecting before the import is complete.
 
         :param import_link_request: (required)
         :type import_link_request: ImportLinkRequest
@@ -972,7 +972,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401ImportLinkLinksImportPost",
             "429": "APIErrorRateLimitExceededResponse",
         }
@@ -1056,7 +1056,7 @@ class LinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> LinkResponse:
+    ) -> LinkCommon:
         """Force a \"relink required\" state on a link (Test only).
 
 
@@ -1093,7 +1093,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401ResetLoginLinksIdResetPost",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -1125,7 +1125,7 @@ class LinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[LinkResponse]:
+    ) -> ApiResponse[LinkCommon]:
         """Force a \"relink required\" state on a link (Test only).
 
 
@@ -1162,7 +1162,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401ResetLoginLinksIdResetPost",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -1231,7 +1231,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401ResetLoginLinksIdResetPost",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -1310,7 +1310,7 @@ class LinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> LinkResponse:
+    ) -> LinkCommon:
         """/links/{id}
 
         Updates the link configuration.
@@ -1351,7 +1351,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401UpdateLinkLinksIdPatch",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -1384,7 +1384,7 @@ class LinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[LinkResponse]:
+    ) -> ApiResponse[LinkCommon]:
         """/links/{id}
 
         Updates the link configuration.
@@ -1425,7 +1425,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401UpdateLinkLinksIdPatch",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -1499,7 +1499,7 @@ class LinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "LinkResponse",
+            "200": "LinkCommon",
             "401": "Response401UpdateLinkLinksIdPatch",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",

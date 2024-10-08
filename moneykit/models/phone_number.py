@@ -33,10 +33,12 @@ class PhoneNumber(BaseModel):
     PhoneNumber
     """  # noqa: E501
 
-    number: StrictStr = Field(description="A phone number for the account owner.")
+    number: StrictStr = Field(
+        description="A phone number for the account owner.  Phone numbers may have a variety of formats; they may or         may not have country-code prefixes; and they may contain extensions."
+    )
     primary: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if this is the primary phone number for the account owner.",
+        description="Indicates if this is the primary phone number for the account owner, as reported by the institution.",
     )
     type: PhoneNumberType
     additional_properties: Dict[str, Any] = {}

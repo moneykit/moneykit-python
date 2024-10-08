@@ -17,8 +17,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, StrictBool, StrictStr
 from pydantic import Field
 from moneykit.models.account_balances import AccountBalances
 from moneykit.models.owner import Owner
@@ -48,9 +48,15 @@ class AccountIdentity(BaseModel):
         description="The last four characters (usually digits) of the account number.         Note that this mask may be non-unique between accounts.",
     )
     balances: AccountBalances
+    raw_provider_data: Optional[Union[str, Any]] = Field(
+        default=None, description="Raw account data from the provider."
+    )
     original_id: Optional[StrictStr] = Field(
         default=None,
         description="The original ID of this account, if supplied (by you) during an import.",
+    )
+    closed: Optional[StrictBool] = Field(
+        default=None, description="True if this account is closed."
     )
     owners: List[Owner]
     additional_properties: Dict[str, Any] = {}
@@ -60,7 +66,9 @@ class AccountIdentity(BaseModel):
         "name",
         "account_mask",
         "balances",
+        "raw_provider_data",
         "original_id",
+        "closed",
         "owners",
     ]
 
@@ -133,7 +141,9 @@ class AccountIdentity(BaseModel):
                 "balances": AccountBalances.from_dict(obj.get("balances"))
                 if obj.get("balances") is not None
                 else None,
+                "raw_provider_data": obj.get("raw_provider_data"),
                 "original_id": obj.get("original_id"),
+                "closed": obj.get("closed"),
                 "owners": [Owner.from_dict(_item) for _item in obj.get("owners")]
                 if obj.get("owners") is not None
                 else None,

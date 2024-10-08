@@ -39,6 +39,7 @@ class LinkProductError(str, Enum):
     UNKNOWN = "unknown"
     NO_ACCOUNTS = "no_accounts"
     INSTITUTION_ERROR = "institution_error"
+    NO_PERMISSION = "no_permission"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

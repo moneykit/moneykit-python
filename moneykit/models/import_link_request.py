@@ -39,7 +39,7 @@ class ImportLinkRequest(BaseModel):
     customer_user: CustomerUser
     provider: Optional[Provider] = None
     institution_id: StrictStr = Field(
-        description="MoneyKit's unique ID for this institution.  If the imported link is         synced with a data provider later, it will be connected to this institution."
+        description="MoneyKit's unique ID for this institution.  If you use a MoneyKit-supported provider, you can         also submit the provider name and __their__ institution_id in dotted notation, such as `mx.chase`         or `yodlee.30188`.  If the imported link is synced with a data provider later, it will be connected to         this institution.  Note that MoneyKit may reconnect the link using any supported provider, not just the one         given during this import."
     )
     accounts: List[AccountImportData]
     transactions: List[TransactionImportData]

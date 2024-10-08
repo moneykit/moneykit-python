@@ -22,6 +22,7 @@ from pydantic import BaseModel, StrictStr
 from pydantic import Field
 from moneykit.models.link_products import LinkProducts
 from moneykit.models.product import Product
+from moneykit.models.provider import Provider
 from moneykit.models.public_link_error import PublicLinkError
 from moneykit.models.public_link_state import PublicLinkState
 
@@ -52,7 +53,11 @@ class LinkCommon(BaseModel):
         default=None,
         description="(Deprecated) An ISO-8601 timestamp indicating the last time that the link was updated.",
     )
+    provider: Provider
     tags: Optional[List[StrictStr]] = None
+    webhook: Optional[StrictStr] = Field(
+        default=None, description="The webhook url assigned to this link."
+    )
     products: LinkProducts
     available_products: List[Product]
     additional_properties: Dict[str, Any] = {}
@@ -64,7 +69,9 @@ class LinkCommon(BaseModel):
         "state",
         "error_code",
         "last_synced_at",
+        "provider",
         "tags",
+        "webhook",
         "products",
         "available_products",
     ]
@@ -131,7 +138,9 @@ class LinkCommon(BaseModel):
                 "state": obj.get("state"),
                 "error_code": obj.get("error_code"),
                 "last_synced_at": obj.get("last_synced_at"),
+                "provider": obj.get("provider"),
                 "tags": obj.get("tags"),
+                "webhook": obj.get("webhook"),
                 "products": LinkProducts.from_dict(obj.get("products"))
                 if obj.get("products") is not None
                 else None,

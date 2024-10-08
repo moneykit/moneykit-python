@@ -862,7 +862,7 @@ class AccountsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         account_ids: Annotated[
@@ -893,7 +893,7 @@ class AccountsApi:
 
         Fetches all accounts belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
@@ -950,7 +950,7 @@ class AccountsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         account_ids: Annotated[
@@ -981,7 +981,7 @@ class AccountsApi:
 
         Fetches all accounts belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
@@ -1038,7 +1038,7 @@ class AccountsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         account_ids: Annotated[
@@ -1069,7 +1069,7 @@ class AccountsApi:
 
         Fetches all accounts belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]

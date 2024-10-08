@@ -44,11 +44,16 @@ class MoneyKitConnectFeatures(BaseModel):
         default=False,
         description="If enabled, the user will see a warning when trying to connect the same institution more than once.",
     )
+    connect_manually: Optional[StrictBool] = Field(
+        default=False,
+        description="If enabled, the user can click a button in the MoneyKit Connect SDK to connect manually if the institution they are looking for doesn't exist in our catalog.",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "issue_reporter",
         "enable_money_id",
         "duplicate_institution_warning",
+        "connect_manually",
     ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
@@ -113,6 +118,9 @@ class MoneyKitConnectFeatures(BaseModel):
                     "duplicate_institution_warning"
                 )
                 if obj.get("duplicate_institution_warning") is not None
+                else False,
+                "connect_manually": obj.get("connect_manually")
+                if obj.get("connect_manually") is not None
                 else False,
             }
         )

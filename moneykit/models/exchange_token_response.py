@@ -33,7 +33,9 @@ class ExchangeTokenResponse(BaseModel):
     ExchangeTokenResponse
     """  # noqa: E501
 
-    link_id: StrictStr = Field(description="The unique ID associated with this link.")
+    link_id: StrictStr = Field(
+        description="DEPRECATED: Please use `link.link_id` for this value"
+    )
     link: LinkCommon
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["link_id", "link"]

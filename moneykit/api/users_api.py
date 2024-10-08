@@ -51,7 +51,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         account_ids: Annotated[
@@ -82,7 +82,7 @@ class UsersApi:
 
         Fetches all accounts belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
@@ -139,7 +139,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         account_ids: Annotated[
@@ -170,7 +170,7 @@ class UsersApi:
 
         Fetches all accounts belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
@@ -227,7 +227,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         account_ids: Annotated[
@@ -258,7 +258,7 @@ class UsersApi:
 
         Fetches all accounts belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
@@ -372,7 +372,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         _request_timeout: Union[
@@ -391,7 +391,7 @@ class UsersApi:
 
         Fetches all links belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -442,7 +442,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         _request_timeout: Union[
@@ -461,7 +461,7 @@ class UsersApi:
 
         Fetches all links belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -512,7 +512,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         _request_timeout: Union[
@@ -531,7 +531,7 @@ class UsersApi:
 
         Fetches all links belonging to a <a href=#operation/get_user_accounts>user</a>.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -628,7 +628,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
@@ -656,13 +656,13 @@ class UsersApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -681,7 +681,7 @@ class UsersApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
@@ -695,9 +695,9 @@ class UsersApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -756,7 +756,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
@@ -784,13 +784,13 @@ class UsersApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -809,7 +809,7 @@ class UsersApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
@@ -823,9 +823,9 @@ class UsersApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -884,7 +884,7 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
@@ -912,13 +912,13 @@ class UsersApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -937,7 +937,7 @@ class UsersApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
@@ -951,9 +951,9 @@ class UsersApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

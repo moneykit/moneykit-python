@@ -56,13 +56,13 @@ class TransactionsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         page: Annotated[
@@ -93,9 +93,9 @@ class TransactionsApi:
         :type id: str
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param page: The page number to return.
         :type page: int
@@ -165,13 +165,13 @@ class TransactionsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         page: Annotated[
@@ -202,9 +202,9 @@ class TransactionsApi:
         :type id: str
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param page: The page number to return.
         :type page: int
@@ -274,13 +274,13 @@ class TransactionsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         page: Annotated[
@@ -311,9 +311,9 @@ class TransactionsApi:
         :type id: str
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param page: The page number to return.
         :type page: int
@@ -484,7 +484,7 @@ class TransactionsApi:
     ) -> TransactionSyncResponse:
         """/links/{id}/transactions/sync
 
-        Provides a paginated feed of transactions, grouped into `created`, `updated`, and `removed` lists.         <p>Each call will also return a `cursor.next` value.  In subsequent calls, include that value to receive         only changes that have occurred since the previous call.         <p>**Pending** transactions will only be reported as `created`.  Pending transactions are completely         removed and replaced with each transaction refresh or update; no attempt is made to track their removal or         modification.         <p>Large numbers of transactions will be paginated, and the `has_more` field will be true.  You should         continue calling this endpoint with each new `cursor.next` value until `has_more` is false.         <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns         transactions that have already been fetched, either because `prefetch` was requested when the link was created,         or because of scheduled or on-demand updates.         <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the         update frequency can vary, depending on the downstream data provider, the institution, and whether one or both         provide webhook-based updates.         **To force a check for updated transactions, you can use the <a href=#operation/refresh_products>/products</a> endpoint.**         <p>Note also that the `transactions.updates_available` webhook will alert you when new data is available.
+        Provides a paginated feed of transactions, grouped into `created`, `updated`, and `removed` lists.         <p>Each call will also return a `cursor.next` value.  In subsequent calls, include that value to receive         only changes that have occurred since the previous call.  **Note** that these lists are **unordered**,         so it is possible to get transactions with dates that precede those you've fetched in previous calls to this         endpoint.  Older transactions can be added, for example, when historical data becomes accessible later.         <p>**Pending** transactions will only be reported as `created`.  Pending transactions are completely         removed and replaced with each transaction refresh or update; no attempt is made to track their removal or         modification.  Pending transactions will **not** be reported in the `removed` list.  If you store         pending transactions, you should remove and replace them entirely each time you fetch new transactions.         <p>Large numbers of transactions will be paginated, and the `has_more` field will be true.  You should         continue calling this endpoint with each new `cursor.next` value until `has_more` is false.         <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns         transactions that have already been fetched, either because `prefetch` was requested when the link was created,         or because of scheduled or on-demand updates.         <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the         update frequency can vary, depending on the downstream data provider, the institution, and whether one or both         provide webhook-based updates.         **To force a check for updated transactions, you can use the <a href=#operation/refresh_products>/products</a> endpoint.**         <p>Note also that the `transactions.updates_available` webhook will alert you when new data is available.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -570,7 +570,7 @@ class TransactionsApi:
     ) -> ApiResponse[TransactionSyncResponse]:
         """/links/{id}/transactions/sync
 
-        Provides a paginated feed of transactions, grouped into `created`, `updated`, and `removed` lists.         <p>Each call will also return a `cursor.next` value.  In subsequent calls, include that value to receive         only changes that have occurred since the previous call.         <p>**Pending** transactions will only be reported as `created`.  Pending transactions are completely         removed and replaced with each transaction refresh or update; no attempt is made to track their removal or         modification.         <p>Large numbers of transactions will be paginated, and the `has_more` field will be true.  You should         continue calling this endpoint with each new `cursor.next` value until `has_more` is false.         <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns         transactions that have already been fetched, either because `prefetch` was requested when the link was created,         or because of scheduled or on-demand updates.         <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the         update frequency can vary, depending on the downstream data provider, the institution, and whether one or both         provide webhook-based updates.         **To force a check for updated transactions, you can use the <a href=#operation/refresh_products>/products</a> endpoint.**         <p>Note also that the `transactions.updates_available` webhook will alert you when new data is available.
+        Provides a paginated feed of transactions, grouped into `created`, `updated`, and `removed` lists.         <p>Each call will also return a `cursor.next` value.  In subsequent calls, include that value to receive         only changes that have occurred since the previous call.  **Note** that these lists are **unordered**,         so it is possible to get transactions with dates that precede those you've fetched in previous calls to this         endpoint.  Older transactions can be added, for example, when historical data becomes accessible later.         <p>**Pending** transactions will only be reported as `created`.  Pending transactions are completely         removed and replaced with each transaction refresh or update; no attempt is made to track their removal or         modification.  Pending transactions will **not** be reported in the `removed` list.  If you store         pending transactions, you should remove and replace them entirely each time you fetch new transactions.         <p>Large numbers of transactions will be paginated, and the `has_more` field will be true.  You should         continue calling this endpoint with each new `cursor.next` value until `has_more` is false.         <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns         transactions that have already been fetched, either because `prefetch` was requested when the link was created,         or because of scheduled or on-demand updates.         <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the         update frequency can vary, depending on the downstream data provider, the institution, and whether one or both         provide webhook-based updates.         **To force a check for updated transactions, you can use the <a href=#operation/refresh_products>/products</a> endpoint.**         <p>Note also that the `transactions.updates_available` webhook will alert you when new data is available.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -656,7 +656,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """/links/{id}/transactions/sync
 
-        Provides a paginated feed of transactions, grouped into `created`, `updated`, and `removed` lists.         <p>Each call will also return a `cursor.next` value.  In subsequent calls, include that value to receive         only changes that have occurred since the previous call.         <p>**Pending** transactions will only be reported as `created`.  Pending transactions are completely         removed and replaced with each transaction refresh or update; no attempt is made to track their removal or         modification.         <p>Large numbers of transactions will be paginated, and the `has_more` field will be true.  You should         continue calling this endpoint with each new `cursor.next` value until `has_more` is false.         <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns         transactions that have already been fetched, either because `prefetch` was requested when the link was created,         or because of scheduled or on-demand updates.         <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the         update frequency can vary, depending on the downstream data provider, the institution, and whether one or both         provide webhook-based updates.         **To force a check for updated transactions, you can use the <a href=#operation/refresh_products>/products</a> endpoint.**         <p>Note also that the `transactions.updates_available` webhook will alert you when new data is available.
+        Provides a paginated feed of transactions, grouped into `created`, `updated`, and `removed` lists.         <p>Each call will also return a `cursor.next` value.  In subsequent calls, include that value to receive         only changes that have occurred since the previous call.  **Note** that these lists are **unordered**,         so it is possible to get transactions with dates that precede those you've fetched in previous calls to this         endpoint.  Older transactions can be added, for example, when historical data becomes accessible later.         <p>**Pending** transactions will only be reported as `created`.  Pending transactions are completely         removed and replaced with each transaction refresh or update; no attempt is made to track their removal or         modification.  Pending transactions will **not** be reported in the `removed` list.  If you store         pending transactions, you should remove and replace them entirely each time you fetch new transactions.         <p>Large numbers of transactions will be paginated, and the `has_more` field will be true.  You should         continue calling this endpoint with each new `cursor.next` value until `has_more` is false.         <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns         transactions that have already been fetched, either because `prefetch` was requested when the link was created,         or because of scheduled or on-demand updates.         <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the         update frequency can vary, depending on the downstream data provider, the institution, and whether one or both         provide webhook-based updates.         **To force a check for updated transactions, you can use the <a href=#operation/refresh_products>/products</a> endpoint.**         <p>Note also that the `transactions.updates_available` webhook will alert you when new data is available.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -774,7 +774,7 @@ class TransactionsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
@@ -802,13 +802,13 @@ class TransactionsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -827,7 +827,7 @@ class TransactionsApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
@@ -841,9 +841,9 @@ class TransactionsApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -902,7 +902,7 @@ class TransactionsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
@@ -930,13 +930,13 @@ class TransactionsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -955,7 +955,7 @@ class TransactionsApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
@@ -969,9 +969,9 @@ class TransactionsApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1030,7 +1030,7 @@ class TransactionsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
             ),
         ],
         transaction_type: Optional[List[TransactionTypeFilter]] = None,
@@ -1058,13 +1058,13 @@ class TransactionsApi:
         start_date: Annotated[
             Optional[date],
             Field(
-                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`."
+                description="The earliest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         end_date: Annotated[
             Optional[date],
             Field(
-                description="The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today."
+                description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1083,7 +1083,7 @@ class TransactionsApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=#operation/create_link_session>/link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
         :type id: str
         :param transaction_type:
         :type transaction_type: List[TransactionTypeFilter]
@@ -1097,9 +1097,9 @@ class TransactionsApi:
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to 90 days before the `end_date`.             <p>If you want to retrieve **all** transactions, use `1900-01-01`.
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.             Defaults to today.
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
         :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

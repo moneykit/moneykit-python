@@ -35,7 +35,7 @@ class Email(BaseModel):
     address: StrictStr = Field(description="An email address for the account owner.")
     primary: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if this is the primary email address for the account owner.",
+        description="Indicates if this is the primary email address for the account owner, as reported by the institution.",
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["address", "primary"]

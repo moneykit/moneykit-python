@@ -20,6 +20,7 @@ import json
 from typing import Any, ClassVar, Dict, List
 from pydantic import BaseModel, StrictBool
 from pydantic import Field
+from moneykit.models.account_response import AccountResponse
 from moneykit.models.cursor_pagination import CursorPagination
 from moneykit.models.link_common import LinkCommon
 from moneykit.models.transaction_sync import TransactionSync
@@ -36,13 +37,20 @@ class TransactionSyncResponse(BaseModel):
     """  # noqa: E501
 
     transactions: TransactionSync
+    accounts: List[AccountResponse]
     cursor: CursorPagination
     has_more: StrictBool = Field(
         description="This condition indicates the presence of transaction updates exceeding the requested count.         If true, additional updates MUST be retrieved by making an additional request with cursor set to `cursor.next`.         "
     )
     link: LinkCommon
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["transactions", "cursor", "has_more", "link"]
+    __properties: ClassVar[List[str]] = [
+        "transactions",
+        "accounts",
+        "cursor",
+        "has_more",
+        "link",
+    ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -81,6 +89,13 @@ class TransactionSyncResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of transactions
         if self.transactions:
             _dict["transactions"] = self.transactions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in accounts (list)
+        _items = []
+        if self.accounts:
+            for _item in self.accounts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["accounts"] = _items
         # override the default output from pydantic by calling `to_dict()` of cursor
         if self.cursor:
             _dict["cursor"] = self.cursor.to_dict()
@@ -107,6 +122,11 @@ class TransactionSyncResponse(BaseModel):
             {
                 "transactions": TransactionSync.from_dict(obj.get("transactions"))
                 if obj.get("transactions") is not None
+                else None,
+                "accounts": [
+                    AccountResponse.from_dict(_item) for _item in obj.get("accounts")
+                ]
+                if obj.get("accounts") is not None
                 else None,
                 "cursor": CursorPagination.from_dict(obj.get("cursor"))
                 if obj.get("cursor") is not None

@@ -37,6 +37,11 @@ class PublicLinkError(str, Enum):
     USER_ERROR = "user_error"
     AUTH_EXPIRED = "auth_expired"
     INCOMPLETE = "incomplete"
+    NO_ACCOUNTS = "no_accounts"
+    USER_SETUP_REQUIRED = "user_setup_required"
+    INVALID_CREDENTIALS = "invalid_credentials"
+    USER_OAUTH_DENIED = "user_oauth_denied"
+    USER_INPUT_INCORRECT = "user_input_incorrect"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

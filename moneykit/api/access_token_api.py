@@ -385,10 +385,16 @@ class AccessTokenApi:
         )
 
     @validate_call
-    def get_app_jwks(
+    def get_well_known_jwks(
         self,
         x_client_id: Annotated[
             Optional[StrictStr], Field(description="Your client ID.")
+        ] = None,
+        authorization: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="(Deprecated) An access token obtained from <a href=#operation/create_access_token>/auth/token</a>.  This method works         but is deprecated in favor of using `X-Client-Id`."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -404,10 +410,12 @@ class AccessTokenApi:
     ) -> JWKSet:
         """JSON Web Key Set
 
-        The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify webhook JSON Web Tokens (JWT) issued by MoneyKit webhooks.
+        The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify     JWTs in webhooks sent by MoneyKit.      The JWKS should be cached, but MoneyKit rotates its webhook keys periodically, so if an     incoming webhook's JWT has a key ID (`kid`) not contained in the cached JWKS, you should fetch     and cache the updated JWKS using this endpoint.
 
         :param x_client_id: Your client ID.
         :type x_client_id: str
+        :param authorization: (Deprecated) An access token obtained from <a href=#operation/create_access_token>/auth/token</a>.  This method works         but is deprecated in favor of using `X-Client-Id`.
+        :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -430,8 +438,9 @@ class AccessTokenApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_app_jwks_serialize(
+        _param = self._get_well_known_jwks_serialize(
             x_client_id=x_client_id,
+            authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -449,10 +458,16 @@ class AccessTokenApi:
         ).data
 
     @validate_call
-    def get_app_jwks_with_http_info(
+    def get_well_known_jwks_with_http_info(
         self,
         x_client_id: Annotated[
             Optional[StrictStr], Field(description="Your client ID.")
+        ] = None,
+        authorization: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="(Deprecated) An access token obtained from <a href=#operation/create_access_token>/auth/token</a>.  This method works         but is deprecated in favor of using `X-Client-Id`."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -468,10 +483,12 @@ class AccessTokenApi:
     ) -> ApiResponse[JWKSet]:
         """JSON Web Key Set
 
-        The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify webhook JSON Web Tokens (JWT) issued by MoneyKit webhooks.
+        The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify     JWTs in webhooks sent by MoneyKit.      The JWKS should be cached, but MoneyKit rotates its webhook keys periodically, so if an     incoming webhook's JWT has a key ID (`kid`) not contained in the cached JWKS, you should fetch     and cache the updated JWKS using this endpoint.
 
         :param x_client_id: Your client ID.
         :type x_client_id: str
+        :param authorization: (Deprecated) An access token obtained from <a href=#operation/create_access_token>/auth/token</a>.  This method works         but is deprecated in favor of using `X-Client-Id`.
+        :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -494,8 +511,9 @@ class AccessTokenApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_app_jwks_serialize(
+        _param = self._get_well_known_jwks_serialize(
             x_client_id=x_client_id,
+            authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -513,10 +531,16 @@ class AccessTokenApi:
         )
 
     @validate_call
-    def get_app_jwks_without_preload_content(
+    def get_well_known_jwks_without_preload_content(
         self,
         x_client_id: Annotated[
             Optional[StrictStr], Field(description="Your client ID.")
+        ] = None,
+        authorization: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="(Deprecated) An access token obtained from <a href=#operation/create_access_token>/auth/token</a>.  This method works         but is deprecated in favor of using `X-Client-Id`."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -532,10 +556,12 @@ class AccessTokenApi:
     ) -> RESTResponseType:
         """JSON Web Key Set
 
-        The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify webhook JSON Web Tokens (JWT) issued by MoneyKit webhooks.
+        The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify     JWTs in webhooks sent by MoneyKit.      The JWKS should be cached, but MoneyKit rotates its webhook keys periodically, so if an     incoming webhook's JWT has a key ID (`kid`) not contained in the cached JWKS, you should fetch     and cache the updated JWKS using this endpoint.
 
         :param x_client_id: Your client ID.
         :type x_client_id: str
+        :param authorization: (Deprecated) An access token obtained from <a href=#operation/create_access_token>/auth/token</a>.  This method works         but is deprecated in favor of using `X-Client-Id`.
+        :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -558,8 +584,9 @@ class AccessTokenApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_app_jwks_serialize(
+        _param = self._get_well_known_jwks_serialize(
             x_client_id=x_client_id,
+            authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -572,9 +599,10 @@ class AccessTokenApi:
         )
         return response_data.response
 
-    def _get_app_jwks_serialize(
+    def _get_well_known_jwks_serialize(
         self,
         x_client_id,
+        authorization,
         _request_auth,
         _content_type,
         _headers,
@@ -596,6 +624,8 @@ class AccessTokenApi:
         # process the header parameters
         if x_client_id is not None:
             _header_params["X-Client-Id"] = x_client_id
+        if authorization is not None:
+            _header_params["Authorization"] = authorization
         # process the form parameters
         # process the body parameter
 
@@ -605,7 +635,7 @@ class AccessTokenApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["OAuth2ClientCredentials"]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
             method="GET",

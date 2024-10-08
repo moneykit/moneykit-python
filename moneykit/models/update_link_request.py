@@ -39,9 +39,10 @@ class UpdateLinkRequest(BaseModel):
         default=None,
         description="Sets the webhook URL for this link.         To remove a webhook for this link, set to `null`.",
     )
+    link_tags: Optional[List[StrictStr]] = None
     tags: Optional[List[StrictStr]] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["webhook", "tags"]
+    __properties: ClassVar[List[str]] = ["webhook", "link_tags", "tags"]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -94,7 +95,11 @@ class UpdateLinkRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"webhook": obj.get("webhook"), "tags": obj.get("tags")}
+            {
+                "webhook": obj.get("webhook"),
+                "link_tags": obj.get("link_tags"),
+                "tags": obj.get("tags"),
+            }
         )
         # store additional fields in additional_properties
         for _key in obj.keys():
