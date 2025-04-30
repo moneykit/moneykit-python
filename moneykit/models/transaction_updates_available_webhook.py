@@ -17,7 +17,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, ClassVar, Dict, Literal, List, Optional
+from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictInt, StrictStr, field_validator
 
 try:
@@ -31,14 +31,14 @@ class TransactionUpdatesAvailableWebhook(BaseModel):
     TransactionUpdatesAvailableWebhook
     """  # noqa: E501
 
-    webhook_major_version: int = 1
-    webhook_minor_version: int = 0
+    webhook_major_version: Optional[StrictInt] = 1
+    webhook_minor_version: Optional[StrictInt] = 0
     webhook_idempotency_key: StrictStr
     webhook_timestamp: datetime
     link_id: StrictStr
     link_tags: List[StrictStr]
-    webhook_event: Literal["transactions.updates_available"] = "transactions.updates_available"
-    has_history: StrictBool
+    webhook_event: Optional[StrictStr] = "transactions.updates_available"
+    has_history: Optional[StrictBool] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "webhook_major_version",

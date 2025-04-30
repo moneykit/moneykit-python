@@ -21,8 +21,11 @@ except ImportError:
 
 from typing_extensions import Annotated
 
+
+from moneykit.models.get_links_response import GetLinksResponse
 from moneykit.models.get_user_links_response import GetUserLinksResponse
 from moneykit.models.import_link_request import ImportLinkRequest
+from moneykit.models.import_transactions_request import ImportTransactionsRequest
 from moneykit.models.link_common import LinkCommon
 from moneykit.models.update_link_request import UpdateLinkRequest
 
@@ -61,7 +64,7 @@ class LinksApi:
     ) -> None:
         """/links/{id}
 
-        Deletes this link and disables its access token.         <p>After deletion, the link id and access token are no longer valid and cannot be used to access any data         that was associated with it.
+        Deletes this link and disables its access token.         <p>After deletion, the link id and access token are no longer valid and cannot be used to access any data         that was associated with it.  MoneyKit retains a bare-minimum record of the deleted link for a period         (90 days) after deletion, so that your app can fetch the link by its ID and see that it is deleted;         but after 90 days, the link will be hard-deleted and is no longer accessible in any way.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -123,7 +126,7 @@ class LinksApi:
     ) -> ApiResponse[None]:
         """/links/{id}
 
-        Deletes this link and disables its access token.         <p>After deletion, the link id and access token are no longer valid and cannot be used to access any data         that was associated with it.
+        Deletes this link and disables its access token.         <p>After deletion, the link id and access token are no longer valid and cannot be used to access any data         that was associated with it.  MoneyKit retains a bare-minimum record of the deleted link for a period         (90 days) after deletion, so that your app can fetch the link by its ID and see that it is deleted;         but after 90 days, the link will be hard-deleted and is no longer accessible in any way.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -185,7 +188,7 @@ class LinksApi:
     ) -> RESTResponseType:
         """/links/{id}
 
-        Deletes this link and disables its access token.         <p>After deletion, the link id and access token are no longer valid and cannot be used to access any data         that was associated with it.
+        Deletes this link and disables its access token.         <p>After deletion, the link id and access token are no longer valid and cannot be used to access any data         that was associated with it.  MoneyKit retains a bare-minimum record of the deleted link for a period         (90 days) after deletion, so that your app can fetch the link by its ID and see that it is deleted;         but after 90 days, the link will be hard-deleted and is no longer accessible in any way.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -532,6 +535,285 @@ class LinksApi:
         )
 
     @validate_call
+    def get_links(
+        self,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(description="The next_cursor value from the previous batch"),
+        ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=5000, strict=True, ge=500)]],
+            Field(description="The number of links per page."),
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetLinksResponse:
+        """/links
+
+        Gets the list of all active links.  Active links are those that have been connected and     for which data has been fetched, and which have not been deleted.  The list is cursor-paged; submit the     `next_cursor` value to get the next page of links.
+
+        :param cursor: The next_cursor value from the previous batch
+        :type cursor: str
+        :param limit: The number of links per page.
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_links_serialize(
+            cursor=cursor,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetLinksResponse",
+            "401": "Response401GetLinksLinksGet",
+            "429": "APIErrorRateLimitExceededResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_links_with_http_info(
+        self,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(description="The next_cursor value from the previous batch"),
+        ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=5000, strict=True, ge=500)]],
+            Field(description="The number of links per page."),
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetLinksResponse]:
+        """/links
+
+        Gets the list of all active links.  Active links are those that have been connected and     for which data has been fetched, and which have not been deleted.  The list is cursor-paged; submit the     `next_cursor` value to get the next page of links.
+
+        :param cursor: The next_cursor value from the previous batch
+        :type cursor: str
+        :param limit: The number of links per page.
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_links_serialize(
+            cursor=cursor,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetLinksResponse",
+            "401": "Response401GetLinksLinksGet",
+            "429": "APIErrorRateLimitExceededResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_links_without_preload_content(
+        self,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(description="The next_cursor value from the previous batch"),
+        ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=5000, strict=True, ge=500)]],
+            Field(description="The number of links per page."),
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """/links
+
+        Gets the list of all active links.  Active links are those that have been connected and     for which data has been fetched, and which have not been deleted.  The list is cursor-paged; submit the     `next_cursor` value to get the next page of links.
+
+        :param cursor: The next_cursor value from the previous batch
+        :type cursor: str
+        :param limit: The number of links per page.
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_links_serialize(
+            cursor=cursor,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetLinksResponse",
+            "401": "Response401GetLinksLinksGet",
+            "429": "APIErrorRateLimitExceededResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_links_serialize(
+        self,
+        cursor,
+        limit,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> Tuple:
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if cursor is not None:
+            _query_params.append(("cursor", cursor))
+
+        if limit is not None:
+            _query_params.append(("limit", limit))
+
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = ["OAuth2ClientCredentials"]
+
+        return self.api_client.param_serialize(
+            method="GET",
+            resource_path="/links",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     def get_user_links(
         self,
         id: Annotated[
@@ -805,7 +1087,7 @@ class LinksApi:
     ) -> LinkCommon:
         """/links/import
 
-        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  You should set generous HTTP read timeouts to avoid disconnecting before the import is complete.
+        Creates a new link with pre-populated accounts and (optionally) transactions.  The new link will     be created in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  For large imports, you should set generous HTTP read timeouts to avoid disconnecting before the     import is complete.  Alternatively, you can import only accounts, and then use the <a href=/api/operation/import_transactions>import-transactions</a>     endpoint to add transactions in batches.
 
         :param import_link_request: (required)
         :type import_link_request: ImportLinkRequest
@@ -871,7 +1153,7 @@ class LinksApi:
     ) -> ApiResponse[LinkCommon]:
         """/links/import
 
-        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  You should set generous HTTP read timeouts to avoid disconnecting before the import is complete.
+        Creates a new link with pre-populated accounts and (optionally) transactions.  The new link will     be created in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  For large imports, you should set generous HTTP read timeouts to avoid disconnecting before the     import is complete.  Alternatively, you can import only accounts, and then use the <a href=/api/operation/import_transactions>import-transactions</a>     endpoint to add transactions in batches.
 
         :param import_link_request: (required)
         :type import_link_request: ImportLinkRequest
@@ -937,7 +1219,7 @@ class LinksApi:
     ) -> RESTResponseType:
         """/links/import
 
-        Creates a new link with pre-populated accounts and transactions.  The new link will be created     in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>/link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  You should set generous HTTP read timeouts to avoid disconnecting before the import is complete.
+        Creates a new link with pre-populated accounts and (optionally) transactions.  The new link will     be created in an initially `disconnected` state, with an error code of `auth_expired`, but all data will be available.     As with any disconnected link, the imported link can then be reconnected at any time by starting a new     <a href=#operation/create_link_session>link-session</a> with `existing_link_id` set to the link's `link_id`.  Note that the link can be     reconnected using any suitable provider.     <p>     The imported data has a maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.     The data is processed synchronously, so you can expect a delay of up to 10 seconds before the response is     transmitted.  For large imports, you should set generous HTTP read timeouts to avoid disconnecting before the     import is complete.  Alternatively, you can import only accounts, and then use the <a href=/api/operation/import_transactions>import-transactions</a>     endpoint to add transactions in batches.
 
         :param import_link_request: (required)
         :type import_link_request: ImportLinkRequest
@@ -1042,7 +1324,276 @@ class LinksApi:
         )
 
     @validate_call
-    def reset_login(
+    def import_transactions(
+        self,
+        id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
+        import_transactions_request: ImportTransactionsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> LinkCommon:
+        """/links/{id}/import/transactions
+
+        Adds transactions to a link imported with the <a href=/api/operation/import_link>import</a> endpoint.  The imported data has a     maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.  The data is processed     synchronously, so you can expect a delay of up to 10 seconds before the response is transmitted.
+
+        :param id: The unique ID for this link. (required)
+        :type id: str
+        :param import_transactions_request: (required)
+        :type import_transactions_request: ImportTransactionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._import_transactions_serialize(
+            id=id,
+            import_transactions_request=import_transactions_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "LinkCommon",
+            "401": "Response401ImportTransactionsLinksIdImportTransactionsPost",
+            "429": "APIErrorRateLimitExceededResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def import_transactions_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
+        import_transactions_request: ImportTransactionsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[LinkCommon]:
+        """/links/{id}/import/transactions
+
+        Adds transactions to a link imported with the <a href=/api/operation/import_link>import</a> endpoint.  The imported data has a     maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.  The data is processed     synchronously, so you can expect a delay of up to 10 seconds before the response is transmitted.
+
+        :param id: The unique ID for this link. (required)
+        :type id: str
+        :param import_transactions_request: (required)
+        :type import_transactions_request: ImportTransactionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._import_transactions_serialize(
+            id=id,
+            import_transactions_request=import_transactions_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "LinkCommon",
+            "401": "Response401ImportTransactionsLinksIdImportTransactionsPost",
+            "429": "APIErrorRateLimitExceededResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def import_transactions_without_preload_content(
+        self,
+        id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
+        import_transactions_request: ImportTransactionsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """/links/{id}/import/transactions
+
+        Adds transactions to a link imported with the <a href=/api/operation/import_link>import</a> endpoint.  The imported data has a     maximum size limit of 1MB, which corresponds very roughly to about 4000 transactions.  The data is processed     synchronously, so you can expect a delay of up to 10 seconds before the response is transmitted.
+
+        :param id: The unique ID for this link. (required)
+        :type id: str
+        :param import_transactions_request: (required)
+        :type import_transactions_request: ImportTransactionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._import_transactions_serialize(
+            id=id,
+            import_transactions_request=import_transactions_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "LinkCommon",
+            "401": "Response401ImportTransactionsLinksIdImportTransactionsPost",
+            "429": "APIErrorRateLimitExceededResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _import_transactions_serialize(
+        self,
+        id,
+        import_transactions_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> Tuple:
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params["id"] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if import_transactions_request is not None:
+            _body_params = import_transactions_request
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["OAuth2ClientCredentials"]
+
+        return self.api_client.param_serialize(
+            method="POST",
+            resource_path="/links/{id}/import/transactions",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    def reset_link(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -1057,8 +1608,9 @@ class LinksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> LinkCommon:
-        """Force a \"relink required\" state on a link (Test only).
+        """/links/{id}/reset
 
+        Forcibly disconnects a link, for testing purposes.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -1084,7 +1636,7 @@ class LinksApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._reset_login_serialize(
+        _param = self._reset_link_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1094,7 +1646,7 @@ class LinksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             "200": "LinkCommon",
-            "401": "Response401ResetLoginLinksIdResetPost",
+            "401": "Response401ResetLinkLinksIdResetPost",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -1111,7 +1663,7 @@ class LinksApi:
         ).data
 
     @validate_call
-    def reset_login_with_http_info(
+    def reset_link_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -1126,8 +1678,9 @@ class LinksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[LinkCommon]:
-        """Force a \"relink required\" state on a link (Test only).
+        """/links/{id}/reset
 
+        Forcibly disconnects a link, for testing purposes.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -1153,7 +1706,7 @@ class LinksApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._reset_login_serialize(
+        _param = self._reset_link_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1163,7 +1716,7 @@ class LinksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             "200": "LinkCommon",
-            "401": "Response401ResetLoginLinksIdResetPost",
+            "401": "Response401ResetLinkLinksIdResetPost",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -1180,7 +1733,7 @@ class LinksApi:
         )
 
     @validate_call
-    def reset_login_without_preload_content(
+    def reset_link_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         _request_timeout: Union[
@@ -1195,8 +1748,9 @@ class LinksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Force a \"relink required\" state on a link (Test only).
+        """/links/{id}/reset
 
+        Forcibly disconnects a link, for testing purposes.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -1222,7 +1776,7 @@ class LinksApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._reset_login_serialize(
+        _param = self._reset_link_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1232,7 +1786,7 @@ class LinksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             "200": "LinkCommon",
-            "401": "Response401ResetLoginLinksIdResetPost",
+            "401": "Response401ResetLinkLinksIdResetPost",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
             "403": "LinkErrorForbiddenActionResponse",
@@ -1244,7 +1798,7 @@ class LinksApi:
         )
         return response_data.response
 
-    def _reset_login_serialize(
+    def _reset_link_serialize(
         self,
         id,
         _request_auth,

@@ -17,7 +17,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, ClassVar, Dict, Literal, List, Optional
+from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr, field_validator
 from moneykit.models.public_link_error import PublicLinkError
 from moneykit.models.public_link_state import PublicLinkState
@@ -33,13 +33,13 @@ class AppLinkStateChangedWebhook(BaseModel):
     AppLinkStateChangedWebhook
     """  # noqa: E501
 
-    webhook_major_version: int = 1
-    webhook_minor_version: int = 0
+    webhook_major_version: Optional[StrictInt] = 1
+    webhook_minor_version: Optional[StrictInt] = 0
     webhook_idempotency_key: StrictStr
     webhook_timestamp: datetime
     link_id: StrictStr
     link_tags: List[StrictStr]
-    webhook_event: Literal["link.state_changed"] = "link.state_changed"
+    webhook_event: Optional[StrictStr] = "link.state_changed"
     state: PublicLinkState
     error: Optional[PublicLinkError] = None
     error_message: Optional[StrictStr] = None

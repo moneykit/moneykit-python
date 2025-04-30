@@ -408,7 +408,7 @@ class AccessTokenApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> JWKSet:
-        """JSON Web Key Set
+        """/.well-known/jwks.json
 
         The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify     JWTs in webhooks sent by MoneyKit.      The JWKS should be cached, but MoneyKit rotates its webhook keys periodically, so if an     incoming webhook's JWT has a key ID (`kid`) not contained in the cached JWKS, you should fetch     and cache the updated JWKS using this endpoint.
 
@@ -481,7 +481,7 @@ class AccessTokenApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[JWKSet]:
-        """JSON Web Key Set
+        """/.well-known/jwks.json
 
         The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify     JWTs in webhooks sent by MoneyKit.      The JWKS should be cached, but MoneyKit rotates its webhook keys periodically, so if an     incoming webhook's JWT has a key ID (`kid`) not contained in the cached JWKS, you should fetch     and cache the updated JWKS using this endpoint.
 
@@ -554,7 +554,7 @@ class AccessTokenApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """JSON Web Key Set
+        """/.well-known/jwks.json
 
         The JSON Web Key Set (JWKS) is a set of keys containing the public keys used to verify     JWTs in webhooks sent by MoneyKit.      The JWKS should be cached, but MoneyKit rotates its webhook keys periodically, so if an     incoming webhook's JWT has a key ID (`kid`) not contained in the cached JWKS, you should fetch     and cache the updated JWKS using this endpoint.
 

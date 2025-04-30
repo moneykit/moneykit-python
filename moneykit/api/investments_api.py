@@ -332,17 +332,17 @@ class InvestmentsApi:
     def get_investment_transactions(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
-        account_ids: Annotated[
-            Optional[List[StrictStr]],
-            Field(description="An optional list of account IDs to filter the results."),
-        ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
+        ] = None,
+        account_ids: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="An optional list of account IDs to filter the results."),
         ] = None,
         start_date: Annotated[
             Optional[date],
@@ -374,12 +374,12 @@ class InvestmentsApi:
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param account_ids: An optional list of account IDs to filter the results.
-        :type account_ids: List[str]
         :param page: The page number to return.
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
+        :param account_ids: An optional list of account IDs to filter the results.
+        :type account_ids: List[str]
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
@@ -408,9 +408,9 @@ class InvestmentsApi:
 
         _param = self._get_investment_transactions_serialize(
             id=id,
-            account_ids=account_ids,
             page=page,
             size=size,
+            account_ids=account_ids,
             start_date=start_date,
             end_date=end_date,
             _request_auth=_request_auth,
@@ -441,17 +441,17 @@ class InvestmentsApi:
     def get_investment_transactions_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
-        account_ids: Annotated[
-            Optional[List[StrictStr]],
-            Field(description="An optional list of account IDs to filter the results."),
-        ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
+        ] = None,
+        account_ids: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="An optional list of account IDs to filter the results."),
         ] = None,
         start_date: Annotated[
             Optional[date],
@@ -483,12 +483,12 @@ class InvestmentsApi:
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param account_ids: An optional list of account IDs to filter the results.
-        :type account_ids: List[str]
         :param page: The page number to return.
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
+        :param account_ids: An optional list of account IDs to filter the results.
+        :type account_ids: List[str]
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
@@ -517,9 +517,9 @@ class InvestmentsApi:
 
         _param = self._get_investment_transactions_serialize(
             id=id,
-            account_ids=account_ids,
             page=page,
             size=size,
+            account_ids=account_ids,
             start_date=start_date,
             end_date=end_date,
             _request_auth=_request_auth,
@@ -550,17 +550,17 @@ class InvestmentsApi:
     def get_investment_transactions_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
-        account_ids: Annotated[
-            Optional[List[StrictStr]],
-            Field(description="An optional list of account IDs to filter the results."),
-        ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
+        ] = None,
+        account_ids: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="An optional list of account IDs to filter the results."),
         ] = None,
         start_date: Annotated[
             Optional[date],
@@ -592,12 +592,12 @@ class InvestmentsApi:
 
         :param id: The unique ID for this link. (required)
         :type id: str
-        :param account_ids: An optional list of account IDs to filter the results.
-        :type account_ids: List[str]
         :param page: The page number to return.
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
+        :param account_ids: An optional list of account IDs to filter the results.
+        :type account_ids: List[str]
         :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
         :type start_date: date
         :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
@@ -626,9 +626,9 @@ class InvestmentsApi:
 
         _param = self._get_investment_transactions_serialize(
             id=id,
-            account_ids=account_ids,
             page=page,
             size=size,
+            account_ids=account_ids,
             start_date=start_date,
             end_date=end_date,
             _request_auth=_request_auth,
@@ -654,9 +654,9 @@ class InvestmentsApi:
     def _get_investment_transactions_serialize(
         self,
         id,
-        account_ids,
         page,
         size,
+        account_ids,
         start_date,
         end_date,
         _request_auth,
@@ -681,14 +681,14 @@ class InvestmentsApi:
         if id is not None:
             _path_params["id"] = id
         # process the query parameters
-        if account_ids is not None:
-            _query_params.append(("account_ids", account_ids))
-
         if page is not None:
             _query_params.append(("page", page))
 
         if size is not None:
             _query_params.append(("size", size))
+
+        if account_ids is not None:
+            _query_params.append(("account_ids", account_ids))
 
         if start_date is not None:
             if isinstance(start_date, date):

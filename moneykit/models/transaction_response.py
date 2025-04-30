@@ -41,7 +41,7 @@ class TransactionResponse(BaseModel):
         description="The ID of the account in which this transaction occurred."
     )
     amount: StrictStr = Field(
-        description="The amount of this transaction, denominated in account currency.  This amount is always         non-negative.  The `type` field indicates whether it is entering or leaving the account."
+        description="The amount of this transaction, denominated in account currency.  This amount is always         non-negative.  The `type` field indicates whether it is entering (type=`credit`) or leaving (type=`debit`)         the account."
     )
     type: TransactionType
     currency: StrictStr = Field(

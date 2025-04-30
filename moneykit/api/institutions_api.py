@@ -316,7 +316,7 @@ class InstitutionsApi:
             ),
         ] = None,
         limit: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="A limit on the number of institutions to be returned."),
         ] = None,
         _request_timeout: Union[
@@ -410,7 +410,7 @@ class InstitutionsApi:
             ),
         ] = None,
         limit: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="A limit on the number of institutions to be returned."),
         ] = None,
         _request_timeout: Union[
@@ -504,7 +504,7 @@ class InstitutionsApi:
             ),
         ] = None,
         limit: Annotated[
-            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="A limit on the number of institutions to be returned."),
         ] = None,
         _request_timeout: Union[

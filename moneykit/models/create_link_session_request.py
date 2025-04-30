@@ -21,6 +21,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
 from pydantic import Field
 from typing_extensions import Annotated
+from moneykit.models.custom_sandbox_data import CustomSandboxData
 from moneykit.models.customer_user import CustomerUser
 from moneykit.models.link_session_setting_overrides import LinkSessionSettingOverrides
 from moneykit.models.money_kit_connect_features import MoneyKitConnectFeatures
@@ -48,7 +49,7 @@ class CreateLinkSessionRequest(BaseModel):
     )
     redirect_uri: Annotated[str, Field(min_length=1, strict=True, max_length=65536)] = (
         Field(
-            description="For Oauth linking, a URI indicating the destination, in your application, where the user should         be sent after authenticating with the institution.  The `redirect_uri` should not contain any query parameters,         and it must be pre-approved by MoneyKit during the app setup process."
+            description="For Oauth linking, a URI indicating the destination, in your application, where the user should         be sent after authenticating with the institution.  The `redirect_uri` should not contain any query parameters,         and its protocol://host[:port]/ must be listed in         your <a href=https://dashboard.moneykit.com/settings/company/oauth>dashboard settings</a>."
         )
     )
     webhook: Optional[
@@ -59,6 +60,7 @@ class CreateLinkSessionRequest(BaseModel):
     )
     link_tags: Optional[List[StrictStr]] = None
     connect_features: Optional[MoneyKitConnectFeatures] = None
+    custom_sandbox_data: Optional[CustomSandboxData] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "settings",
@@ -69,6 +71,7 @@ class CreateLinkSessionRequest(BaseModel):
         "webhook",
         "link_tags",
         "connect_features",
+        "custom_sandbox_data",
     ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
@@ -114,6 +117,9 @@ class CreateLinkSessionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of connect_features
         if self.connect_features:
             _dict["connect_features"] = self.connect_features.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of custom_sandbox_data
+        if self.custom_sandbox_data:
+            _dict["custom_sandbox_data"] = self.custom_sandbox_data.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -147,6 +153,11 @@ class CreateLinkSessionRequest(BaseModel):
                     obj.get("connect_features")
                 )
                 if obj.get("connect_features") is not None
+                else None,
+                "custom_sandbox_data": CustomSandboxData.from_dict(
+                    obj.get("custom_sandbox_data")
+                )
+                if obj.get("custom_sandbox_data") is not None
                 else None,
             }
         )

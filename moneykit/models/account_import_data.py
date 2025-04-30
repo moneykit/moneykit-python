@@ -39,6 +39,10 @@ class AccountImportData(BaseModel):
     name: StrictStr = Field(
         description="The account name.  This value may change if synced with a data provider later."
     )
+    nickname: Optional[StrictStr] = Field(
+        default=None,
+        description="The account nickname.  This value may change if synced with a data provider later.",
+    )
     type: StrictStr = Field(
         description="The account type.  It can have any initial value but it will be converted to a MoneyKit         account type (see <a href=/pages/account_types>Account Types</a>) upon output.  The account may change types if it is         synced with a data provider later."
     )
@@ -51,6 +55,7 @@ class AccountImportData(BaseModel):
     __properties: ClassVar[List[str]] = [
         "account_id",
         "name",
+        "nickname",
         "type",
         "mask",
         "balances",
@@ -113,6 +118,7 @@ class AccountImportData(BaseModel):
             {
                 "account_id": obj.get("account_id"),
                 "name": obj.get("name"),
+                "nickname": obj.get("nickname"),
                 "type": obj.get("type"),
                 "mask": obj.get("mask"),
                 "balances": AccountBalances.from_dict(obj.get("balances"))

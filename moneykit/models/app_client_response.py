@@ -40,7 +40,7 @@ class AppClientResponse(BaseModel):
     scope: StrictStr = Field(description="Actions allowed by this client.")
     app: AppResponse
     disabled_at: Optional[datetime] = Field(
-        default=None, description="Set to timestamp if the client has been disabled."
+        default=None, description="When the client was (or will be) disabled."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [

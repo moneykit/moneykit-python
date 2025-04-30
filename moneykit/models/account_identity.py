@@ -17,7 +17,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictStr
 from pydantic import Field
 from moneykit.models.account_balances import AccountBalances
@@ -41,16 +41,16 @@ class AccountIdentity(BaseModel):
         description="See <a href=/pages/account_types>Account Types</a> for an explanation of account types.  Account types are         dot-prefixed with one of `depository`, `investment`, `liability`, or `other`; or the value is `unknown`.         <p>**Balances for `liability` accounts are reversed:**  negative balances (the amount owed) are reported as         positive values.  For all other types of accounts, a negative balance indicates the amount owed."
     )
     name: StrictStr = Field(
-        description="The account name, according to the institution.  Note that some institutions allow         the end user to nickname the account; in such cases this field may be the name assigned by the user."
+        description="The account name, according to the institution."
+    )
+    nickname: Optional[StrictStr] = Field(
+        default=None, description="The account nickname, if available."
     )
     account_mask: Optional[StrictStr] = Field(
         default=None,
         description="The last four characters (usually digits) of the account number.         Note that this mask may be non-unique between accounts.",
     )
     balances: AccountBalances
-    raw_provider_data: Optional[Union[str, Any]] = Field(
-        default=None, description="Raw account data from the provider."
-    )
     original_id: Optional[StrictStr] = Field(
         default=None,
         description="The original ID of this account, if supplied (by you) during an import.",
@@ -64,9 +64,9 @@ class AccountIdentity(BaseModel):
         "account_id",
         "account_type",
         "name",
+        "nickname",
         "account_mask",
         "balances",
-        "raw_provider_data",
         "original_id",
         "closed",
         "owners",
@@ -137,11 +137,11 @@ class AccountIdentity(BaseModel):
                 "account_id": obj.get("account_id"),
                 "account_type": obj.get("account_type"),
                 "name": obj.get("name"),
+                "nickname": obj.get("nickname"),
                 "account_mask": obj.get("account_mask"),
                 "balances": AccountBalances.from_dict(obj.get("balances"))
                 if obj.get("balances") is not None
                 else None,
-                "raw_provider_data": obj.get("raw_provider_data"),
                 "original_id": obj.get("original_id"),
                 "closed": obj.get("closed"),
                 "owners": [Owner.from_dict(_item) for _item in obj.get("owners")]

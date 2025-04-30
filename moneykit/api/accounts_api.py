@@ -872,10 +872,7 @@ class AccountsApi:
             ),
         ] = None,
         institution_ids: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to accounts at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         _request_timeout: Union[
             None,
@@ -897,7 +894,7 @@ class AccountsApi:
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
-        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :param institution_ids: DEPRECATED; ignored
         :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -960,10 +957,7 @@ class AccountsApi:
             ),
         ] = None,
         institution_ids: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to accounts at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         _request_timeout: Union[
             None,
@@ -985,7 +979,7 @@ class AccountsApi:
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
-        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :param institution_ids: DEPRECATED; ignored
         :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1048,10 +1042,7 @@ class AccountsApi:
             ),
         ] = None,
         institution_ids: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to accounts at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         _request_timeout: Union[
             None,
@@ -1073,7 +1064,7 @@ class AccountsApi:
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
-        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :param institution_ids: DEPRECATED; ignored
         :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

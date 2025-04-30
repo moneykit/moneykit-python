@@ -23,7 +23,13 @@ from typing_extensions import Annotated
 from datetime import date
 
 
-from moneykit.models.get_transactions_response import GetTransactionsResponse
+from moneykit.models.api_public_transactions_get_transactions_response import (
+    ApiPublicTransactionsGetTransactionsResponse,
+)
+from moneykit.models.api_public_transactions_legacy_get_transactions_response import (
+    ApiPublicTransactionsLegacyGetTransactionsResponse,
+)
+from moneykit.models.bud_category import BudCategory
 from moneykit.models.get_user_transactions_response import GetUserTransactionsResponse
 from moneykit.models.transaction_sync_response import TransactionSyncResponse
 from moneykit.models.transaction_type_filter import TransactionTypeFilter
@@ -46,12 +52,316 @@ class TransactionsApi:
         self.api_client = api_client
 
     @validate_call
+    def correct_enrichment(
+        self,
+        id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
+        txn_id: StrictStr,
+        bud_category: BudCategory,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiPublicTransactionsGetTransactionsResponse:
+        """/links/{id}/transactions/{txn_id}/enrichment
+
+        Manually update the enrichment categories for a specific transaction.     The transaction will be updated with your corrections, which are then used to refine future categorizations.     This endpoint returns the updated transaction, along with similar past transactions, using the same format as when retrieving transactions for a link.
+
+        :param id: The unique ID for this link. (required)
+        :type id: str
+        :param txn_id: (required)
+        :type txn_id: str
+        :param bud_category: (required)
+        :type bud_category: BudCategory
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._correct_enrichment_serialize(
+            id=id,
+            txn_id=txn_id,
+            bud_category=bud_category,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "ApiPublicTransactionsGetTransactionsResponse",
+            "401": "Response401CorrectEnrichmentLinksIdTransactionsTxnIdEnrichmentPost",
+            "429": "APIErrorRateLimitExceededResponse",
+            "404": "LinkErrorNotFoundResponse",
+            "403": "LinkErrorForbiddenActionResponse",
+            "410": "LinkErrorDeletedResponse",
+            "422": "LinkErrorBadStateResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def correct_enrichment_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
+        txn_id: StrictStr,
+        bud_category: BudCategory,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ApiPublicTransactionsGetTransactionsResponse]:
+        """/links/{id}/transactions/{txn_id}/enrichment
+
+        Manually update the enrichment categories for a specific transaction.     The transaction will be updated with your corrections, which are then used to refine future categorizations.     This endpoint returns the updated transaction, along with similar past transactions, using the same format as when retrieving transactions for a link.
+
+        :param id: The unique ID for this link. (required)
+        :type id: str
+        :param txn_id: (required)
+        :type txn_id: str
+        :param bud_category: (required)
+        :type bud_category: BudCategory
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._correct_enrichment_serialize(
+            id=id,
+            txn_id=txn_id,
+            bud_category=bud_category,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "ApiPublicTransactionsGetTransactionsResponse",
+            "401": "Response401CorrectEnrichmentLinksIdTransactionsTxnIdEnrichmentPost",
+            "429": "APIErrorRateLimitExceededResponse",
+            "404": "LinkErrorNotFoundResponse",
+            "403": "LinkErrorForbiddenActionResponse",
+            "410": "LinkErrorDeletedResponse",
+            "422": "LinkErrorBadStateResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def correct_enrichment_without_preload_content(
+        self,
+        id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
+        txn_id: StrictStr,
+        bud_category: BudCategory,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """/links/{id}/transactions/{txn_id}/enrichment
+
+        Manually update the enrichment categories for a specific transaction.     The transaction will be updated with your corrections, which are then used to refine future categorizations.     This endpoint returns the updated transaction, along with similar past transactions, using the same format as when retrieving transactions for a link.
+
+        :param id: The unique ID for this link. (required)
+        :type id: str
+        :param txn_id: (required)
+        :type txn_id: str
+        :param bud_category: (required)
+        :type bud_category: BudCategory
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._correct_enrichment_serialize(
+            id=id,
+            txn_id=txn_id,
+            bud_category=bud_category,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "ApiPublicTransactionsGetTransactionsResponse",
+            "401": "Response401CorrectEnrichmentLinksIdTransactionsTxnIdEnrichmentPost",
+            "429": "APIErrorRateLimitExceededResponse",
+            "404": "LinkErrorNotFoundResponse",
+            "403": "LinkErrorForbiddenActionResponse",
+            "410": "LinkErrorDeletedResponse",
+            "422": "LinkErrorBadStateResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _correct_enrichment_serialize(
+        self,
+        id,
+        txn_id,
+        bud_category,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> Tuple:
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params["id"] = id
+        if txn_id is not None:
+            _path_params["txn_id"] = txn_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if bud_category is not None:
+            _body_params = bud_category
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["OAuth2ClientCredentials"]
+
+        return self.api_client.param_serialize(
+            method="POST",
+            resource_path="/links/{id}/transactions/{txn_id}/enrichment",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     def get_transactions(
         self,
         id: Annotated[StrictStr, Field(description="The unique ID for this link.")],
         account_ids: Annotated[
             Optional[List[StrictStr]],
             Field(description="An optional list of account IDs to filter the results."),
+        ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
             Optional[date],
@@ -65,14 +375,6 @@ class TransactionsApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
-        page: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=1)]],
-            Field(description="The page number to return."),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return per page."),
-        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -84,7 +386,7 @@ class TransactionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetTransactionsResponse:
+    ) -> ApiPublicTransactionsLegacyGetTransactionsResponse:
         """/links/{id}/transactions
 
         Returns transactions for the accounts associated with a <a href=#tag/Links>link</a>.  Results are     paginated, and returned in reverse chronological order.     <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns     transactions that have already been fetched, either because `prefetch` was requested when the link was created,     or because of scheduled or on-demand updates.     <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the     update frequency can vary, depending on the downstream data provider, the institution, and whether one or both     provide webhook-based updates.  **To force a check for updated transactions, you can use the     <a href=#operation/refresh_products>/products</a> endpoint.**     <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.
@@ -93,14 +395,14 @@ class TransactionsApi:
         :type id: str
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
-        :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
-        :type end_date: date
         :param page: The page number to return.
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
+        :type start_date: date
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
+        :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -126,10 +428,10 @@ class TransactionsApi:
         _param = self._get_transactions_serialize(
             id=id,
             account_ids=account_ids,
-            start_date=start_date,
-            end_date=end_date,
             page=page,
             size=size,
+            start_date=start_date,
+            end_date=end_date,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -137,7 +439,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetTransactionsResponse",
+            "200": "ApiPublicTransactionsLegacyGetTransactionsResponse",
             "401": "Response401GetTransactions",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -162,6 +464,14 @@ class TransactionsApi:
             Optional[List[StrictStr]],
             Field(description="An optional list of account IDs to filter the results."),
         ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
+        ] = None,
         start_date: Annotated[
             Optional[date],
             Field(
@@ -174,14 +484,6 @@ class TransactionsApi:
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
         ] = None,
-        page: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=1)]],
-            Field(description="The page number to return."),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return per page."),
-        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -193,7 +495,7 @@ class TransactionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetTransactionsResponse]:
+    ) -> ApiResponse[ApiPublicTransactionsLegacyGetTransactionsResponse]:
         """/links/{id}/transactions
 
         Returns transactions for the accounts associated with a <a href=#tag/Links>link</a>.  Results are     paginated, and returned in reverse chronological order.     <p>**Note** that this endpoint does **not** trigger a fetch of transactions from the institution; it merely returns     transactions that have already been fetched, either because `prefetch` was requested when the link was created,     or because of scheduled or on-demand updates.     <p>MoneyKit checks for updated account data, including transactions, periodically throughout the day, but the     update frequency can vary, depending on the downstream data provider, the institution, and whether one or both     provide webhook-based updates.  **To force a check for updated transactions, you can use the     <a href=#operation/refresh_products>/products</a> endpoint.**     <p>If you have requested prefetch or an on-demand update, you should check the `refreshed_at` date     for this product in the returned response, and compare that against the previous `refreshed_at` date, which you can     get from any previous response for this or any other account or link request.  If the refreshed_at date has not     increased, then updated data is not yet available.
@@ -202,14 +504,14 @@ class TransactionsApi:
         :type id: str
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
-        :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
-        :type end_date: date
         :param page: The page number to return.
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
+        :type start_date: date
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
+        :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -235,10 +537,10 @@ class TransactionsApi:
         _param = self._get_transactions_serialize(
             id=id,
             account_ids=account_ids,
-            start_date=start_date,
-            end_date=end_date,
             page=page,
             size=size,
+            start_date=start_date,
+            end_date=end_date,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -246,7 +548,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetTransactionsResponse",
+            "200": "ApiPublicTransactionsLegacyGetTransactionsResponse",
             "401": "Response401GetTransactions",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -271,6 +573,14 @@ class TransactionsApi:
             Optional[List[StrictStr]],
             Field(description="An optional list of account IDs to filter the results."),
         ] = None,
+        page: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=1)]],
+            Field(description="The page number to return."),
+        ] = None,
+        size: Annotated[
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
+            Field(description="The number of items to return per page."),
+        ] = None,
         start_date: Annotated[
             Optional[date],
             Field(
@@ -282,14 +592,6 @@ class TransactionsApi:
             Field(
                 description="The latest date for which data should be returned, formatted as YYYY-MM-DD."
             ),
-        ] = None,
-        page: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=1)]],
-            Field(description="The page number to return."),
-        ] = None,
-        size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
-            Field(description="The number of items to return per page."),
         ] = None,
         _request_timeout: Union[
             None,
@@ -311,14 +613,14 @@ class TransactionsApi:
         :type id: str
         :param account_ids: An optional list of account IDs to filter the results.
         :type account_ids: List[str]
-        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
-        :type start_date: date
-        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
-        :type end_date: date
         :param page: The page number to return.
         :type page: int
         :param size: The number of items to return per page.
         :type size: int
+        :param start_date: The earliest date for which data should be returned, formatted as YYYY-MM-DD.
+        :type start_date: date
+        :param end_date: The latest date for which data should be returned, formatted as YYYY-MM-DD.
+        :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -344,10 +646,10 @@ class TransactionsApi:
         _param = self._get_transactions_serialize(
             id=id,
             account_ids=account_ids,
-            start_date=start_date,
-            end_date=end_date,
             page=page,
             size=size,
+            start_date=start_date,
+            end_date=end_date,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -355,7 +657,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetTransactionsResponse",
+            "200": "ApiPublicTransactionsLegacyGetTransactionsResponse",
             "401": "Response401GetTransactions",
             "429": "APIErrorRateLimitExceededResponse",
             "404": "LinkErrorNotFoundResponse",
@@ -372,10 +674,10 @@ class TransactionsApi:
         self,
         id,
         account_ids,
-        start_date,
-        end_date,
         page,
         size,
+        start_date,
+        end_date,
         _request_auth,
         _content_type,
         _headers,
@@ -401,6 +703,12 @@ class TransactionsApi:
         if account_ids is not None:
             _query_params.append(("account_ids", account_ids))
 
+        if page is not None:
+            _query_params.append(("page", page))
+
+        if size is not None:
+            _query_params.append(("size", size))
+
         if start_date is not None:
             if isinstance(start_date, date):
                 _query_params.append(
@@ -422,12 +730,6 @@ class TransactionsApi:
                 )
             else:
                 _query_params.append(("end_date", end_date))
-
-        if page is not None:
-            _query_params.append(("page", page))
-
-        if size is not None:
-            _query_params.append(("size", size))
 
         # process the header parameters
         # process the form parameters
@@ -774,11 +1076,16 @@ class TransactionsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user."
             ),
         ],
-        transaction_type: Optional[List[TransactionTypeFilter]] = None,
-        category: Optional[List[StrictStr]] = None,
+        transaction_type: Annotated[
+            Optional[List[TransactionTypeFilter]],
+            Field(description="DEPRECATED; ignored"),
+        ] = None,
+        category: Annotated[
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
+        ] = None,
         account_id: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
@@ -786,17 +1093,14 @@ class TransactionsApi:
             ),
         ] = None,
         institution_id: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to transactions at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -827,15 +1131,15 @@ class TransactionsApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user. (required)
         :type id: str
-        :param transaction_type:
+        :param transaction_type: DEPRECATED; ignored
         :type transaction_type: List[TransactionTypeFilter]
-        :param category:
+        :param category: DEPRECATED; ignored
         :type category: List[str]
         :param account_id: If present, filters results to transactions in accounts matching the given IDs.
         :type account_id: List[str]
-        :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
+        :param institution_id: DEPRECATED; ignored
         :type institution_id: List[str]
         :param page: The page number to return.
         :type page: int
@@ -902,11 +1206,16 @@ class TransactionsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user."
             ),
         ],
-        transaction_type: Optional[List[TransactionTypeFilter]] = None,
-        category: Optional[List[StrictStr]] = None,
+        transaction_type: Annotated[
+            Optional[List[TransactionTypeFilter]],
+            Field(description="DEPRECATED; ignored"),
+        ] = None,
+        category: Annotated[
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
+        ] = None,
         account_id: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
@@ -914,17 +1223,14 @@ class TransactionsApi:
             ),
         ] = None,
         institution_id: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to transactions at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -955,15 +1261,15 @@ class TransactionsApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user. (required)
         :type id: str
-        :param transaction_type:
+        :param transaction_type: DEPRECATED; ignored
         :type transaction_type: List[TransactionTypeFilter]
-        :param category:
+        :param category: DEPRECATED; ignored
         :type category: List[str]
         :param account_id: If present, filters results to transactions in accounts matching the given IDs.
         :type account_id: List[str]
-        :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
+        :param institution_id: DEPRECATED; ignored
         :type institution_id: List[str]
         :param page: The page number to return.
         :type page: int
@@ -1030,11 +1336,16 @@ class TransactionsApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user."
             ),
         ],
-        transaction_type: Optional[List[TransactionTypeFilter]] = None,
-        category: Optional[List[StrictStr]] = None,
+        transaction_type: Annotated[
+            Optional[List[TransactionTypeFilter]],
+            Field(description="DEPRECATED; ignored"),
+        ] = None,
+        category: Annotated[
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
+        ] = None,
         account_id: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
@@ -1042,17 +1353,14 @@ class TransactionsApi:
             ),
         ] = None,
         institution_id: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to transactions at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -1083,15 +1391,15 @@ class TransactionsApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user. (required)
         :type id: str
-        :param transaction_type:
+        :param transaction_type: DEPRECATED; ignored
         :type transaction_type: List[TransactionTypeFilter]
-        :param category:
+        :param category: DEPRECATED; ignored
         :type category: List[str]
         :param account_id: If present, filters results to transactions in accounts matching the given IDs.
         :type account_id: List[str]
-        :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
+        :param institution_id: DEPRECATED; ignored
         :type institution_id: List[str]
         :param page: The page number to return.
         :type page: int

@@ -61,10 +61,7 @@ class UsersApi:
             ),
         ] = None,
         institution_ids: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to accounts at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         _request_timeout: Union[
             None,
@@ -86,7 +83,7 @@ class UsersApi:
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
-        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :param institution_ids: DEPRECATED; ignored
         :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -149,10 +146,7 @@ class UsersApi:
             ),
         ] = None,
         institution_ids: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to accounts at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         _request_timeout: Union[
             None,
@@ -174,7 +168,7 @@ class UsersApi:
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
-        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :param institution_ids: DEPRECATED; ignored
         :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -237,10 +231,7 @@ class UsersApi:
             ),
         ] = None,
         institution_ids: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to accounts at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         _request_timeout: Union[
             None,
@@ -262,7 +253,7 @@ class UsersApi:
         :type id: str
         :param account_ids: If present, filters results to accounts matching the given IDs.
         :type account_ids: List[str]
-        :param institution_ids: If present, filters results to accounts at institutions matching the given IDs.
+        :param institution_ids: DEPRECATED; ignored
         :type institution_ids: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -628,11 +619,16 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user."
             ),
         ],
-        transaction_type: Optional[List[TransactionTypeFilter]] = None,
-        category: Optional[List[StrictStr]] = None,
+        transaction_type: Annotated[
+            Optional[List[TransactionTypeFilter]],
+            Field(description="DEPRECATED; ignored"),
+        ] = None,
+        category: Annotated[
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
+        ] = None,
         account_id: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
@@ -640,17 +636,14 @@ class UsersApi:
             ),
         ] = None,
         institution_id: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to transactions at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -681,15 +674,15 @@ class UsersApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user. (required)
         :type id: str
-        :param transaction_type:
+        :param transaction_type: DEPRECATED; ignored
         :type transaction_type: List[TransactionTypeFilter]
-        :param category:
+        :param category: DEPRECATED; ignored
         :type category: List[str]
         :param account_id: If present, filters results to transactions in accounts matching the given IDs.
         :type account_id: List[str]
-        :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
+        :param institution_id: DEPRECATED; ignored
         :type institution_id: List[str]
         :param page: The page number to return.
         :type page: int
@@ -756,11 +749,16 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user."
             ),
         ],
-        transaction_type: Optional[List[TransactionTypeFilter]] = None,
-        category: Optional[List[StrictStr]] = None,
+        transaction_type: Annotated[
+            Optional[List[TransactionTypeFilter]],
+            Field(description="DEPRECATED; ignored"),
+        ] = None,
+        category: Annotated[
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
+        ] = None,
         account_id: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
@@ -768,17 +766,14 @@ class UsersApi:
             ),
         ] = None,
         institution_id: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to transactions at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -809,15 +804,15 @@ class UsersApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user. (required)
         :type id: str
-        :param transaction_type:
+        :param transaction_type: DEPRECATED; ignored
         :type transaction_type: List[TransactionTypeFilter]
-        :param category:
+        :param category: DEPRECATED; ignored
         :type category: List[str]
         :param account_id: If present, filters results to transactions in accounts matching the given IDs.
         :type account_id: List[str]
-        :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
+        :param institution_id: DEPRECATED; ignored
         :type institution_id: List[str]
         :param page: The page number to return.
         :type page: int
@@ -884,11 +879,16 @@ class UsersApi:
         id: Annotated[
             StrictStr,
             Field(
-                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user."
+                description="The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user."
             ),
         ],
-        transaction_type: Optional[List[TransactionTypeFilter]] = None,
-        category: Optional[List[StrictStr]] = None,
+        transaction_type: Annotated[
+            Optional[List[TransactionTypeFilter]],
+            Field(description="DEPRECATED; ignored"),
+        ] = None,
+        category: Annotated[
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
+        ] = None,
         account_id: Annotated[
             Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
             Field(
@@ -896,17 +896,14 @@ class UsersApi:
             ),
         ] = None,
         institution_id: Annotated[
-            Optional[List[Annotated[str, Field(min_length=1, strict=True)]]],
-            Field(
-                description="If present, filters results to transactions at institutions matching the given IDs."
-            ),
+            Optional[List[StrictStr]], Field(description="DEPRECATED; ignored")
         ] = None,
         page: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=1)]],
             Field(description="The page number to return."),
         ] = None,
         size: Annotated[
-            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
             Field(description="The number of items to return per page."),
         ] = None,
         start_date: Annotated[
@@ -937,15 +934,15 @@ class UsersApi:
 
         Fetches transactions for a <a href=#operation/get_user_accounts>user</a>.     <p>This endpoint fetches all transactions for a user across all of their links.  You can use it to retrieve     transactions from any or all accounts at once, regardless of which institution they belong to.
 
-        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create any link for this user. (required)
+        :param id: The unique ID for this user.  This is the same ID provided         in the call to <a href=/api/operation/create_link_session#customer_user-id>link-session</a> to create a link for this user. (required)
         :type id: str
-        :param transaction_type:
+        :param transaction_type: DEPRECATED; ignored
         :type transaction_type: List[TransactionTypeFilter]
-        :param category:
+        :param category: DEPRECATED; ignored
         :type category: List[str]
         :param account_id: If present, filters results to transactions in accounts matching the given IDs.
         :type account_id: List[str]
-        :param institution_id: If present, filters results to transactions at institutions matching the given IDs.
+        :param institution_id: DEPRECATED; ignored
         :type institution_id: List[str]
         :param page: The page number to return.
         :type page: int

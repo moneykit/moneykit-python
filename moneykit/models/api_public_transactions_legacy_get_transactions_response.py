@@ -20,9 +20,9 @@ import json
 from typing import Any, ClassVar, Dict, List
 from pydantic import BaseModel, StrictInt
 from pydantic import Field
-from moneykit.models.account import Account
+from moneykit.models.account_response import AccountResponse
 from moneykit.models.link_common import LinkCommon
-from moneykit.models.transaction import Transaction
+from moneykit.models.transaction_response import TransactionResponse
 
 try:
     from typing import Self
@@ -40,8 +40,8 @@ class ApiPublicTransactionsLegacyGetTransactionsResponse(BaseModel):
         description="The page number corresponding to this batch of results."
     )
     size: StrictInt = Field(description="The number of results in this batch.")
-    transactions: List[Transaction]
-    accounts: List[Account]
+    transactions: List[TransactionResponse]
+    accounts: List[AccountResponse]
     link: LinkCommon
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
@@ -126,11 +126,14 @@ class ApiPublicTransactionsLegacyGetTransactionsResponse(BaseModel):
                 "page": obj.get("page"),
                 "size": obj.get("size"),
                 "transactions": [
-                    Transaction.from_dict(_item) for _item in obj.get("transactions")
+                    TransactionResponse.from_dict(_item)
+                    for _item in obj.get("transactions")
                 ]
                 if obj.get("transactions") is not None
                 else None,
-                "accounts": [Account.from_dict(_item) for _item in obj.get("accounts")]
+                "accounts": [
+                    AccountResponse.from_dict(_item) for _item in obj.get("accounts")
+                ]
                 if obj.get("accounts") is not None
                 else None,
                 "link": LinkCommon.from_dict(obj.get("link"))

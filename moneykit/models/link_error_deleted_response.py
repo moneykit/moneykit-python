@@ -32,7 +32,7 @@ class LinkErrorDeletedResponse(BaseModel):
     """  # noqa: E501
 
     error_code: Optional[StrictStr] = "link_error.deleted"
-    error_message: Optional[StrictStr] = "Link deleted."
+    error_message: Optional[StrictStr] = "This link was deleted at some earlier time."
     documentation_url: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
@@ -108,7 +108,7 @@ class LinkErrorDeletedResponse(BaseModel):
                 else "link_error.deleted",
                 "error_message": obj.get("error_message")
                 if obj.get("error_message") is not None
-                else "Link deleted.",
+                else "This link was deleted at some earlier time.",
                 "documentation_url": obj.get("documentation_url"),
             }
         )

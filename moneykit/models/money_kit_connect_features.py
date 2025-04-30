@@ -42,18 +42,33 @@ class MoneyKitConnectFeatures(BaseModel):
     )
     duplicate_institution_warning: Optional[StrictBool] = Field(
         default=False,
-        description="If enabled, the user will see a warning when trying to connect the same institution more than once.",
+        description="If enabled, the user will see a warning when trying to connect to an institution for which             they already have a connected link.",
+    )
+    duplicate_institution_rejected: Optional[StrictBool] = Field(
+        default=False,
+        description="If enabled, all institutions for which the user has a connected link will be hidden, so the user             will be unable to make another link to an institution to which they are already linked.",
     )
     connect_manually: Optional[StrictBool] = Field(
         default=False,
         description="If enabled, the user can click a button in the MoneyKit Connect SDK to connect manually if the institution they are looking for doesn't exist in our catalog.",
+    )
+    permit_only_one_account: Optional[StrictBool] = Field(
+        default=False,
+        description="If enabled, the user is allowed to grant permission only for one account.",
+    )
+    permit_only_depository_accounts: Optional[StrictBool] = Field(
+        default=False,
+        description="If enabled, the user is allowed to grant permission only for depository accounts.             If there are no depository accounts, the linking process will fail.",
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "issue_reporter",
         "enable_money_id",
         "duplicate_institution_warning",
+        "duplicate_institution_rejected",
         "connect_manually",
+        "permit_only_one_account",
+        "permit_only_depository_accounts",
     ]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
@@ -119,8 +134,21 @@ class MoneyKitConnectFeatures(BaseModel):
                 )
                 if obj.get("duplicate_institution_warning") is not None
                 else False,
+                "duplicate_institution_rejected": obj.get(
+                    "duplicate_institution_rejected"
+                )
+                if obj.get("duplicate_institution_rejected") is not None
+                else False,
                 "connect_manually": obj.get("connect_manually")
                 if obj.get("connect_manually") is not None
+                else False,
+                "permit_only_one_account": obj.get("permit_only_one_account")
+                if obj.get("permit_only_one_account") is not None
+                else False,
+                "permit_only_depository_accounts": obj.get(
+                    "permit_only_depository_accounts"
+                )
+                if obj.get("permit_only_depository_accounts") is not None
                 else False,
             }
         )

@@ -313,7 +313,7 @@ class LinkSessionApi:
     ) -> ExchangeTokenResponse:
         """/link-session/exchange-token
 
-        After the end user has successfully completed the linking process, your back end     calls this endpoint to exchange the token received by your front end for a`link_id` that can be used to access     the link's data.
+        After the end user has successfully completed the linking process, your back end     calls this endpoint to exchange the token received by your front end for a `link_id` that can be used to access     the link's data.
 
         :param exchange_token_request: (required)
         :type exchange_token_request: ExchangeTokenRequest
@@ -351,7 +351,6 @@ class LinkSessionApi:
             "201": "ExchangeTokenResponse",
             "401": "Response401ExchangeTokenLinkSessionExchangeTokenPost",
             "400": "LinkSessionErrorInvalidTokenExchange",
-            "422": "LinkSessionErrorInvalidTokenExchange",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -380,7 +379,7 @@ class LinkSessionApi:
     ) -> ApiResponse[ExchangeTokenResponse]:
         """/link-session/exchange-token
 
-        After the end user has successfully completed the linking process, your back end     calls this endpoint to exchange the token received by your front end for a`link_id` that can be used to access     the link's data.
+        After the end user has successfully completed the linking process, your back end     calls this endpoint to exchange the token received by your front end for a `link_id` that can be used to access     the link's data.
 
         :param exchange_token_request: (required)
         :type exchange_token_request: ExchangeTokenRequest
@@ -418,7 +417,6 @@ class LinkSessionApi:
             "201": "ExchangeTokenResponse",
             "401": "Response401ExchangeTokenLinkSessionExchangeTokenPost",
             "400": "LinkSessionErrorInvalidTokenExchange",
-            "422": "LinkSessionErrorInvalidTokenExchange",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -447,7 +445,7 @@ class LinkSessionApi:
     ) -> RESTResponseType:
         """/link-session/exchange-token
 
-        After the end user has successfully completed the linking process, your back end     calls this endpoint to exchange the token received by your front end for a`link_id` that can be used to access     the link's data.
+        After the end user has successfully completed the linking process, your back end     calls this endpoint to exchange the token received by your front end for a `link_id` that can be used to access     the link's data.
 
         :param exchange_token_request: (required)
         :type exchange_token_request: ExchangeTokenRequest
@@ -485,7 +483,6 @@ class LinkSessionApi:
             "201": "ExchangeTokenResponse",
             "401": "Response401ExchangeTokenLinkSessionExchangeTokenPost",
             "400": "LinkSessionErrorInvalidTokenExchange",
-            "422": "LinkSessionErrorInvalidTokenExchange",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout

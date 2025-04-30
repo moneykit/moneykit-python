@@ -54,6 +54,7 @@ class LinkCommon(BaseModel):
         description="(Deprecated) An ISO-8601 timestamp indicating the last time that the link was updated.",
     )
     provider: Provider
+    link_tags: Optional[List[StrictStr]] = None
     tags: Optional[List[StrictStr]] = None
     webhook: Optional[StrictStr] = Field(
         default=None, description="The webhook url assigned to this link."
@@ -70,6 +71,7 @@ class LinkCommon(BaseModel):
         "error_code",
         "last_synced_at",
         "provider",
+        "link_tags",
         "tags",
         "webhook",
         "products",
@@ -139,6 +141,7 @@ class LinkCommon(BaseModel):
                 "error_code": obj.get("error_code"),
                 "last_synced_at": obj.get("last_synced_at"),
                 "provider": obj.get("provider"),
+                "link_tags": obj.get("link_tags"),
                 "tags": obj.get("tags"),
                 "webhook": obj.get("webhook"),
                 "products": LinkProducts.from_dict(obj.get("products"))

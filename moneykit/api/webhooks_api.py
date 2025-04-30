@@ -58,8 +58,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookTestLinkResponse:
-        """Trigger a test webhook event for a link (Sandbox only).
+        """/webhooks/test/link/{id}
 
+        Triggers a webhook event for a link, for testing purposes; works only for sandbox links.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -132,8 +133,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookTestLinkResponse]:
-        """Trigger a test webhook event for a link (Sandbox only).
+        """/webhooks/test/link/{id}
 
+        Triggers a webhook event for a link, for testing purposes; works only for sandbox links.
 
         :param id: The unique ID for this link. (required)
         :type id: str
@@ -206,8 +208,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Trigger a test webhook event for a link (Sandbox only).
+        """/webhooks/test/link/{id}
 
+        Triggers a webhook event for a link, for testing purposes; works only for sandbox links.
 
         :param id: The unique ID for this link. (required)
         :type id: str

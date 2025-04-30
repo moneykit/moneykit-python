@@ -33,7 +33,6 @@ class LinkProductError(str, Enum):
     """
     RATE_LIMIT = "rate_limit"
     AUTH_EXPIRED = "auth_expired"
-    INVALID_CREDENTIALS = "invalid_credentials"
     NOT_SUPPORTED = "not_supported"
     TIMEOUT = "timeout"
     UNKNOWN = "unknown"

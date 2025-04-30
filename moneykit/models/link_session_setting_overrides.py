@@ -20,7 +20,6 @@ import json
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
 from moneykit.models.country import Country
-from moneykit.models.link_permissions import LinkPermissions
 from moneykit.models.products_settings import ProductsSettings
 from moneykit.models.provider import Provider
 
@@ -36,16 +35,10 @@ class LinkSessionSettingOverrides(BaseModel):
     """  # noqa: E501
 
     providers: Optional[List[Provider]] = None
-    link_permissions: Optional[LinkPermissions] = None
     products: Optional[ProductsSettings] = None
     countries: Optional[List[Country]] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "providers",
-        "link_permissions",
-        "products",
-        "countries",
-    ]
+    __properties: ClassVar[List[str]] = ["providers", "products", "countries"]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -81,9 +74,6 @@ class LinkSessionSettingOverrides(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of link_permissions
-        if self.link_permissions:
-            _dict["link_permissions"] = self.link_permissions.to_dict()
         # override the default output from pydantic by calling `to_dict()` of products
         if self.products:
             _dict["products"] = self.products.to_dict()
@@ -106,11 +96,6 @@ class LinkSessionSettingOverrides(BaseModel):
         _obj = cls.model_validate(
             {
                 "providers": obj.get("providers"),
-                "link_permissions": LinkPermissions.from_dict(
-                    obj.get("link_permissions")
-                )
-                if obj.get("link_permissions") is not None
-                else None,
                 "products": ProductsSettings.from_dict(obj.get("products"))
                 if obj.get("products") is not None
                 else None,

@@ -18,7 +18,7 @@ import json
 
 from datetime import datetime
 from typing import Any, ClassVar, Dict, Literal, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, StrictStr, field_validator
 from moneykit.models.link_product_state import LinkProductState
 from moneykit.models.product import Product
 

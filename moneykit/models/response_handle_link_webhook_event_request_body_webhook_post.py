@@ -19,7 +19,7 @@ import re  # noqa: F401
 from typing import Optional
 from pydantic import BaseModel, ValidationError, field_validator
 from moneykit.models.app_link_state_changed_webhook import AppLinkStateChangedWebhook
-from moneykit.models.link_product_refresh_webhook import LinkProductRefreshWebhook
+from moneykit.models.product_state_changed_webhook import ProductStateChangedWebhook
 from moneykit.models.transaction_updates_available_webhook import (
     TransactionUpdatesAvailableWebhook,
 )
@@ -33,7 +33,7 @@ except ImportError:
 
 RESPONSEHANDLELINKWEBHOOKEVENTREQUESTBODYWEBHOOKPOST_ANY_OF_SCHEMAS = [
     "AppLinkStateChangedWebhook",
-    "LinkProductRefreshWebhook",
+    "ProductStateChangedWebhook",
     "TransactionUpdatesAvailableWebhook",
 ]
 
@@ -45,15 +45,15 @@ class ResponseHandleLinkWebhookEventRequestBodyWebhookPost(BaseModel):
 
     # data type: AppLinkStateChangedWebhook
     anyof_schema_1_validator: Optional[AppLinkStateChangedWebhook] = None
-    # data type: LinkProductRefreshWebhook
-    anyof_schema_2_validator: Optional[LinkProductRefreshWebhook] = None
+    # data type: ProductStateChangedWebhook
+    anyof_schema_2_validator: Optional[ProductStateChangedWebhook] = None
     # data type: TransactionUpdatesAvailableWebhook
     anyof_schema_3_validator: Optional[TransactionUpdatesAvailableWebhook] = None
     if TYPE_CHECKING:
         actual_instance: Optional[
             Union[
                 AppLinkStateChangedWebhook,
-                LinkProductRefreshWebhook,
+                ProductStateChangedWebhook,
                 TransactionUpdatesAvailableWebhook,
             ]
         ] = None
@@ -93,10 +93,10 @@ class ResponseHandleLinkWebhookEventRequestBodyWebhookPost(BaseModel):
         else:
             return v
 
-        # validate data type: LinkProductRefreshWebhook
-        if not isinstance(v, LinkProductRefreshWebhook):
+        # validate data type: ProductStateChangedWebhook
+        if not isinstance(v, ProductStateChangedWebhook):
             error_messages.append(
-                f"Error! Input type `{type(v)}` is not `LinkProductRefreshWebhook`"
+                f"Error! Input type `{type(v)}` is not `ProductStateChangedWebhook`"
             )
         else:
             return v
@@ -112,7 +112,7 @@ class ResponseHandleLinkWebhookEventRequestBodyWebhookPost(BaseModel):
         if error_messages:
             # no match
             raise ValueError(
-                "No match found when setting the actual_instance in ResponseHandleLinkWebhookEventRequestBodyWebhookPost with anyOf schemas: AppLinkStateChangedWebhook, LinkProductRefreshWebhook, TransactionUpdatesAvailableWebhook. Details: "
+                "No match found when setting the actual_instance in ResponseHandleLinkWebhookEventRequestBodyWebhookPost with anyOf schemas: AppLinkStateChangedWebhook, ProductStateChangedWebhook, TransactionUpdatesAvailableWebhook. Details: "
                 + ", ".join(error_messages)
             )
         else:
@@ -133,9 +133,9 @@ class ResponseHandleLinkWebhookEventRequestBodyWebhookPost(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[LinkProductRefreshWebhook] = None
+        # anyof_schema_2_validator: Optional[ProductStateChangedWebhook] = None
         try:
-            instance.actual_instance = LinkProductRefreshWebhook.from_json(json_str)
+            instance.actual_instance = ProductStateChangedWebhook.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -151,7 +151,7 @@ class ResponseHandleLinkWebhookEventRequestBodyWebhookPost(BaseModel):
         if error_messages:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into ResponseHandleLinkWebhookEventRequestBodyWebhookPost with anyOf schemas: AppLinkStateChangedWebhook, LinkProductRefreshWebhook, TransactionUpdatesAvailableWebhook. Details: "
+                "No match found when deserializing the JSON string into ResponseHandleLinkWebhookEventRequestBodyWebhookPost with anyOf schemas: AppLinkStateChangedWebhook, ProductStateChangedWebhook, TransactionUpdatesAvailableWebhook. Details: "
                 + ", ".join(error_messages)
             )
         else:

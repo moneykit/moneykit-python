@@ -36,11 +36,11 @@ class AccountNumbersLegacy20230218(BaseModel):
     """  # noqa: E501
 
     ach: List[AchNumber]
-    bacs: List[BacsNumber]
     eft: List[EftNumber]
+    bacs: List[BacsNumber]
     international: List[InternationalNumber]
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["ach", "bacs", "eft", "international"]
+    __properties: ClassVar[List[str]] = ["ach", "eft", "bacs", "international"]
 
     model_config = {"populate_by_name": True, "validate_assignment": True}
 
@@ -83,13 +83,6 @@ class AccountNumbersLegacy20230218(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["ach"] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in bacs (list)
-        _items = []
-        if self.bacs:
-            for _item in self.bacs:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["bacs"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in eft (list)
         _items = []
         if self.eft:
@@ -97,6 +90,13 @@ class AccountNumbersLegacy20230218(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["eft"] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in bacs (list)
+        _items = []
+        if self.bacs:
+            for _item in self.bacs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["bacs"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in international (list)
         _items = []
         if self.international:
@@ -125,11 +125,11 @@ class AccountNumbersLegacy20230218(BaseModel):
                 "ach": [AchNumber.from_dict(_item) for _item in obj.get("ach")]
                 if obj.get("ach") is not None
                 else None,
-                "bacs": [BacsNumber.from_dict(_item) for _item in obj.get("bacs")]
-                if obj.get("bacs") is not None
-                else None,
                 "eft": [EftNumber.from_dict(_item) for _item in obj.get("eft")]
                 if obj.get("eft") is not None
+                else None,
+                "bacs": [BacsNumber.from_dict(_item) for _item in obj.get("bacs")]
+                if obj.get("bacs") is not None
                 else None,
                 "international": [
                     InternationalNumber.from_dict(_item)
