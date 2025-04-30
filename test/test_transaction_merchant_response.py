@@ -35,10 +35,10 @@ class TestTransactionMerchantResponse(unittest.TestCase):
         model = TransactionMerchantResponse()
         if include_optional:
             return TransactionMerchantResponse(
-                id = 'a0822a4f-a59b-4fc9-a768-d880da5bd090',
-                name = 'Starbucks',
-                logo = 'https://example.com/starbucks.png',
-                confidence = 99
+                id = '',
+                name = '',
+                logo = '',
+                confidence = 56
             )
         else:
             return TransactionMerchantResponse(

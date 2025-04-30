@@ -35,17 +35,17 @@ class TestTransactionImportData(unittest.TestCase):
         model = TransactionImportData()
         if include_optional:
             return TransactionImportData(
-                account_id = '74583934',
+                account_id = '',
                 transaction_id = '',
-                amount = '384.05',
+                amount = '',
                 var_date = None,
-                description = 'Regina's Mulberry',
-                type = 'food_and_drinks.restaurants'
+                description = '',
+                type = ''
             )
         else:
             return TransactionImportData(
-                account_id = '74583934',
-                amount = '384.05',
+                account_id = '',
+                amount = '',
                 var_date = None,
         )
         """

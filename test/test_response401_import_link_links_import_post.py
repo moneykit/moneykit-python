@@ -38,12 +38,12 @@ class TestResponse401ImportLinkLinksImportPost(unittest.TestCase):
         if include_optional:
             return Response401ImportLinkLinksImportPost(
                 error_code = api_error.auth.unauthorized,
-                error_message = Accounts access not permitted,
+                error_message = None,
                 documentation_url = None
             )
         else:
             return Response401ImportLinkLinksImportPost(
-                error_message = Accounts access not permitted,
+                error_message = None,
         )
         """
 

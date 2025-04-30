@@ -37,12 +37,12 @@ class TestTransactionSubcategoryResponse(unittest.TestCase):
         model = TransactionSubcategoryResponse()
         if include_optional:
             return TransactionSubcategoryResponse(
-                value = 'coffee',
-                confidence = 99
+                value = '',
+                confidence = 56
             )
         else:
             return TransactionSubcategoryResponse(
-                value = 'coffee',
+                value = '',
         )
         """
 

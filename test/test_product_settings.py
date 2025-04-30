@@ -36,8 +36,9 @@ class TestProductSettings(unittest.TestCase):
         if include_optional:
             return ProductSettings(
                 required = True,
+                require_permission = True,
                 prefetch = True,
-                reason = 'display your account balances'
+                reason = ''
             )
         else:
             return ProductSettings(

@@ -41,16 +41,16 @@ class TestAccountNumbersLegacy20230218(unittest.TestCase):
                         routing_number = '', 
                         wire_routing_number = '', )
                     ],
-                bacs = [
-                    moneykit.models.bacs_number.BacsNumber(
-                        account_number = '', 
-                        sort_code = '', )
-                    ],
                 eft = [
                     moneykit.models.eft_number.EftNumber(
                         account_number = '', 
                         institution_number = '', 
                         branch_number = '', )
+                    ],
+                bacs = [
+                    moneykit.models.bacs_number.BacsNumber(
+                        account_number = '', 
+                        sort_code = '', )
                     ],
                 international = [
                     moneykit.models.international_number.InternationalNumber(
@@ -66,16 +66,16 @@ class TestAccountNumbersLegacy20230218(unittest.TestCase):
                         routing_number = '', 
                         wire_routing_number = '', )
                     ],
-                bacs = [
-                    moneykit.models.bacs_number.BacsNumber(
-                        account_number = '', 
-                        sort_code = '', )
-                    ],
                 eft = [
                     moneykit.models.eft_number.EftNumber(
                         account_number = '', 
                         institution_number = '', 
                         branch_number = '', )
+                    ],
+                bacs = [
+                    moneykit.models.bacs_number.BacsNumber(
+                        account_number = '', 
+                        sort_code = '', )
                     ],
                 international = [
                     moneykit.models.international_number.InternationalNumber(

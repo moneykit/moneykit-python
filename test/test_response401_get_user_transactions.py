@@ -38,12 +38,12 @@ class TestResponse401GetUserTransactions(unittest.TestCase):
         if include_optional:
             return Response401GetUserTransactions(
                 error_code = api_error.auth.unauthorized,
-                error_message = Accounts access not permitted,
+                error_message = None,
                 documentation_url = None
             )
         else:
             return Response401GetUserTransactions(
-                error_message = Accounts access not permitted,
+                error_message = None,
         )
         """
 

@@ -35,22 +35,22 @@ class TestSecurityResponse(unittest.TestCase):
         model = SecurityResponse()
         if include_optional:
             return SecurityResponse(
-                id = 'sec_bb6fi893jxdfNxyAjnb784',
-                name = 'Microsoft',
-                type = 'equity',
-                currency = 'USD',
-                ticker = 'MSFT',
-                isin = 'US5949181045',
+                security_id = '',
+                name = '',
+                type = '',
+                currency = '',
+                ticker = '',
+                isin = '',
                 sedol = '',
-                close_price = '98.12',
-                close_date = '2022-02-08'
+                close_price = '',
+                close_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date()
             )
         else:
             return SecurityResponse(
-                id = 'sec_bb6fi893jxdfNxyAjnb784',
-                name = 'Microsoft',
-                type = 'equity',
-                currency = 'USD',
+                security_id = '',
+                name = '',
+                type = '',
+                currency = '',
         )
         """
 

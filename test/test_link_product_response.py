@@ -35,8 +35,8 @@ class TestLinkProductResponse(unittest.TestCase):
         model = LinkProductResponse()
         if include_optional:
             return LinkProductResponse(
-                refreshed_at = '2023-02-16T09:14:11',
-                last_attempted_at = '2023-02-16T09:14:11',
+                refreshed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                last_attempted_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 error_code = 'rate_limit',
                 error_message = '',
                 unavailable = '',
@@ -44,7 +44,7 @@ class TestLinkProductResponse(unittest.TestCase):
                     required = True, 
                     require_permission = True, 
                     prefetch = True, 
-                    reason = 'display your account balances', )
+                    reason = '', )
             )
         else:
             return LinkProductResponse(

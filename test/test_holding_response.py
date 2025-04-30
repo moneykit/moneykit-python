@@ -35,19 +35,19 @@ class TestHoldingResponse(unittest.TestCase):
         model = HoldingResponse()
         if include_optional:
             return HoldingResponse(
-                account_id = 'acc_6Tef269B6ZArSVpYrxtjBV',
-                security_id = 'sec_bb6fi893jxdfNxyAjnb784',
-                quantity = '10',
-                price = '98.12',
-                price_datetime = '2023-02-16T09:14:11',
-                value = '987.15',
-                cost_basis = '781.38'
+                account_id = '',
+                security_id = '',
+                quantity = '',
+                price = '',
+                price_datetime = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                value = '',
+                cost_basis = ''
             )
         else:
             return HoldingResponse(
-                account_id = 'acc_6Tef269B6ZArSVpYrxtjBV',
-                security_id = 'sec_bb6fi893jxdfNxyAjnb784',
-                quantity = '10',
+                account_id = '',
+                security_id = '',
+                quantity = '',
         )
         """
 

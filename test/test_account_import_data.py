@@ -35,28 +35,29 @@ class TestAccountImportData(unittest.TestCase):
         model = AccountImportData()
         if include_optional:
             return AccountImportData(
-                account_id = '74583934',
-                name = 'Premier Checking',
-                type = 'depository.checking',
-                mask = '3748',
+                account_id = '',
+                name = '',
+                nickname = '',
+                type = '',
+                mask = '',
                 balances = moneykit.models.account_balances.AccountBalances(
-                    currency = 'USD', 
-                    available = 340.12, 
-                    current = 445.89, 
-                    limit = 500, 
-                    balance_date = '2021-08-12T15:23:00Z', )
+                    currency = '', 
+                    available = 1.337, 
+                    current = 1.337, 
+                    limit = 1.337, 
+                    balance_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
             )
         else:
             return AccountImportData(
-                account_id = '74583934',
-                name = 'Premier Checking',
-                type = 'depository.checking',
+                account_id = '',
+                name = '',
+                type = '',
                 balances = moneykit.models.account_balances.AccountBalances(
-                    currency = 'USD', 
-                    available = 340.12, 
-                    current = 445.89, 
-                    limit = 500, 
-                    balance_date = '2021-08-12T15:23:00Z', ),
+                    currency = '', 
+                    available = 1.337, 
+                    current = 1.337, 
+                    limit = 1.337, 
+                    balance_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
         )
         """
 

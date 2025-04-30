@@ -40,23 +40,24 @@ class TestImportLinkRequest(unittest.TestCase):
                     email = null, 
                     phone = null, ),
                 provider = 'moneykit',
-                institution_id = 'chase',
+                institution_id = '',
                 accounts = [
                     moneykit.models.account_import_data.AccountImportData(
-                        account_id = '74583934', 
-                        name = 'Premier Checking', 
-                        type = 'depository.checking', 
-                        mask = '3748', 
+                        account_id = '', 
+                        name = '', 
+                        nickname = '', 
+                        type = '', 
+                        mask = '', 
                         balances = null, )
                     ],
                 transactions = [
                     moneykit.models.transaction_import_data.TransactionImportData(
-                        account_id = '74583934', 
+                        account_id = '', 
                         transaction_id = '', 
-                        amount = '384.05', 
+                        amount = '', 
                         date = null, 
-                        description = 'Regina's Mulberry', 
-                        type = 'food_and_drinks.restaurants', )
+                        description = '', 
+                        type = '', )
                     ]
             )
         else:
@@ -65,23 +66,24 @@ class TestImportLinkRequest(unittest.TestCase):
                     id = '0123', 
                     email = null, 
                     phone = null, ),
-                institution_id = 'chase',
+                institution_id = '',
                 accounts = [
                     moneykit.models.account_import_data.AccountImportData(
-                        account_id = '74583934', 
-                        name = 'Premier Checking', 
-                        type = 'depository.checking', 
-                        mask = '3748', 
+                        account_id = '', 
+                        name = '', 
+                        nickname = '', 
+                        type = '', 
+                        mask = '', 
                         balances = null, )
                     ],
                 transactions = [
                     moneykit.models.transaction_import_data.TransactionImportData(
-                        account_id = '74583934', 
+                        account_id = '', 
                         transaction_id = '', 
-                        amount = '384.05', 
+                        amount = '', 
                         date = null, 
-                        description = 'Regina's Mulberry', 
-                        type = 'food_and_drinks.restaurants', )
+                        description = '', 
+                        type = '', )
                     ],
         )
         """
