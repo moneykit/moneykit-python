@@ -38,11 +38,11 @@ class TestCustomerUser(unittest.TestCase):
                 id = '0123',
                 email = moneykit.models.customer_user_email.CustomerUserEmail(
                     address = '0123', 
-                    customer_verified_at = '2023-02-16T00:00:00', ),
+                    customer_verified_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
                 phone = moneykit.models.customer_user_phone.CustomerUserPhone(
-                    number = '+16175551212', 
+                    number = '0123', 
                     country = null, 
-                    customer_verified_at = '2023-02-16T00:00:00', )
+                    customer_verified_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
             )
         else:
             return CustomerUser(

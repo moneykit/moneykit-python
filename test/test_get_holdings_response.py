@@ -37,69 +37,113 @@ class TestGetHoldingsResponse(unittest.TestCase):
             return GetHoldingsResponse(
                 holdings = [
                     moneykit.models.holding_response.HoldingResponse(
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        security_id = 'sec_bb6fi893jxdfNxyAjnb784', 
-                        quantity = '10', 
-                        price = '98.12', 
-                        price_datetime = '2023-02-16T09:14:11', 
-                        value = '987.15', 
-                        cost_basis = '781.38', )
+                        account_id = '', 
+                        security_id = '', 
+                        quantity = '', 
+                        price = '', 
+                        price_datetime = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        value = '', 
+                        cost_basis = '', )
                     ],
                 securities = [
                     moneykit.models.security_response.SecurityResponse(
-                        id = 'sec_bb6fi893jxdfNxyAjnb784', 
-                        name = 'Microsoft', 
-                        type = 'equity', 
-                        currency = 'USD', 
-                        ticker = 'MSFT', 
-                        isin = 'US5949181045', 
+                        security_id = '', 
+                        name = '', 
+                        type = '', 
+                        currency = '', 
+                        ticker = '', 
+                        isin = '', 
                         sedol = '', 
-                        close_price = '98.12', 
-                        close_date = '2022-02-08', )
+                        close_price = '', 
+                        close_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), )
                     ],
                 accounts = [
-                    moneykit.models.account.Account(
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        account_type = 'depository.checking', 
-                        name = 'Premier Checking', 
-                        account_mask = '3748', 
-                        balances = null, )
+                    moneykit.models.account_response.AccountResponse(
+                        account_id = '', 
+                        account_type = '', 
+                        name = '', 
+                        nickname = '', 
+                        account_mask = '', 
+                        balances = null, 
+                        original_id = '', 
+                        closed = True, )
                     ],
-                link = {link_id=mk_eqkWN34UEoa2NxyALG8pcV, institution_id=chase, institution_name=Chase, provider=mx, state=connected, last_synced_at=2023-02-16T09:14:11, tags=[user_type:admin], products={accounts={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11}, identity={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11, settings={required=true, prefetch=false}}}}
+                link = moneykit.models.link_common.LinkCommon(
+                    link_id = '', 
+                    institution_id = '', 
+                    institution_name = '', 
+                    institution_avatar = '', 
+                    state = null, 
+                    error_code = null, 
+                    last_synced_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    provider = null, 
+                    link_tags = [
+                        ''
+                        ], 
+                    tags = [
+                        ''
+                        ], 
+                    webhook = '', 
+                    products = null, 
+                    available_products = [
+                        'accounts'
+                        ], )
             )
         else:
             return GetHoldingsResponse(
                 holdings = [
                     moneykit.models.holding_response.HoldingResponse(
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        security_id = 'sec_bb6fi893jxdfNxyAjnb784', 
-                        quantity = '10', 
-                        price = '98.12', 
-                        price_datetime = '2023-02-16T09:14:11', 
-                        value = '987.15', 
-                        cost_basis = '781.38', )
+                        account_id = '', 
+                        security_id = '', 
+                        quantity = '', 
+                        price = '', 
+                        price_datetime = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        value = '', 
+                        cost_basis = '', )
                     ],
                 securities = [
                     moneykit.models.security_response.SecurityResponse(
-                        id = 'sec_bb6fi893jxdfNxyAjnb784', 
-                        name = 'Microsoft', 
-                        type = 'equity', 
-                        currency = 'USD', 
-                        ticker = 'MSFT', 
-                        isin = 'US5949181045', 
+                        security_id = '', 
+                        name = '', 
+                        type = '', 
+                        currency = '', 
+                        ticker = '', 
+                        isin = '', 
                         sedol = '', 
-                        close_price = '98.12', 
-                        close_date = '2022-02-08', )
+                        close_price = '', 
+                        close_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), )
                     ],
                 accounts = [
-                    moneykit.models.account.Account(
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        account_type = 'depository.checking', 
-                        name = 'Premier Checking', 
-                        account_mask = '3748', 
-                        balances = null, )
+                    moneykit.models.account_response.AccountResponse(
+                        account_id = '', 
+                        account_type = '', 
+                        name = '', 
+                        nickname = '', 
+                        account_mask = '', 
+                        balances = null, 
+                        original_id = '', 
+                        closed = True, )
                     ],
-                link = {link_id=mk_eqkWN34UEoa2NxyALG8pcV, institution_id=chase, institution_name=Chase, provider=mx, state=connected, last_synced_at=2023-02-16T09:14:11, tags=[user_type:admin], products={accounts={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11}, identity={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11, settings={required=true, prefetch=false}}}},
+                link = moneykit.models.link_common.LinkCommon(
+                    link_id = '', 
+                    institution_id = '', 
+                    institution_name = '', 
+                    institution_avatar = '', 
+                    state = null, 
+                    error_code = null, 
+                    last_synced_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    provider = null, 
+                    link_tags = [
+                        ''
+                        ], 
+                    tags = [
+                        ''
+                        ], 
+                    webhook = '', 
+                    products = null, 
+                    available_products = [
+                        'accounts'
+                        ], ),
         )
         """
 

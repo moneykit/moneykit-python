@@ -35,12 +35,12 @@ class TestTransactionCategoryResponse(unittest.TestCase):
         model = TransactionCategoryResponse()
         if include_optional:
             return TransactionCategoryResponse(
-                value = 'food_and_drink',
-                confidence = 99
+                value = '',
+                confidence = 56
             )
         else:
             return TransactionCategoryResponse(
-                value = 'food_and_drink',
+                value = '',
         )
         """
 

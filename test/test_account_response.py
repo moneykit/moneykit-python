@@ -35,29 +35,31 @@ class TestAccountResponse(unittest.TestCase):
         model = AccountResponse()
         if include_optional:
             return AccountResponse(
-                account_id = 'acc_6Tef269B6ZArSVpYrxtjBV',
-                account_type = 'depository.checking',
-                name = 'Premier Checking',
-                account_mask = '3748',
+                account_id = '',
+                account_type = '',
+                name = '',
+                nickname = '',
+                account_mask = '',
                 balances = moneykit.models.account_balances.AccountBalances(
-                    currency = 'USD', 
-                    available = 340.12, 
-                    current = 445.89, 
-                    limit = 500, 
-                    balance_date = '2021-08-12T15:23:00Z', ),
-                original_id = ''
+                    currency = '', 
+                    available = 1.337, 
+                    current = 1.337, 
+                    limit = 1.337, 
+                    balance_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
+                original_id = '',
+                closed = True
             )
         else:
             return AccountResponse(
-                account_id = 'acc_6Tef269B6ZArSVpYrxtjBV',
-                account_type = 'depository.checking',
-                name = 'Premier Checking',
+                account_id = '',
+                account_type = '',
+                name = '',
                 balances = moneykit.models.account_balances.AccountBalances(
-                    currency = 'USD', 
-                    available = 340.12, 
-                    current = 445.89, 
-                    limit = 500, 
-                    balance_date = '2021-08-12T15:23:00Z', ),
+                    currency = '', 
+                    available = 1.337, 
+                    current = 1.337, 
+                    limit = 1.337, 
+                    balance_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
         )
         """
 

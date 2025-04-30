@@ -39,61 +39,147 @@ class TestApiPublicTransactionsLegacyGetTransactionsResponse(unittest.TestCase):
         model = ApiPublicTransactionsLegacyGetTransactionsResponse()
         if include_optional:
             return ApiPublicTransactionsLegacyGetTransactionsResponse(
-                total = 82,
-                page = 1,
-                size = 50,
+                total = 56,
+                page = 56,
+                size = 56,
                 transactions = [
-                    moneykit.models.transaction.Transaction(
-                        transaction_id = 'c7318ff7-257c-490e-8242-03a815b223b7', 
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        amount = '384.05', 
-                        type = debit, 
-                        currency = 'USD', 
-                        date = '2023-02-16T00:00:00', 
-                        datetime = '2023-02-16T09:14:11', 
-                        description = 'Regina's Mulberry', 
-                        raw_description = 'Regina's Mulberry #1402 T48999-84', 
+                    moneykit.models.transaction_response.TransactionResponse(
+                        transaction_id = '', 
+                        account_id = '', 
+                        amount = '', 
+                        type = null, 
+                        currency = '', 
+                        date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
+                        datetime = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        description = '', 
+                        raw_description = '', 
                         pending = True, 
-                        category = 'food_and_drinks.restaurants', )
+                        category = '', 
+                        enrichment = moneykit.models.transaction_enrichment_response.TransactionEnrichmentResponse(
+                            category = moneykit.models.transaction_category_response.TransactionCategoryResponse(
+                                value = '', 
+                                confidence = 56, ), 
+                            subcategory = moneykit.models.transaction_subcategory_response.TransactionSubcategoryResponse(
+                                value = '', 
+                                confidence = 56, ), 
+                            merchant = moneykit.models.transaction_merchant_response.TransactionMerchantResponse(
+                                id = '', 
+                                name = '', 
+                                logo = '', 
+                                confidence = 56, ), 
+                            processor = moneykit.models.transaction_processor_response.TransactionProcessorResponse(
+                                id = '', 
+                                name = '', 
+                                logo = '', 
+                                confidence = 56, ), 
+                            recurrence = moneykit.models.transaction_recurrence_response.TransactionRecurrenceResponse(
+                                frequency = '', 
+                                next_predicted_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), ), ), 
+                        original_id = '', )
                     ],
                 accounts = [
-                    moneykit.models.account.Account(
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        account_type = 'depository.checking', 
-                        name = 'Premier Checking', 
-                        account_mask = '3748', 
-                        balances = null, )
+                    moneykit.models.account_response.AccountResponse(
+                        account_id = '', 
+                        account_type = '', 
+                        name = '', 
+                        nickname = '', 
+                        account_mask = '', 
+                        balances = null, 
+                        original_id = '', 
+                        closed = True, )
                     ],
-                link = {link_id=mk_eqkWN34UEoa2NxyALG8pcV, institution_id=chase, institution_name=Chase, institution_avatar=https://example.com/avatar.png, provider=mx, state=connected, last_synced_at=2023-02-16T09:14:11, tags=[user_type:admin], products={accounts={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11}, identity={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11, settings={required=true, prefetch=false}}}}
+                link = moneykit.models.link_common.LinkCommon(
+                    link_id = '', 
+                    institution_id = '', 
+                    institution_name = '', 
+                    institution_avatar = '', 
+                    state = null, 
+                    error_code = null, 
+                    last_synced_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    provider = null, 
+                    link_tags = [
+                        ''
+                        ], 
+                    tags = [
+                        ''
+                        ], 
+                    webhook = '', 
+                    products = null, 
+                    available_products = [
+                        'accounts'
+                        ], )
             )
         else:
             return ApiPublicTransactionsLegacyGetTransactionsResponse(
-                total = 82,
-                page = 1,
-                size = 50,
+                total = 56,
+                page = 56,
+                size = 56,
                 transactions = [
-                    moneykit.models.transaction.Transaction(
-                        transaction_id = 'c7318ff7-257c-490e-8242-03a815b223b7', 
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        amount = '384.05', 
-                        type = debit, 
-                        currency = 'USD', 
-                        date = '2023-02-16T00:00:00', 
-                        datetime = '2023-02-16T09:14:11', 
-                        description = 'Regina's Mulberry', 
-                        raw_description = 'Regina's Mulberry #1402 T48999-84', 
+                    moneykit.models.transaction_response.TransactionResponse(
+                        transaction_id = '', 
+                        account_id = '', 
+                        amount = '', 
+                        type = null, 
+                        currency = '', 
+                        date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
+                        datetime = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        description = '', 
+                        raw_description = '', 
                         pending = True, 
-                        category = 'food_and_drinks.restaurants', )
+                        category = '', 
+                        enrichment = moneykit.models.transaction_enrichment_response.TransactionEnrichmentResponse(
+                            category = moneykit.models.transaction_category_response.TransactionCategoryResponse(
+                                value = '', 
+                                confidence = 56, ), 
+                            subcategory = moneykit.models.transaction_subcategory_response.TransactionSubcategoryResponse(
+                                value = '', 
+                                confidence = 56, ), 
+                            merchant = moneykit.models.transaction_merchant_response.TransactionMerchantResponse(
+                                id = '', 
+                                name = '', 
+                                logo = '', 
+                                confidence = 56, ), 
+                            processor = moneykit.models.transaction_processor_response.TransactionProcessorResponse(
+                                id = '', 
+                                name = '', 
+                                logo = '', 
+                                confidence = 56, ), 
+                            recurrence = moneykit.models.transaction_recurrence_response.TransactionRecurrenceResponse(
+                                frequency = '', 
+                                next_predicted_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), ), ), 
+                        original_id = '', )
                     ],
                 accounts = [
-                    moneykit.models.account.Account(
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        account_type = 'depository.checking', 
-                        name = 'Premier Checking', 
-                        account_mask = '3748', 
-                        balances = null, )
+                    moneykit.models.account_response.AccountResponse(
+                        account_id = '', 
+                        account_type = '', 
+                        name = '', 
+                        nickname = '', 
+                        account_mask = '', 
+                        balances = null, 
+                        original_id = '', 
+                        closed = True, )
                     ],
-                link = {link_id=mk_eqkWN34UEoa2NxyALG8pcV, institution_id=chase, institution_name=Chase, institution_avatar=https://example.com/avatar.png, provider=mx, state=connected, last_synced_at=2023-02-16T09:14:11, tags=[user_type:admin], products={accounts={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11}, identity={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11, settings={required=true, prefetch=false}}}},
+                link = moneykit.models.link_common.LinkCommon(
+                    link_id = '', 
+                    institution_id = '', 
+                    institution_name = '', 
+                    institution_avatar = '', 
+                    state = null, 
+                    error_code = null, 
+                    last_synced_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    provider = null, 
+                    link_tags = [
+                        ''
+                        ], 
+                    tags = [
+                        ''
+                        ], 
+                    webhook = '', 
+                    products = null, 
+                    available_products = [
+                        'accounts'
+                        ], ),
         )
         """
 

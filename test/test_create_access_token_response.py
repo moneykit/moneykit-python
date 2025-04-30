@@ -35,15 +35,15 @@ class TestCreateAccessTokenResponse(unittest.TestCase):
         model = CreateAccessTokenResponse()
         if include_optional:
             return CreateAccessTokenResponse(
-                access_token = '52ea3d1b4f9a53fffb67...',
-                token_type = 'bearer',
-                expires_in = 3600
+                access_token = '',
+                token_type = '',
+                expires_in = 56
             )
         else:
             return CreateAccessTokenResponse(
-                access_token = '52ea3d1b4f9a53fffb67...',
-                token_type = 'bearer',
-                expires_in = 3600,
+                access_token = '',
+                token_type = '',
+                expires_in = 56,
         )
         """
 

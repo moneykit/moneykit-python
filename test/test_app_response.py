@@ -35,17 +35,17 @@ class TestAppResponse(unittest.TestCase):
         model = AppResponse()
         if include_optional:
             return AppResponse(
-                app_id = '3d18cdd1-fa96-4423-b781-bd5be036830e',
-                name = 'My App',
-                id = '3d18cdd1-fa96-4423-b781-bd5be036830e',
-                app_name = 'My App'
+                app_id = '',
+                name = '',
+                id = '',
+                app_name = ''
             )
         else:
             return AppResponse(
-                app_id = '3d18cdd1-fa96-4423-b781-bd5be036830e',
-                name = 'My App',
-                id = '3d18cdd1-fa96-4423-b781-bd5be036830e',
-                app_name = 'My App',
+                app_id = '',
+                name = '',
+                id = '',
+                app_name = '',
         )
         """
 

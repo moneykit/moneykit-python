@@ -39,16 +39,19 @@ class TestAccountWithAccountNumbersLegacy20230218(unittest.TestCase):
         model = AccountWithAccountNumbersLegacy20230218()
         if include_optional:
             return AccountWithAccountNumbersLegacy20230218(
-                account_id = 'acc_6Tef269B6ZArSVpYrxtjBV',
-                account_type = 'depository.checking',
-                name = 'Premier Checking',
-                account_mask = '3748',
+                account_id = '',
+                account_type = '',
+                name = '',
+                nickname = '',
+                account_mask = '',
                 balances = moneykit.models.account_balances.AccountBalances(
-                    currency = USD, 
-                    available = 340.12, 
-                    current = 445.89, 
-                    limit = 500, 
-                    balance_date = '2021-08-12T15:23:00Z', ),
+                    currency = '', 
+                    available = 1.337, 
+                    current = 1.337, 
+                    limit = 1.337, 
+                    balance_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
+                original_id = '',
+                closed = True,
                 numbers = moneykit.models.account_numbers_legacy_2023_02_18.AccountNumbersLegacy_2023_02_18(
                     ach = [
                         moneykit.models.ach_number.AchNumber(
@@ -56,16 +59,16 @@ class TestAccountWithAccountNumbersLegacy20230218(unittest.TestCase):
                             routing_number = '', 
                             wire_routing_number = '', )
                         ], 
-                    bacs = [
-                        moneykit.models.bacs_number.BacsNumber(
-                            account_number = '', 
-                            sort_code = '', )
-                        ], 
                     eft = [
                         moneykit.models.eft_number.EftNumber(
                             account_number = '', 
                             institution_number = '', 
                             branch_number = '', )
+                        ], 
+                    bacs = [
+                        moneykit.models.bacs_number.BacsNumber(
+                            account_number = '', 
+                            sort_code = '', )
                         ], 
                     international = [
                         moneykit.models.international_number.InternationalNumber(
@@ -75,15 +78,15 @@ class TestAccountWithAccountNumbersLegacy20230218(unittest.TestCase):
             )
         else:
             return AccountWithAccountNumbersLegacy20230218(
-                account_id = 'acc_6Tef269B6ZArSVpYrxtjBV',
-                account_type = 'depository.checking',
-                name = 'Premier Checking',
+                account_id = '',
+                account_type = '',
+                name = '',
                 balances = moneykit.models.account_balances.AccountBalances(
-                    currency = USD, 
-                    available = 340.12, 
-                    current = 445.89, 
-                    limit = 500, 
-                    balance_date = '2021-08-12T15:23:00Z', ),
+                    currency = '', 
+                    available = 1.337, 
+                    current = 1.337, 
+                    limit = 1.337, 
+                    balance_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
                 numbers = moneykit.models.account_numbers_legacy_2023_02_18.AccountNumbersLegacy_2023_02_18(
                     ach = [
                         moneykit.models.ach_number.AchNumber(
@@ -91,16 +94,16 @@ class TestAccountWithAccountNumbersLegacy20230218(unittest.TestCase):
                             routing_number = '', 
                             wire_routing_number = '', )
                         ], 
-                    bacs = [
-                        moneykit.models.bacs_number.BacsNumber(
-                            account_number = '', 
-                            sort_code = '', )
-                        ], 
                     eft = [
                         moneykit.models.eft_number.EftNumber(
                             account_number = '', 
                             institution_number = '', 
                             branch_number = '', )
+                        ], 
+                    bacs = [
+                        moneykit.models.bacs_number.BacsNumber(
+                            account_number = '', 
+                            sort_code = '', )
                         ], 
                     international = [
                         moneykit.models.international_number.InternationalNumber(

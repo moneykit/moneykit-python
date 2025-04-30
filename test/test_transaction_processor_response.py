@@ -35,10 +35,10 @@ class TestTransactionProcessorResponse(unittest.TestCase):
         model = TransactionProcessorResponse()
         if include_optional:
             return TransactionProcessorResponse(
-                id = 'a0822a4f-a59b-4fc9-a768-d880da5bd090',
-                name = 'Square',
-                logo = 'https://example.com/square.png',
-                confidence = 99
+                id = '',
+                name = '',
+                logo = '',
+                confidence = 56
             )
         else:
             return TransactionProcessorResponse(

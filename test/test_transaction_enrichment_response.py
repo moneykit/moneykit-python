@@ -38,30 +38,30 @@ class TestTransactionEnrichmentResponse(unittest.TestCase):
         if include_optional:
             return TransactionEnrichmentResponse(
                 category = moneykit.models.transaction_category_response.TransactionCategoryResponse(
-                    value = 'food_and_drink', 
-                    confidence = 99, ),
+                    value = '', 
+                    confidence = 56, ),
                 subcategory = moneykit.models.transaction_subcategory_response.TransactionSubcategoryResponse(
-                    value = 'coffee', 
-                    confidence = 99, ),
+                    value = '', 
+                    confidence = 56, ),
                 merchant = moneykit.models.transaction_merchant_response.TransactionMerchantResponse(
-                    id = 'a0822a4f-a59b-4fc9-a768-d880da5bd090', 
-                    name = 'Starbucks', 
-                    logo = 'https://example.com/starbucks.png', 
-                    confidence = 99, ),
+                    id = '', 
+                    name = '', 
+                    logo = '', 
+                    confidence = 56, ),
                 processor = moneykit.models.transaction_processor_response.TransactionProcessorResponse(
-                    id = 'a0822a4f-a59b-4fc9-a768-d880da5bd090', 
-                    name = 'Square', 
-                    logo = 'https://example.com/square.png', 
-                    confidence = 99, ),
+                    id = '', 
+                    name = '', 
+                    logo = '', 
+                    confidence = 56, ),
                 recurrence = moneykit.models.transaction_recurrence_response.TransactionRecurrenceResponse(
-                    frequency = 'monthly', 
-                    next_predicted_date = '2024-08-03', )
+                    frequency = '', 
+                    next_predicted_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), )
             )
         else:
             return TransactionEnrichmentResponse(
                 category = moneykit.models.transaction_category_response.TransactionCategoryResponse(
-                    value = 'food_and_drink', 
-                    confidence = 99, ),
+                    value = '', 
+                    confidence = 56, ),
         )
         """
 

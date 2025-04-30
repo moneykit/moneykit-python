@@ -36,7 +36,7 @@ class TestCustomerUserEmail(unittest.TestCase):
         if include_optional:
             return CustomerUserEmail(
                 address = '0123',
-                customer_verified_at = '2023-02-16T00:00:00'
+                customer_verified_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return CustomerUserEmail(

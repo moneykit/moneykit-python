@@ -41,27 +41,71 @@ class TestGetAccountNumbersResponseLegacy20230218(unittest.TestCase):
             return GetAccountNumbersResponseLegacy20230218(
                 accounts = [
                     moneykit.models.account_with_account_numbers_legacy_2023_02_18.AccountWithAccountNumbersLegacy_2023_02_18(
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        account_type = 'depository.checking', 
-                        name = 'Premier Checking', 
-                        account_mask = '3748', 
+                        account_id = '', 
+                        account_type = '', 
+                        name = '', 
+                        nickname = '', 
+                        account_mask = '', 
                         balances = null, 
+                        original_id = '', 
+                        closed = True, 
                         numbers = null, )
                     ],
-                link = {link_id=mk_eqkWN34UEoa2NxyALG8pcV, institution_id=chase, institution_name=Chase, institution_avatar=https://example.com/avatar.png, provider=mx, state=connected, last_synced_at=2023-02-16T09:14:11, tags=[user_type:admin], products={accounts={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11}, identity={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11, settings={required=true, prefetch=false}}}}
+                link = moneykit.models.link_common.LinkCommon(
+                    link_id = '', 
+                    institution_id = '', 
+                    institution_name = '', 
+                    institution_avatar = '', 
+                    state = null, 
+                    error_code = null, 
+                    last_synced_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    provider = null, 
+                    link_tags = [
+                        ''
+                        ], 
+                    tags = [
+                        ''
+                        ], 
+                    webhook = '', 
+                    products = null, 
+                    available_products = [
+                        'accounts'
+                        ], )
             )
         else:
             return GetAccountNumbersResponseLegacy20230218(
                 accounts = [
                     moneykit.models.account_with_account_numbers_legacy_2023_02_18.AccountWithAccountNumbersLegacy_2023_02_18(
-                        account_id = 'acc_6Tef269B6ZArSVpYrxtjBV', 
-                        account_type = 'depository.checking', 
-                        name = 'Premier Checking', 
-                        account_mask = '3748', 
+                        account_id = '', 
+                        account_type = '', 
+                        name = '', 
+                        nickname = '', 
+                        account_mask = '', 
                         balances = null, 
+                        original_id = '', 
+                        closed = True, 
                         numbers = null, )
                     ],
-                link = {link_id=mk_eqkWN34UEoa2NxyALG8pcV, institution_id=chase, institution_name=Chase, institution_avatar=https://example.com/avatar.png, provider=mx, state=connected, last_synced_at=2023-02-16T09:14:11, tags=[user_type:admin], products={accounts={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11}, identity={refreshed_at=2023-02-16T09:14:11, last_attempted_at=2023-02-16T09:14:11, settings={required=true, prefetch=false}}}},
+                link = moneykit.models.link_common.LinkCommon(
+                    link_id = '', 
+                    institution_id = '', 
+                    institution_name = '', 
+                    institution_avatar = '', 
+                    state = null, 
+                    error_code = null, 
+                    last_synced_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    provider = null, 
+                    link_tags = [
+                        ''
+                        ], 
+                    tags = [
+                        ''
+                        ], 
+                    webhook = '', 
+                    products = null, 
+                    available_products = [
+                        'accounts'
+                        ], ),
         )
         """
 

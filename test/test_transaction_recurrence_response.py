@@ -37,8 +37,8 @@ class TestTransactionRecurrenceResponse(unittest.TestCase):
         model = TransactionRecurrenceResponse()
         if include_optional:
             return TransactionRecurrenceResponse(
-                frequency = 'monthly',
-                next_predicted_date = '2024-08-03'
+                frequency = '',
+                next_predicted_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date()
             )
         else:
             return TransactionRecurrenceResponse(

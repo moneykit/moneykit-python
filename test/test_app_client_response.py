@@ -35,26 +35,26 @@ class TestAppClientResponse(unittest.TestCase):
         model = AppClientResponse()
         if include_optional:
             return AppClientResponse(
-                client_id = 'live_5c739a369515e10fc9e0',
-                client_name = 'My App (Prod)',
+                client_id = '',
+                client_name = '',
                 scope = '',
                 app = moneykit.models.app_response.AppResponse(
-                    app_id = '3d18cdd1-fa96-4423-b781-bd5be036830e', 
-                    name = 'My App', 
-                    id = '3d18cdd1-fa96-4423-b781-bd5be036830e', 
-                    app_name = 'My App', ),
+                    app_id = '', 
+                    name = '', 
+                    id = '', 
+                    app_name = '', ),
                 disabled_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return AppClientResponse(
-                client_id = 'live_5c739a369515e10fc9e0',
-                client_name = 'My App (Prod)',
+                client_id = '',
+                client_name = '',
                 scope = '',
                 app = moneykit.models.app_response.AppResponse(
-                    app_id = '3d18cdd1-fa96-4423-b781-bd5be036830e', 
-                    name = 'My App', 
-                    id = '3d18cdd1-fa96-4423-b781-bd5be036830e', 
-                    app_name = 'My App', ),
+                    app_id = '', 
+                    name = '', 
+                    id = '', 
+                    app_name = '', ),
         )
         """
 
