@@ -156,16 +156,3 @@ moneykit/py.typed
 moneykit/rest.py
 pyproject.toml
 test/__init__.py
-test/test_bud_category.py
-test/test_bud_primary_category.py
-test/test_bud_subcategory.py
-test/test_custom_sandbox_account.py
-test/test_custom_sandbox_data.py
-test/test_get_links_link.py
-test/test_get_links_response.py
-test/test_import_transactions_request.py
-test/test_product_state_changed_webhook.py
-test/test_response401_correct_enrichment_links_id_transactions_txn_id_enrichment_post.py
-test/test_response401_get_links_links_get.py
-test/test_response401_import_transactions_links_id_import_transactions_post.py
-test/test_response401_reset_link_links_id_reset_post.py
