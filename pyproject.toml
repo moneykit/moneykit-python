@@ -5,7 +5,7 @@ description = "MoneyKit API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
 readme = "README.md"
-repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
+repository = "https://github.com/moneykit/moneykit-python"
 keywords = ["OpenAPI", "OpenAPI-Generator", "MoneyKit API"]
 include = ["moneykit/py.typed"]
 
