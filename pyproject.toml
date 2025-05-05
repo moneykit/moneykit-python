@@ -1,17 +1,13 @@
-[tool.poetry]
+[project]
 name = "moneykit"
 version = "0.2.2"
 description = "MoneyKit API"
-authors = ["OpenAPI Generator Community <team@openapitools.org>"]
-license = "NoLicense"
 readme = "README.md"
-repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
 keywords = ["OpenAPI", "OpenAPI-Generator", "MoneyKit API"]
-include = ["moneykit/py.typed"]
+requires-python = ">=3.8"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-
 urllib3 = ">= 1.25.3"
 python-dateutil = ">=2.8.2"
 pydantic = ">=2"
